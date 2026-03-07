@@ -50,10 +50,9 @@ export default function Contact() {
       <section className="contact-page section">
         <div className="container">
           <div className="contact-header">
-            <h1>Get in Touch</h1>
+            <h1>Start a Conversation</h1>
             <p>
-              Have a project in mind? Send a note and I'll get back to you
-              within one business day.
+              Send a note. We'll take it from there.
             </p>
           </div>
 
@@ -65,8 +64,8 @@ export default function Contact() {
                 transition={{ duration: 0.5 }}
                 style={{ paddingTop: '2rem' }}
               >
-                <h2 style={{ marginBottom: '0.5rem' }}>Message sent.</h2>
-                <p>Thanks for reaching out. I'll be in touch soon.</p>
+                <h2 style={{ marginBottom: '0.5rem' }}>Got it.</h2>
+                <p>You'll hear back within one business day.</p>
               </motion.div>
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
@@ -95,18 +94,19 @@ export default function Contact() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="type">What are you looking for?</label>
+                  <label htmlFor="type">What kind of work?</label>
                   <select
                     id="type"
                     name="type"
                     value={form.type}
                     onChange={handleChange}
                   >
-                    <option value="" disabled>-- Select one --</option>
-                    <option value="Web Development">Web Development</option>
-                    <option value="Custom Application">Custom Application</option>
-                    <option value="Process Automation">Process Automation</option>
-                    <option value="Technical Training">Technical Training</option>
+                    <option value="" disabled>Select one</option>
+                    <option value="Websites">Websites</option>
+                    <option value="Custom Software">Custom Software</option>
+                    <option value="AI Training">AI Training</option>
+                    <option value="Automation">Automation</option>
+                    <option value="Internal Tools">Internal Tools</option>
                     <option value="Something Else">Something Else</option>
                   </select>
                 </div>
@@ -115,7 +115,7 @@ export default function Contact() {
                   <textarea
                     id="message"
                     name="message"
-                    placeholder="Tell me about your project..."
+                    placeholder="What's the problem you're trying to solve?"
                     value={form.message}
                     onChange={handleChange}
                     rows={5}
@@ -125,7 +125,7 @@ export default function Contact() {
 
                 {status === 'error' && (
                   <p style={{ color: 'var(--red)', fontSize: '0.9rem' }}>
-                    Something went wrong. Please try again or email noah@nsgsolutions.co directly.
+                    Something went wrong. Try again, or email noah@nsgsolutions.co directly.
                   </p>
                 )}
 
@@ -134,7 +134,7 @@ export default function Contact() {
                   className="btn btn-primary form-submit"
                   disabled={status === 'sending'}
                 >
-                  {status === 'sending' ? 'Sending...' : 'Send Message'}
+                  {status === 'sending' ? 'Sending...' : 'Send'}
                   {status !== 'sending' && <span>&rarr;</span>}
                 </button>
               </form>
@@ -150,18 +150,17 @@ export default function Contact() {
               <div className="contact-info-block">
                 <h2>Response Time</h2>
                 <p>
-                  I aim to respond to every inquiry within one business day. If your
-                  project is time-sensitive, mention it in your message and
-                  I'll prioritize accordingly.
+                  Every message gets a reply within one business day. If timing
+                  is tight, say so.
                 </p>
               </div>
 <div className="contact-info-block">
                 <h2>What Happens Next</h2>
                 <p>
-                  We'll meet — ideally in person — to understand your project,
-                  what you're trying to solve, and what success might look like.
-                  From there, you'll get a clear proposal with timeline and
-                  pricing. No obligations until you say go.
+                  We meet — in person if possible — to talk through what you're
+                  dealing with and what a solution needs to do. From there, you
+                  get a plain-language proposal: scope, timeline, price. No
+                  commitment until you're ready.
                 </p>
               </div>
             </div>

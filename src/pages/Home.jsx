@@ -1,22 +1,32 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import SEO from '../components/SEO'
+import { posts } from '../data/posts'
+
+function formatDate(dateStr) {
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  })
+}
 
 const valueProps = [
   {
     number: '01',
-    title: 'Fast Delivery',
-    desc: 'Projects scoped tightly and delivered on clear timelines. No endless back-and-forth, no mystery deadlines. You get working software, fast.',
+    title: 'Service',
+    desc: "Busy work isn't the same as good work. The goal is fit — the right solution for what's actually needed.",
   },
   {
     number: '02',
-    title: 'Quality Results',
-    desc: 'Done right, tested before delivery, and built to last. Everything we build is something your team can rely on and grow with.',
+    title: 'Integrity',
+    desc: "Technology isn't always the answer. When it's not, that gets said.",
   },
   {
     number: '03',
-    title: 'Transparent Pricing',
-    desc: "You know exactly what you're paying and what you're getting. No hidden fees and no surprise line items.",
+    title: 'Openness',
+    desc: "The gap between what's possible today and what most businesses are using is real. Closing it is the work.",
   },
 ]
 
@@ -25,7 +35,7 @@ export default function Home() {
     <div className="page-transition">
       <SEO
         title="Home"
-        description="NSG is a technology consulting firm helping businesses close the gap between modern tools and everyday operations. Web development, custom applications, automation, training, and systems build-out."
+        description="NSG is a technology consultancy focused on work that actually matters — web development, custom applications, automation, and AI training for teams that want to use what's current."
         path="/"
       />
       {/* Hero */}
@@ -42,7 +52,7 @@ export default function Home() {
               NSG<span className="accent">.</span>
               <span className="sr-only"> - Technology Consulting</span>
             </h1>
-            <p className="hero-tagline">Software for people</p>
+            <p className="hero-tagline">Principled software</p>
             <div className="hero-actions">
               <Link to="/contact" className="btn btn-primary">
                 Get in Touch
@@ -61,7 +71,7 @@ export default function Home() {
         <div className="container">
           <div className="value-props-header">
             <h2>Why NSG</h2>
-            <p>Simple commitments, consistently delivered.</p>
+            <p>Rooted in what matters</p>
           </div>
           <div className="value-grid stagger-in">
             {valueProps.map((v) => (
@@ -72,6 +82,29 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* From the Blog */}
+      <section className="value-props section">
+        <div className="container">
+          <h2>From the Blog</h2>
+          <div className="blog-list stagger-in">
+            {[...posts]
+              .sort((a, b) => new Date(b.date) - new Date(a.date))
+              .slice(0, 2)
+              .map((post) => (
+                <Link to={`/blog/${post.slug}`} key={post.slug} className="blog-card">
+                  <div className="blog-card-meta">
+                    <span className="blog-card-date">{formatDate(post.date)}</span>
+                  </div>
+                  <h2 className="blog-card-title">{post.title}</h2>
+                  <p className="blog-card-excerpt">{post.excerpt}</p>
+                  <span className="blog-card-read">Read →</span>
+                </Link>
+              ))}
+          </div>
+          <Link to="/blog" className="blog-card-read" style={{ marginTop: 'var(--space-md)', display: 'inline-block' }}>View all posts →</Link>
         </div>
       </section>
     </div>

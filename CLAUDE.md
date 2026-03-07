@@ -14,7 +14,7 @@ We take a human approach to our work. We meet in person to get to know each othe
 
 ## Tagline
 
-"Software for people"
+"Principled software"
 
 ## Tone & Language
 
@@ -24,6 +24,30 @@ We take a human approach to our work. We meet in person to get to know each othe
 - When talking about AI, be practical and grounded - never preachy or utopian.
 - Red is an accent color only - never overwhelming.
 - White space is your friend.
+
+## Copy Voice
+
+The philosophical foundation of this site's copy is the Dao De Jing. Not in cadence or form, but in spirit. The Dao De Jing teaches that the sage accomplishes without striving, leads without proclaiming, and is trusted because nothing is performed. The highest good, like water, serves without contention. What is not said carries as much weight as what is. Strength comes from stillness, not force.
+
+This philosophy should be felt in every line of copy — not announced, not referenced, just present.
+
+These principles govern all copy on the site — headings, subheadings, card descriptions, CTAs, and body text:
+
+**The work speaks; the worker is quiet.** Avoid copy that narrates virtues ("I care about...", "My job is to...", "I'm committed to..."). Announce what is done, not what is intended. If it sounds like a personal brand statement, cut it.
+
+**No striving, no contention.** Phrases like "I'm not trying to..." or "Unlike other consultants..." signal insecurity. The Dao does not position itself against anything. State what's true without pushing against anything else.
+
+**Avoid first-person in short copy.** Headlines, card titles, subheadings, and taglines should avoid "I," "me," and "my" wherever possible. Declarative and impersonal lands with more authority: "The work only counts if it changes something" over "I only take on work that matters."
+
+**Simplicity over completeness.** Less is more. A sentence that could be two sentences should be one. A word that could be three words should be one. Empty space is not absence — it is room for the reader to arrive at the truth themselves.
+
+**No slogans.** If it sounds like it could appear on a motivational poster or a VC-backed startup's About page, rewrite it. Copy should feel like something that crystallized in honest conversation — not something crafted in a marketing meeting.
+
+**Direct and declarative.** Say the true thing plainly. Avoid hedging ("perhaps," "in many ways," "it could be argued"). The Dao does not hedge.
+
+**Warmth without performance.** A small amount of personality is welcome — dry humor, self-awareness, a slight wink. But it should feel like it slipped out naturally, the way warmth does when nothing is being performed.
+
+**Good test:** Read the copy aloud. If it sounds like something a real person would say to someone they deeply respect — no posturing, no selling, just truth — it passes. If it sounds like it was written to impress, it wasn't written in the spirit of the Dao.
 
 ## Tech Stack
 

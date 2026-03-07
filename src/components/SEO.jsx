@@ -5,7 +5,7 @@ const BASE_URL = 'https://nsgsolutions.co'
 
 export default function SEO({ title, description, path = '/' }) {
   const fullTitle = title === 'Home'
-    ? `${SITE_NAME} - Software for People | Technology Consulting`
+    ? `${SITE_NAME} - Principled Software | Technology Consulting`
     : `${title} | ${SITE_NAME}`
   const url = `${BASE_URL}${path}`
 

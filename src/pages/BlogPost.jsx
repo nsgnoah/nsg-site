@@ -3,6 +3,16 @@ import ReactMarkdown from 'react-markdown'
 import SEO from '../components/SEO'
 import { posts } from '../data/posts'
 
+function readingTime(post) {
+  if (post.body) {
+    const words = post.body.trim().split(/\s+/).length
+    const minutes = Math.ceil(words / 200)
+    return `${minutes} min read`
+  }
+  const totalItems = (post.sections || []).reduce((sum, s) => sum + s.items.length, 0)
+  return `Quick read`
+}
+
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -49,7 +59,7 @@ export default function BlogPost() {
           </div>
           <article className="blog-post">
             <header className="blog-post-header">
-              <span className="blog-post-date">{formatDate(post.date)}</span>
+              <span className="blog-post-date">{formatDate(post.date)} · {readingTime(post)}</span>
               <h1 className="blog-post-title">{post.title}</h1>
             </header>
             <div className="blog-post-body">

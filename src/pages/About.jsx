@@ -4,23 +4,23 @@ import SEO from '../components/SEO'
 const principles = [
   {
     id: '01',
-    title: 'Honesty',
-    desc: "I'm upfront about whether I can help — and if I can't, I'll point you to someone who can.",
+    title: 'Straight talk',
+    desc: "If the work isn't a good fit, that gets said up front — along with a better direction if one exists.",
   },
   {
     id: '02',
-    title: 'Humanity',
-    desc: 'I prefer working with people in person, getting to know each other, and building a relationship that has value beyond a transaction.',
+    title: 'In person',
+    desc: 'Most projects start with a conversation, not a form. The relationship matters. So does understanding the problem before touching a keyboard.',
   },
   {
     id: '03',
-    title: 'Humility',
-    desc: 'I ask questions until I understand the issue. If I screw up, I own it and do my best to make it right.',
+    title: 'Accountability',
+    desc: "Questions get asked until the problem is understood. If something falls short of what was agreed, it gets fixed.",
   },
   {
     id: '04',
-    title: 'Non-Evangelism',
-    desc: "Technology is great at some things and bad at others. My job is to put it to use where it helps — not to push it where it doesn't.",
+    title: 'No agenda',
+    desc: "Technology solves specific problems. It doesn't solve all of them. The goal is to use it where it helps and leave it alone where it doesn't.",
   },
 ]
 
@@ -37,38 +37,35 @@ export default function About() {
           <div className="about-header">
             <h1>About</h1>
             <p>
-              A solo consultancy built on a simple idea:
-              leverage technology to help people.
+              One person. No subcontractors. The work gets done by whoever you talk to.
             </p>
           </div>
 
           <div className="about-content">
             <div className="about-text">
+              <img src="/noah.jpg" alt="Noah Greensweig" className="about-photo" />
               <p>
-                NSG is a one-person consulting practice focused on building
-                software, automating processes, and training teams. I work
-                directly with clients — no layers of abstraction, no game of
-                telephone between you and the person doing the work.
+                NSG is a solo practice. That means one person handles every
+                conversation, every decision, and every line of work. Clients
+                talk directly to whoever is building their thing — because that
+                person is the same one who picked up the phone.
               </p>
               <p>
-                I started NSG because the gap between what modern technology
-                can do and what most businesses are actually using is growing
-                fast. Small and mid-sized companies, public entities, and
-                lean teams often don't have the resources to keep up with every
-                new tool and platform that comes out. But they shouldn't have
-                to, and that's what I'm here for.
+                Most clients aren't looking for a technology partner. They have
+                a specific problem — a process that's slow, a system that doesn't
+                talk to another system, a task that takes hours and shouldn't.
+                The work is to understand that problem, build something that
+                solves it, and leave them able to run it on their own.
               </p>
               <p>
-                Every project is scoped honestly, priced clearly, and delivered
-                with the goal that you won't need me again unless you want to
-                build something new. If the work doesn't meet the standard we
-                agreed on, I'll make it right.
+                Projects are scoped and priced before anything is built. If the
+                finished work falls short of what was agreed, it gets fixed at
+                no additional cost. There's no ambiguity about what was promised.
               </p>
               <p>
-                Whether it's a custom application, an internal tool for your operations
-                team, or training your staff to use the systems they already
-                have — the approach is the same: understand the problem, build
-                the solution, hand it over clean.
+                The measure of a good project isn't how impressive it looks —
+                it's whether the people using it find it useful six months later.
+                That's what's being aimed at.
               </p>
             </div>
 
@@ -84,11 +81,11 @@ export default function About() {
           </div>
 
           <div className="value-props-header" style={{ marginTop: 'var(--space-2xl)', borderTop: '1px solid var(--gray-200)', paddingTop: 'var(--space-2xl)' }}>
-            <h2>Have a project in mind?</h2>
-            <p>Let's talk through what you need and figure out the right approach.</p>
+            <h2>Something on your mind?</h2>
+            <p>Reach out and describe the situation. No obligation, no pitch — just a conversation.</p>
             <div className="hero-actions" style={{ justifyContent: 'center', marginTop: 'var(--space-lg)' }}>
               <Link to="/contact" className="btn btn-primary">
-                Get in Touch
+                Start a conversation
               </Link>
             </div>
           </div>
