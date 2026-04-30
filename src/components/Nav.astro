@@ -8,12 +8,16 @@ const { currentPath } = Astro.props;
 const isActive = (path: string) => currentPath === path;
 ---
 
-<nav class="nav" aria-label="Primary navigation">
+<nav class="nav" aria-label="Primary navigation" data-mobile-nav>
   <div class="container nav-inner">
     <a href="/" class="wordmark" aria-label="NSG home">
       NSG<span class="wordmark-dot" aria-hidden="true"></span>
     </a>
-    <ul class="nav-links">
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-menu" data-nav-toggle>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+    <ul class="nav-links" id="primary-menu" data-nav-menu>
       <li>
         <a class="nav-link" href="/services" aria-current={isActive('/services') ? 'page' : undefined}>Services</a>
       </li>
@@ -26,3 +30,34 @@ const isActive = (path: string) => currentPath === path;
     </ul>
   </div>
 </nav>
+
+<script>
+  const mobileNav = document.querySelector('[data-mobile-nav]');
+  const navToggle = mobileNav?.querySelector('[data-nav-toggle]');
+  const navMenu = mobileNav?.querySelector('[data-nav-menu]');
+
+  if (mobileNav && navToggle && navMenu) {
+    const setOpen = (open) => {
+      mobileNav.setAttribute('data-open', open ? 'true' : 'false');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      document.body.classList.toggle('nav-open', open);
+    };
+
+    navToggle.addEventListener('click', () => {
+      setOpen(navToggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    navMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.matchMedia('(min-width: 721px)').matches) setOpen(false);
+    });
+  }
+</script>
