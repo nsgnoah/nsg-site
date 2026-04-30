@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+design_handoff_nsg_site/
+NSG Design System.zip

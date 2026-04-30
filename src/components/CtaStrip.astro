@@ -1,0 +1,36 @@
+---
+interface Props {
+  title: string;
+  continuation: string;
+  note: string;
+  primaryText?: string;
+  primaryHref?: string;
+  ghostText?: string;
+  ghostHref?: string;
+}
+
+const {
+  title,
+  continuation,
+  note,
+  primaryText = 'Get in touch',
+  primaryHref = '/contact',
+  ghostText,
+  ghostHref = 'mailto:noah@nsgsolutions.co'
+} = Astro.props;
+---
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2 set:html={`${title}<br/><em>${continuation}</em>`} />
+        <div class="cta-note">{note}</div>
+      </div>
+      <div class="cta-actions">
+        <a href={primaryHref} class="btn btn-primary">{primaryText} <span class="arr">→</span></a>
+        {ghostText && <a href={ghostHref} class="btn btn-ghost">{ghostText}</a>}
+      </div>
+    </div>
+  </div>
+</section>

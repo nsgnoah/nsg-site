@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHead from '../components/SectionHead.astro';
+import LabelRow from '../components/LabelRow.astro';
+import WorkCard from '../components/WorkCard.astro';
+import CtaStrip from '../components/CtaStrip.astro';
+
+const problems = [
+  ['01', '"There’s a spreadsheet four people maintain and nobody trusts."', 'Replaced with a small internal app. Single source of truth, no copy-paste.'],
+  ['02', '"Our website looks like every other shop on the block."', 'A site that’s actually yours — fast, tailored, and built to last.'],
+  ['03', '"Three tools don’t talk to each other; we re-enter everything."', 'Wired together so the same data only gets typed once.'],
+  ['04', '"We want to use AI but don’t know where it fits."', 'Pick the right tool(s) for your operation, then build it in.'],
+  ['05', '"The thing we need doesn’t exist off the shelf."', 'Built around how you actually work — no extra features in the way.'],
+  ['06', '"Every Monday morning is the same hour of busywork."', 'A script or scheduled job that does it before anyone clocks in.']
+];
+
+const principles = [
+  ['01 / DIRECT', 'One person, start to finish.', 'You describe the problem to the same person who builds and ships the fix. Nothing translated, nothing lost on a handoff.'],
+  ['02 / HONEST', 'Done means done.', 'Work continues until you look at it and say "this is even better than what we had in mind." If something later breaks that we agreed was finished, fixing it is free.'],
+  ['03 / HANDS-ON', 'Visible while it’s built.', 'You see the work as it’s built, not in a reveal at the end. In person where possible, video the rest of the time.']
+];
+
+const work = [
+  {
+    kind: 'Web · Custom CMS',
+    industry: 'Cannabis retail',
+    year: '2026',
+    title: 'A storefront site that doesn’t look like a template.',
+    desc: 'New website and ordering flow for a dispensary opening in St. Paul. Fast, tailored, and easy for staff to update without calling anyone.',
+    tag: 'STOREFRONT_001.JPG'
+  },
+  {
+    kind: 'Custom tool · 3D',
+    industry: 'Event staging',
+    year: '2026',
+    title: 'Stage builder, in 3D, before anything is built.',
+    desc: 'Internal 3D visualizer that lets a staging company see a stage in a venue before the trucks roll out. Replacing a stack of PDFs and best-guesses.',
+    tag: 'STAGE_PREVIEW.GLB'
+  },
+  {
+    kind: 'Web · Forms',
+    industry: 'University research',
+    year: '2024',
+    title: 'A grant-application tool that researchers will actually use.',
+    desc: 'Custom application portal for environmental grant submissions at the University of Minnesota. Replaced a tangle of forms and email threads.',
+    tag: 'GRANTS_PORTAL.PNG'
+  },
+  {
+    kind: 'Automation · AI',
+    industry: 'Reinsurance',
+    year: 'Ongoing',
+    title: 'Catastrophe-modeling, on a schedule.',
+    desc: 'Automation layer over a broker’s catastrophe-modeling pipeline. The same numbers, an order of magnitude faster, with eyes on every step that matters.',
+    tag: 'CAT_MODEL.RUN'
+  }
+];
+---
+
+<BaseLayout>
+  <div class="page">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-meta">
+          <div class="hero-meta-cell">
+            <div class="key">Practice</div>
+            <div class="val">Custom software</div>
+          </div>
+          <div class="hero-meta-cell">
+            <div class="key">Based in</div>
+            <div class="val">Minneapolis, MN</div>
+          </div>
+          <div class="hero-meta-cell">
+            <div class="key">Working with</div>
+            <div class="val">Small businesses</div>
+          </div>
+        </div>
+
+        <h1 class="hero-title">
+          Software that fits the way you<br />
+          <span class="already">already</span> work<span class="accent">.</span>
+        </h1>
+
+        <div class="hero-sub">
+          <p>
+            NSG builds the small, sharp tools small businesses actually need —
+            the spreadsheet replacement, the website that isn’t a template, the
+            automation that quietly does what someone used to.
+          </p>
+          <div class="hero-actions">
+            <a href="/contact" class="btn btn-primary">Start a conversation <span class="arr">→</span></a>
+            <a href="/services" class="btn btn-ghost">What we do</a>
+          </div>
+        </div>
+
+        <div class="ticker">
+          <span><span class="dot"></span>Currently taking on 1–2 new engagements</span>
+          <span>· Replies within two business days</span>
+          <span>· In person when possible</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section problems">
+      <div class="container">
+        <SectionHead num="01 / WHY HIRE" meta="The work">
+          <Fragment slot="title">Things that get in the way<br /><em>of getting work done.</em></Fragment>
+          <Fragment slot="lede">The list below is paraphrased from real first conversations. You probably recognize one of them.</Fragment>
+        </SectionHead>
+
+        <div class="problems-list">
+          {problems.map(([num, quote, fix]) => (
+            <div class="problem">
+              <span class="num">PROBLEM / {num}</span>
+              <div class="problem-quote">{quote}</div>
+              <div class="problem-fix">
+                <span class="arrow">→</span>
+                <span>{fix}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section approach">
+      <div class="container">
+        <SectionHead num="02 / APPROACH" meta="How NSG works">
+          <Fragment slot="title">Three things this practice is<br /><em>built around.</em></Fragment>
+          <Fragment slot="lede">No account managers. No status games. The person you talk to is the person writing the code.</Fragment>
+        </SectionHead>
+
+        <div class="principle-grid">
+          {principles.map(([num, title, body]) => (
+            <div class="principle">
+              <span class="marker"></span>
+              <span class="num">{num}</span>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section work">
+      <div class="container">
+        <SectionHead num="03 / SELECTED WORK" meta="Recent engagements">
+          <Fragment slot="title">A few of the things<br /><em>currently in flight.</em></Fragment>
+          <Fragment slot="lede">Names withheld where clients prefer it. Happy to walk through any of these on a call.</Fragment>
+        </SectionHead>
+
+        <div class="work-list">
+          {work.map((item, index) => <WorkCard index={index} {...item} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section manifesto">
+      <div class="container">
+        <LabelRow num="04 / NOTE" meta="From the workbench" dark />
+        <h2>
+          <span class="manifesto-line">The aim isn’t to <em class="inline-em">impress</em> you with the work.</span>
+          <span class="manifesto-line manifesto-quote-line">
+            It’s to make you say <span class="accent">"hell yeah —</span>
+            <em class="manifesto-tail">this is even better than what we had in mind."</em>
+          </span>
+        </h2>
+        <div class="manifesto-attr">Noah Greensweig, NSG</div>
+      </div>
+    </section>
+
+    <CtaStrip
+      title="Have a small thorn<br/>in your operation?"
+      continuation="Send a note."
+      note="Replies within two business days · No commitment until you’re ready"
+      primaryText="Get in touch"
+      ghostText="Email directly"
+    />
+  </div>
+</BaseLayout>

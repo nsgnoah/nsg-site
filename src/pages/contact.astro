@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LabelRow from '../components/LabelRow.astro';
+
+const contactEndpoint = import.meta.env.PUBLIC_CONTACT_FORM_ENDPOINT || '';
+const types = ['Automation', 'Custom tool', 'AI integration', 'Connecting tools', 'Not sure yet'];
+const budgets = ['< $5k', '$5–15k', '$15–40k', '> $40k', 'Help me figure it out'];
+---
+
+<BaseLayout title="Contact — NSG Solutions">
+  <div class="page">
+    <div class="container">
+      <header class="page-head">
+        <LabelRow num="CONTACT / 01" meta="Start a conversation" />
+        <h1>Say hi.<br /><em>Describe what's in the way.</em></h1>
+        <p class="lede">
+          A few sentences is plenty. You'll hear back within two business days, from Noah,
+          with either some questions or a time to talk.
+        </p>
+      </header>
+
+      <section class="contact-layout">
+        <div class="contact-success" data-contact-success hidden>
+          <LabelRow num="SENT" />
+          <h2>Got it. <em>Talk soon.</em></h2>
+          <p>
+            You'll hear back within two business days. If something's urgent, email
+            <a href="mailto:noah@nsgsolutions.co">noah@nsgsolutions.co</a> directly.
+          </p>
+        </div>
+
+        <form class="contact-form" data-contact-form action={contactEndpoint || undefined} method="post">
+          <input type="hidden" name="work_type" data-chip-input="work_type" />
+          <input type="hidden" name="budget" data-chip-input="budget" />
+
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" required placeholder="Jane Smith" autocomplete="name" />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="jane@yourbusiness.com" autocomplete="email" />
+          </div>
+
+          <div class="field">
+            <label for="org">Business / Organization <span>(optional)</span></label>
+            <input id="org" name="organization" type="text" placeholder="e.g. Smith & Co." autocomplete="organization" />
+          </div>
+
+          <div class="field">
+            <label>What kind of work?</label>
+            <div class="chips" aria-label="What kind of work?">
+              {types.map((type) => (
+                <button class="chip" type="button" data-chip="work_type" data-value={type} aria-pressed="false">{type}</button>
+              ))}
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Rough budget <span>(optional, helps a lot)</span></label>
+            <div class="chips" aria-label="Rough budget">
+              {budgets.map((budget) => (
+                <button class="chip" type="button" data-chip="budget" data-value={budget} aria-pressed="false">{budget}</button>
+              ))}
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="message">What's going on?</label>
+            <textarea id="message" name="message" required rows="6" placeholder="A few sentences is plenty. What's in the way? What does &quot;done&quot; look like?"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="align-self: flex-start;">
+            Send the note <span class="arr">→</span>
+          </button>
+        </form>
+
+        <aside class="contact-aside">
+          <div class="block">
+            <h3>Direct line</h3>
+            <p><a href="mailto:noah@nsgsolutions.co">noah@nsgsolutions.co</a></p>
+          </div>
+          <div class="block">
+            <h3>Reply time</h3>
+            <p>Within two business days. If timing is tight, say so in the note.</p>
+          </div>
+          <div class="block">
+            <h3>What happens next</h3>
+            <p>We'll set up a call — in person if you're in Minneapolis. We talk through what you're dealing with, then you get a plain-language proposal: scope, timeline, price. No commitment until you're ready.</p>
+          </div>
+          <div class="block">
+            <h3>Where</h3>
+            <p>Minneapolis, MN. Available remote everywhere else.</p>
+          </div>
+        </aside>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const form = document.querySelector('[data-contact-form]');
+    const success = document.querySelector('[data-contact-success]');
+    const chips = document.querySelectorAll('[data-chip]');
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const group = chip.getAttribute('data-chip');
+        const value = chip.getAttribute('data-value') || '';
+        const input = document.querySelector(`[data-chip-input="${group}"]`);
+        const active = chip.classList.contains('active');
+
+        document.querySelectorAll(`[data-chip="${group}"]`).forEach((item) => {
+          item.classList.remove('active');
+          item.setAttribute('aria-pressed', 'false');
+        });
+
+        if (input instanceof HTMLInputElement) {
+          input.value = active ? '' : value;
+        }
+
+        if (!active) {
+          chip.classList.add('active');
+          chip.setAttribute('aria-pressed', 'true');
+        }
+      });
+    });
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const endpoint = form.getAttribute('action');
+
+      if (endpoint) {
+        const submit = form.querySelector('button[type="submit"]');
+        submit?.setAttribute('disabled', '');
+
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { Accept: 'application/json' }
+          });
+
+          if (!response.ok) {
+            throw new Error('Contact submission failed.');
+          }
+        } catch (error) {
+          submit?.removeAttribute('disabled');
+          window.alert('The note could not be sent. Please email noah@nsgsolutions.co directly.');
+          return;
+        }
+      }
+
+      form.setAttribute('hidden', '');
+      success?.removeAttribute('hidden');
+      success?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    });
+  </script>
+</BaseLayout>

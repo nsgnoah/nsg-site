@@ -1,0 +1,18 @@
+---
+import LabelRow from './LabelRow.astro';
+
+interface Props {
+  num: string;
+  meta: string;
+}
+
+const { num, meta } = Astro.props;
+---
+
+<div class="section-head">
+  <div>
+    <LabelRow num={num} meta={meta} />
+    <h2><slot name="title" /></h2>
+  </div>
+  <p class="lede"><slot name="lede" /></p>
+</div>

@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LabelRow from '../components/LabelRow.astro';
+import CtaStrip from '../components/CtaStrip.astro';
+
+const facts = [
+  ['Based', 'Minneapolis, <em>MN</em>'],
+  ['Available', 'Remote, US-wide'],
+  ['Capacity', '1–2 new this quarter'],
+  ['Reply time', '≤ 2 business days'],
+  ['Past clients', 'Small biz, <em>universities, brokers</em>'],
+  ['Stack', 'Whatever fits the job'],
+  ['Meeting style', 'In person where possible'],
+  ['Billing', 'Hourly, <em>or fixed scope</em>']
+];
+---
+
+<BaseLayout title="About — NSG Solutions">
+  <div class="page">
+    <div class="container">
+      <section class="about-hero">
+        <div>
+          <LabelRow num="ABOUT / 01" meta="The person behind it" />
+          <h1>Hi — I'm Noah.<br /><em>I run a small software practice<br />out of Minneapolis.</em></h1>
+        </div>
+        <div class="about-photo-frame">
+          <img src="/assets/noah.jpg" alt="Noah Greensweig" />
+          <div class="about-photo-tag"><span class="dash"></span>Noah Greensweig · Minneapolis, MN</div>
+        </div>
+      </section>
+
+      <section class="about-prose">
+        <div class="label-col">02 / WHAT THIS IS</div>
+        <div class="body-col">
+          <p>
+            NSG is a small software practice. The whole thing is one person: I take on
+            a handful of client engagements at a time, I do the work end-to-end, and the
+            person you talk to is the same person writing the code.
+          </p>
+          <p>
+            I've spent years writing software in full-time roles — most recently building an
+            automation layer over a reinsurance broker's catastrophe-modeling pipeline,
+            and leading AI adoption inside the same business. NSG is where I bring that
+            experience to small businesses that want a real tool, not a slide deck about one.
+          </p>
+          <p>
+            The pitch is plain. <em>Do business with integrity. Stick with the work
+            until you look at it and feel: hell yeah — this is even better than what we had in mind.</em>
+            That's it. There's no second pitch.
+          </p>
+        </div>
+      </section>
+
+      <section class="about-prose">
+        <div class="label-col">03 / HOW THIS WORKS</div>
+        <div class="body-col">
+          <p>
+            We meet — in person if you're in or near Minneapolis, video otherwise.
+            You walk me through what's getting in the way of the work. I ask a lot of
+            questions, take notes, and come back with a plain-language proposal:
+            what the fix looks like, what it costs (hourly rate, or a fixed bid for well-defined work),
+            and when you'll have it.
+          </p>
+          <p>
+            Then we build, together. You see the work as it goes — not in a reveal at the end.
+            Things change as we learn; that's fine. The point isn't to defend the original
+            plan, it's to land the right thing.
+          </p>
+          <p>
+            When it's done, it's yours. I write things so a person who isn't me can keep
+            them running. If something we previously agreed was finished later turns out to
+            be broken, fixing it is free.
+          </p>
+        </div>
+      </section>
+
+      <section class="about-prose">
+        <div class="label-col">04 / ON AI</div>
+        <div class="body-col">
+          <p>
+            There's no single right AI tool, and the landscape changes every few months.
+            Part of the job is keeping track of that so you don't have to, and picking
+            the thing that fits your situation — not the thing that's trending this week.
+          </p>
+          <p>
+            Used carefully, AI makes a lot of this work faster than it used to be, which
+            mostly means projects are cheaper and ship sooner. Quality doesn't suffer for
+            it. Used carelessly, it makes a confident mess. Most of the craft now is knowing
+            the difference.
+          </p>
+        </div>
+      </section>
+
+      <section class="about-facts">
+        <LabelRow num="05 / FACTS" meta="The short version" />
+        <div class="facts-grid">
+          {facts.map(([key, value]) => (
+            <div class="fact">
+              <div class="key">{key}</div>
+              <div class="val" set:html={value}></div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+
+    <CtaStrip
+      title="Want to talk?"
+      continuation="Tell me what's going on."
+      note="Two business-day reply · No commitment until you're ready"
+      primaryText="Get in touch"
+      ghostText="Email directly"
+    />
+  </div>
+</BaseLayout>

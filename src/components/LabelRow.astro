@@ -1,0 +1,15 @@
+---
+interface Props {
+  num: string;
+  meta?: string;
+  dark?: boolean;
+}
+
+const { num, meta, dark = false } = Astro.props;
+---
+
+<div class:list={['label-row', dark && 'label-row-dark']}>
+  <span class="num">{num}</span>
+  <span class="rule" aria-hidden="true"></span>
+  {meta && <span class="meta">{meta}</span>}
+</div>

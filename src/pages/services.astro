@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LabelRow from '../components/LabelRow.astro';
+import CtaStrip from '../components/CtaStrip.astro';
+
+const services = [
+  {
+    num: '01',
+    title: 'When the same task happens every week.',
+    sub: 'Automation',
+    blurb: 'If a person is doing it the same way every time, a script — or an AI step with a human checking the high-stakes parts — can usually do it instead. Quietly, on a schedule, with a record of every run.',
+    symptoms: [
+      ['"It’s an hour every Monday and the report is the same shape."', 'Scheduled job, emailed to whoever needs it.'],
+      ['"Three people copy the same data into three places."', 'One source of truth, the rest pull from it automatically.'],
+      ['"Files get renamed and filed by hand."', 'Watched folder, named-and-filed before you notice.']
+    ]
+  },
+  {
+    num: '02',
+    title: 'When off-the-shelf software almost — but not quite — fits.',
+    sub: 'Custom tools',
+    blurb: 'Sometimes the tool you need doesn’t exist, or the closest thing costs more than it’s worth and still gets it slightly wrong. A small custom application, built around how you actually work, often costs less than the software you’d be tolerating for the next five years.',
+    symptoms: [
+      ['"Our website looks like every other shop on the block."', 'A site that’s actually yours, fast and built to last.'],
+      ['"We need a 3D preview before we build the real thing."', 'In-browser visualizer, no plugins, no exports.'],
+      ['"Customers keep emailing what should be a self-serve form."', 'Customer portal, scoped to what they actually need.']
+    ]
+  },
+  {
+    num: '03',
+    title: 'When AI feels useful but you can’t tell where it fits.',
+    sub: 'AI integration',
+    blurb: 'When a process is clear enough to write down, AI can run it on a schedule — operating the same software your team uses, leaving an audit trail, and pausing for a human at the high-stakes steps. The work is picking the right shape for your operation, not bolting on a chatbot.',
+    symptoms: [
+      ['"Half my week is running the same model with different inputs."', 'Scheduled runs with audit trails, not someone clicking through at 7am.'],
+      ['"We prep CSVs for the model by hand and pray we got it right."', 'Validated data-prep pipeline, every row traceable to its source.'],
+      ['"We want AI to actually do the work, not just summarize it."', 'Agents that operate the tools your team already uses, with checkpoints where a human signs off.']
+    ]
+  },
+  {
+    num: '04',
+    title: 'When five tools can’t see each other.',
+    sub: 'Connecting your tools',
+    blurb: 'Most businesses run on five or six pieces of software that don’t know the others exist. Wiring them together so the same information doesn’t have to be entered twice is some of the highest-leverage work there is.',
+    symptoms: [
+      ['"CRM doesn’t talk to accounting."', 'Customer & invoice data, in sync without a person in the middle.'],
+      ['"Bookings live in one tool, the calendar in another."', 'Two-way sync, single source of truth.'],
+      ['"Stuff falls through the cracks between tools."', 'Lightweight glue + alerts when something stalls.']
+    ]
+  }
+];
+---
+
+<BaseLayout title="Services — NSG Solutions">
+  <div class="page">
+    <div class="container">
+      <header class="page-head">
+        <LabelRow num="SERVICES / 01" meta="What NSG does" />
+        <h1>Issues we solve</h1>
+        <p class="lede">
+          Every project starts the same way: someone describes what's getting in the way of the work.
+          The categories below are how those descriptions usually sound. If yours doesn't fit any of them,
+          that's fine — most of them don't, exactly.
+        </p>
+      </header>
+    </div>
+
+    <div class="container">
+      {services.map((service) => (
+        <section class="svc-block">
+          <div class="left">
+            <div class="num">CATEGORY / {service.num}</div>
+            <h2>{service.title}</h2>
+            <p>{service.blurb}</p>
+            <div class="meta" style="margin-top: 1.5rem;">{service.sub}</div>
+          </div>
+          <div class="svc-symptoms">
+            {service.symptoms.map(([quote, fix]) => (
+              <div class="svc-symptom">
+                <span class="check"></span>
+                <div>
+                  <span class="quote">{quote}</span>
+                  <span class="gloss">→ {fix}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <CtaStrip
+      title="Not sure which of these is yours?"
+      continuation="Describe what’s bugging you."
+      note="A short note is plenty. We’ll sort it out from there."
+      primaryText="Send a note"
+    />
+  </div>
+</BaseLayout>
