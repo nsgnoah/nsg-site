@@ -172,24 +172,11 @@ main {
 }
 
 .wordmark {
-  align-items: baseline;
   color: var(--black);
-  display: inline-flex;
   font-family: var(--font-heading);
   font-size: 1.25rem;
   font-weight: 800;
-  gap: 0.16rem;
   letter-spacing: 0;
-}
-
-.wordmark-dot {
-  background: var(--red);
-  border-radius: 50%;
-  display: inline-block;
-  flex: 0 0 auto;
-  height: 6px;
-  transform: translateY(1px);
-  width: 6px;
 }
 
 .nav-links {
