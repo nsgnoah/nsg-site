@@ -1,0 +1,297 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LabelRow from '../components/LabelRow.astro';
+---
+
+<BaseLayout
+  title="404 — Page not found · NSG Solutions"
+  description="That URL didn't match anything on the NSG site. Here's a way back."
+>
+  <div class="page nf">
+    <section class="nf-hero">
+      <div class="container">
+        <div class="nf-grid">
+          <div class="nf-left">
+            <LabelRow num="ERR / 404" meta="Page not found" />
+
+            <div class="nf-code" aria-hidden="true">
+              <span class="nf-code-digit">4</span><span class="nf-code-digit nf-code-zero">0</span><span class="nf-code-digit">4</span>
+            </div>
+
+            <h1 class="nf-title">
+              That page <em>isn't here.</em>
+            </h1>
+
+            <p class="nf-lede">
+              Either the URL is off by a character, the link is older than the
+              site, or someone moved a thing without telling the redirects.
+              No big deal<span class="accent">.</span>
+            </p>
+
+            <div class="nf-actions">
+              <a href="/" class="btn btn-primary">Back to the home page <span class="arr">→</span></a>
+              <a href="/contact" class="btn btn-ghost">Email Noah</a>
+            </div>
+          </div>
+
+          <aside class="nf-right">
+            <div class="nf-readout">
+              <div class="nf-readout-row">
+                <span class="nf-readout-key">Status</span>
+                <span class="nf-readout-val">404 / Not Found</span>
+              </div>
+              <div class="nf-readout-row">
+                <span class="nf-readout-key">Requested</span>
+                <span class="nf-readout-val nf-path" id="nf-path">/</span>
+              </div>
+              <div class="nf-readout-row">
+                <span class="nf-readout-key">Server</span>
+                <span class="nf-readout-val">nsgsolutions.co</span>
+              </div>
+              <div class="nf-readout-row">
+                <span class="nf-readout-key">Action</span>
+                <span class="nf-readout-val">Try one of the links below</span>
+              </div>
+            </div>
+
+            <ul class="nf-suggest">
+              <li>
+                <a href="/services">
+                  <span class="nf-suggest-key">→ Services</span>
+                  <span class="nf-suggest-meta">What NSG actually builds</span>
+                </a>
+              </li>
+              <li>
+                <a href="/about">
+                  <span class="nf-suggest-key">→ About</span>
+                  <span class="nf-suggest-meta">One person, start to finish</span>
+                </a>
+              </li>
+              <li>
+                <a href="/contact">
+                  <span class="nf-suggest-key">→ Contact</span>
+                  <span class="nf-suggest-meta">Start a conversation</span>
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <span class="nf-suggest-key">→ Home</span>
+                  <span class="nf-suggest-meta">Start from the top</span>
+                </a>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var el = document.getElementById('nf-path');
+      if (!el) return;
+      try {
+        var path = window.location.pathname + window.location.search;
+        if (path.length > 60) path = path.slice(0, 57) + '...';
+        el.textContent = path || '/';
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    .nf {
+      background: var(--paper);
+    }
+
+    .nf-hero {
+      padding: clamp(4rem, 8vw, 7rem) 0 clamp(5rem, 10vw, 8rem);
+      min-height: calc(100vh - var(--nav-h));
+      display: flex;
+      align-items: center;
+    }
+
+    .nf-grid {
+      display: grid;
+      gap: clamp(2.5rem, 5vw, 5rem);
+      grid-template-columns: 7fr 5fr;
+      align-items: start;
+    }
+
+    .nf-code {
+      align-items: baseline;
+      color: var(--black);
+      display: flex;
+      font-family: var(--font-heading);
+      font-size: clamp(7rem, 18vw, 14rem);
+      font-weight: 800;
+      gap: 0.04em;
+      letter-spacing: -0.04em;
+      line-height: 0.85;
+      margin: 1.25rem 0 2rem;
+    }
+
+    .nf-code-digit {
+      display: inline-block;
+    }
+
+    .nf-code-zero {
+      color: var(--red);
+      font-family: var(--font-body);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      transform: translateY(0.04em);
+    }
+
+    .nf-title {
+      color: var(--black);
+      font-family: var(--font-heading);
+      font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1;
+      margin-bottom: 1.25rem;
+      max-width: 14ch;
+    }
+
+    .nf-title em {
+      color: var(--gray-500);
+      display: inline;
+      font-family: var(--font-body);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .nf-lede {
+      color: var(--gray-700);
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      max-width: 48ch;
+    }
+
+    .nf-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .nf-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .nf-readout {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      display: flex;
+      flex-direction: column;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      position: relative;
+    }
+
+    .nf-readout::before {
+      background: var(--red);
+      content: '';
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 2px;
+    }
+
+    .nf-readout-row {
+      align-items: baseline;
+      border-bottom: 1px solid var(--gray-200);
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 7rem 1fr;
+      padding: 0.85rem 1.1rem 0.85rem 1.4rem;
+    }
+
+    .nf-readout-row:last-child {
+      border-bottom: 0;
+    }
+
+    .nf-readout-key {
+      color: var(--gray-500);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .nf-readout-val {
+      color: var(--black);
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+      overflow-wrap: anywhere;
+    }
+
+    .nf-path {
+      color: var(--red);
+    }
+
+    .nf-suggest {
+      border-top: 1px solid var(--gray-200);
+      list-style: none;
+    }
+
+    .nf-suggest li {
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .nf-suggest a {
+      align-items: center;
+      color: var(--black);
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      padding: 1rem 0.25rem;
+      transition: color 0.2s var(--ease), padding 0.2s var(--ease);
+    }
+
+    .nf-suggest a:hover {
+      color: var(--red);
+      padding-left: 0.65rem;
+    }
+
+    .nf-suggest-key {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .nf-suggest-meta {
+      color: var(--gray-500);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 1024px) {
+      .nf-code {
+        font-size: clamp(6rem, 22vw, 11rem);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nf-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nf-hero {
+        min-height: auto;
+      }
+
+      .nf-suggest-meta {
+        display: none;
+      }
+    }
+  </style>
+</BaseLayout>
