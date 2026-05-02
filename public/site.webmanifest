@@ -1,0 +1,21 @@
+{
+  "name": "NSG Solutions",
+  "short_name": "NSG",
+  "icons": [
+    {
+      "src": "/assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon-red-dot.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#D72638",
+  "background_color": "#F4F2EE",
+  "display": "browser",
+  "start_url": "/"
+}
