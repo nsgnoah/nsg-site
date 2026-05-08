@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LabelRow from '../components/LabelRow.astro';
 
-const types = ['Automation', 'Custom tool', 'AI integration', 'Connecting tools', 'Not sure yet'];
+const types = ['Website or app', 'Automation', 'AI integration', 'Not sure yet'];
 ---
 
 <BaseLayout
@@ -83,11 +83,11 @@ const types = ['Automation', 'Custom tool', 'AI integration', 'Connecting tools'
           </div>
           <div class="block">
             <h3>What happens next</h3>
-            <p>We'll set up a call — in person if you're in Minneapolis. We talk through what you're dealing with, then you get a plain-language proposal: scope, timeline, price. No commitment until you're ready.</p>
+            <p>We'll set up a call and talk through what you're dealing with. Then, you get a plain-language proposal: scope, timeline, price. No commitment until you're ready.</p>
           </div>
           <div class="block">
             <h3>Where</h3>
-            <p>Minneapolis, MN. Available remote everywhere else.</p>
+            <p>Minneapolis, MN. Available to meet in person or remote.</p>
           </div>
         </aside>
       </section>
@@ -144,20 +144,14 @@ const types = ['Automation', 'Custom tool', 'AI integration', 'Connecting tools'
 
     chips.forEach((chip) => {
       chip.addEventListener('click', () => {
-        const value = chip.getAttribute('data-value') || '';
         const isActive = chip.classList.contains('active');
+        chip.classList.toggle('active', !isActive);
+        chip.setAttribute('aria-selected', String(!isActive));
 
-        chips.forEach((c) => {
-          c.classList.remove('active');
-          c.setAttribute('aria-selected', 'false');
-        });
-
-        typeInput.value = isActive ? '' : value;
-
-        if (!isActive) {
-          chip.classList.add('active');
-          chip.setAttribute('aria-selected', 'true');
-        }
+        const selected = [...chips]
+          .filter((c) => c.classList.contains('active'))
+          .map((c) => c.getAttribute('data-value') || '');
+        typeInput.value = selected.join(', ');
       });
     });
 

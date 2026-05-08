@@ -1010,7 +1010,7 @@ main {
 
 .about-photo-tag {
   align-items: center;
-  bottom: -28px;
+  bottom: -44px;
   color: var(--gray-500);
   display: flex;
   font-family: var(--font-mono);
@@ -1059,7 +1059,7 @@ main {
 }
 
 .facts-grid {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .fact {

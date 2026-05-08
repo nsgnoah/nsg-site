@@ -1,0 +1,566 @@
+/* ============================================================
+   NSG redesign additions
+   - Tier-stack visualization (services page)
+   - Tiered problems list (home page)
+   - On-AI section refresh (about page)
+   ============================================================ */
+
+:root {
+  --nsg-teal: #0D9488;
+  --nsg-teal-soft: rgba(13, 148, 136, 0.08);
+}
+
+/* The redesigned hero line is longer than the original "already work"
+   lockup; give the existing headline treatment enough measure to hold
+   the intended three-line break on desktop. */
+.hero-title {
+  font-size: clamp(5.25rem, 7vw, 5.85rem);
+  line-height: 1.02;
+  max-width: 100%;
+}
+
+.hero-title .already {
+  font-size: 0.92em;
+}
+
+.hero-final-line {
+  white-space: nowrap;
+}
+
+.home-page .section-head h2 em,
+.home-page .cta-inner h2 em {
+  font-family: var(--font-heading);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.12;
+  margin-top: 0.32em;
+}
+
+.home-page .section-head h2 em {
+  font-size: 0.62em;
+}
+
+.home-page .section-head .lede {
+  font-style: normal;
+  line-height: 1.65;
+}
+
+.home-page .manifesto h2 {
+  max-width: none;
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+}
+
+.work-title-oneline {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.section-head h2:has(.work-title-oneline) {
+  font-size: clamp(1.5rem, 4.6vw, 2.6rem);
+  max-width: none;
+}
+
+.home-page .manifesto h2 .manifesto-tail {
+  font-family: var(--font-heading);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.18;
+}
+
+.soft-heading-tail {
+  color: var(--gray-500);
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.82em;
+  font-weight: 500;
+  line-height: 1.1;
+  margin-top: 0.24em;
+}
+
+.page-head h1.h1-oneline {
+  font-size: clamp(1.5rem, 6.4vw, 5rem);
+  max-width: none;
+  white-space: nowrap;
+}
+
+/* ---------- Tier banner above home problems list ---------- */
+
+.tier-intro {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem 1.25rem;
+  align-items: baseline;
+  padding: 1.25rem 0 0.5rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.tier-intro .ti-num {
+  color: var(--gray-500);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tier-intro .ti-num em {
+  color: var(--red);
+  font-style: normal;
+}
+
+.tier-intro.tier-3 .ti-num em {
+  color: var(--nsg-teal);
+}
+
+.tier-intro h3 {
+  color: var(--black);
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin-bottom: 0.35rem;
+}
+
+.tier-intro p {
+  color: var(--gray-700);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-style: normal;
+  line-height: 1.65;
+  max-width: 54ch;
+}
+
+.problems .tier-group + .tier-group {
+  margin-top: 3.5rem;
+}
+
+/* keep the tier-group's border treatment consistent with the original
+   problems-list grid */
+.tier-group .problems-list {
+  border-left: 1px solid var(--gray-200);
+  border-top: 1px solid var(--gray-200);
+}
+
+.tier-group .problem-quote {
+  font-size: 1.2rem;
+  font-style: normal;
+  line-height: 1.45;
+}
+
+/* ---------- The Stack (services page top visualization) ---------- */
+
+.stack-frame {
+  border: 1px solid var(--gray-200);
+  background: var(--paper);
+  margin: clamp(2rem, 4vw, 3rem) 0 clamp(3rem, 5vw, 4rem);
+  position: relative;
+}
+
+.stack-frame .stack-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--gray-200);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  background: var(--white);
+}
+
+.stack-frame .stack-meta .label {
+  color: var(--red);
+}
+
+.stack-row {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr auto;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2.5rem);
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.25rem, 2.5vw, 2rem);
+  border-bottom: 1px solid var(--gray-200);
+  position: relative;
+  background: var(--paper);
+  transition: background 0.25s var(--ease);
+}
+
+.stack-row:last-child {
+  border-bottom: 0;
+}
+
+.stack-row:hover {
+  background: var(--white);
+}
+
+.stack-row .row-num {
+  font-family: var(--font-heading);
+  font-size: clamp(2.6rem, 4vw, 3.5rem);
+  font-weight: 800;
+  color: var(--gray-200);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.stack-row .row-name {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  font-weight: 700;
+  color: var(--black);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.4rem;
+}
+
+.stack-row .row-name .accent-dot {
+  color: var(--red);
+}
+
+.stack-row.row-tier-3 .row-name .accent-dot {
+  color: var(--nsg-teal);
+}
+
+.stack-row .row-sub {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-style: normal;
+  color: var(--gray-700);
+  line-height: 1.55;
+  max-width: 50ch;
+}
+
+.stack-row .row-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  text-align: right;
+  min-width: 14rem;
+}
+
+.stack-row .row-tags span {
+  white-space: nowrap;
+}
+
+/* tier accent stripes — left edge, scaffolding-feel */
+.stack-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gray-300);
+}
+
+.stack-row.row-tier-1::before { background: var(--gray-400); }
+.stack-row.row-tier-2::before { background: var(--black); }
+.stack-row.row-tier-3::before { background: var(--nsg-teal); }
+
+/* tier number badge inside the stack — adds the "01 / 02 / 03" vibe */
+.stack-row .row-num-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.stack-row.row-tier-3 .row-num-tag {
+  color: var(--nsg-teal);
+}
+
+/* "where you start" indicator below the stack */
+.stack-where {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.stack-where .rule {
+  height: 1px;
+  background: var(--gray-200);
+}
+
+.stack-where strong {
+  color: var(--black);
+  font-weight: 600;
+}
+
+/* ---------- Layered service blocks (under the stack) ---------- */
+
+.svc-layer {
+  border-bottom: 1px solid var(--gray-200);
+  padding: clamp(3rem, 6vw, 5rem) 0;
+  position: relative;
+}
+
+.svc-layer:last-of-type {
+  border-bottom: 0;
+}
+
+.svc-layer .layer-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: var(--gutter);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--gray-200);
+  padding-bottom: 1.75rem;
+}
+
+.svc-layer .layer-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.75rem;
+}
+
+.svc-layer.layer-3 .layer-tag {
+  color: var(--nsg-teal);
+}
+
+.svc-layer h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3.6vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  max-width: none;
+}
+
+@media (min-width: 720px) {
+  .svc-layer h2 {
+    white-space: nowrap;
+  }
+}
+
+.svc-layer h2 em {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-heading);
+  font-style: normal;
+  font-weight: 700;
+  color: var(--black);
+  font-size: 1em;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.svc-layer .layer-when {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  text-align: right;
+  max-width: 26ch;
+  line-height: 1.5;
+}
+
+.svc-layer .layer-when strong {
+  color: var(--black);
+  font-weight: 600;
+}
+
+.svc-layer .layer-grid {
+  display: grid;
+  gap: clamp(2rem, 4vw, 5rem);
+  grid-template-columns: 1fr 2fr;
+  align-items: start;
+}
+
+.svc-layer .layer-grid > .left p {
+  color: var(--gray-700);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 36ch;
+}
+
+.svc-layer .layer-grid > .left p + p {
+  margin-top: 1rem;
+}
+
+.svc-layer .layer-grid .meta {
+  margin-top: 1.5rem;
+}
+
+.svc-layer .symptoms {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.svc-layer .symptom {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto 1fr;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.svc-layer .symptom:last-child {
+  border-bottom: 0;
+}
+
+.svc-layer .symptom .check {
+  border: 1.5px solid var(--red);
+  border-radius: 50%;
+  height: 14px;
+  margin-top: 0.4rem;
+  position: relative;
+  width: 14px;
+  flex: 0 0 auto;
+}
+
+.svc-layer.layer-3 .symptom .check {
+  border-color: var(--nsg-teal);
+}
+
+.svc-layer .symptom .check::after {
+  background: var(--red);
+  border-radius: 50%;
+  content: '';
+  inset: 3px;
+  position: absolute;
+}
+
+.svc-layer.layer-3 .symptom .check::after {
+  background: var(--nsg-teal);
+}
+
+.svc-layer .symptom .quote {
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-style: normal;
+  line-height: 1.45;
+}
+
+.svc-layer .symptom .gloss {
+  color: var(--gray-500);
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-style: normal;
+  font-weight: 500;
+  margin-top: 0.4rem;
+}
+
+/* ---------- On AI: stacked diagram inline in about prose ---------- */
+
+.about-stack-mini {
+  margin: 1.5rem 0 1.75rem;
+  padding: 1.25rem 1.25rem;
+  border: 1px solid var(--gray-200);
+  background: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  max-width: 32rem;
+}
+
+.about-stack-mini .row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  color: var(--gray-700);
+}
+
+.about-stack-mini .row .num {
+  color: var(--gray-400);
+  font-weight: 500;
+}
+
+.about-stack-mini .row .name {
+  color: var(--black);
+  font-weight: 600;
+}
+
+.about-stack-mini .row.t3 .name {
+  color: var(--nsg-teal);
+}
+
+.about-stack-mini .row .bar {
+  display: inline-block;
+  width: 1.25rem;
+  height: 6px;
+  background: var(--black);
+}
+
+.about-stack-mini .row.t3 .bar {
+  background: var(--nsg-teal);
+}
+
+.about-stack-mini .row.t1 .bar {
+  background: var(--gray-400);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 880px) {
+  .stack-row {
+    grid-template-columns: 4rem 1fr;
+    gap: 1rem;
+  }
+  .stack-row .row-tags {
+    grid-column: 1 / -1;
+    text-align: left;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+  }
+  .svc-layer .layer-head {
+    grid-template-columns: 1fr;
+  }
+  .svc-layer .layer-when {
+    text-align: left;
+    max-width: none;
+  }
+  .svc-layer .layer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 5.25rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+
+  .problems .tier-group + .tier-group {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-title {
+    font-size: 2.25rem;
+  }
+}

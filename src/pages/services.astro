@@ -3,99 +3,175 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import LabelRow from '../components/LabelRow.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 
-const services = [
+// The stack — three layers, top to bottom. Engage at any one.
+// Layer 03 (Intelligence) gets the teal accent (--nsg-teal: #0D9488).
+const stack = [
   {
-    num: '01',
-    title: 'When the same task happens every week.',
-    sub: 'Automation',
-    blurb: 'If a person is doing it the same way every time, a script — or an AI step with a human checking the high-stakes parts — can usually do it instead. Quietly, on a schedule, with a record of every run.',
-    symptoms: [
-      ['"It’s an hour every Monday and the report is the same shape."', 'Scheduled job, emailed to whoever needs it.'],
-      ['"Three people copy the same data into three places."', 'One source of truth, the rest pull from it automatically.'],
-      ['"Files get renamed and filed by hand."', 'Watched folder, named-and-filed before you notice.']
-    ]
+    num: '03',
+    tier: 3,
+    name: 'Intelligence',
+    title: 'AI that does the work.',
+    sub: "For businesses whose foundation is solid and whose operations are wired together. The point isn\u2019t bolting on a chatbot. It\u2019s letting AI run the parts a person used to.",
+    tags: ['AI integration', 'AI agents', 'Intelligent pipelines', 'AI-enhanced workflows']
   },
   {
     num: '02',
-    title: 'When off-the-shelf software almost — but not quite — fits.',
-    sub: 'Custom tools',
-    blurb: 'Sometimes the tool you need doesn’t exist, or the closest thing costs more than it’s worth and still gets it slightly wrong. A small custom application, built around how you actually work, often costs less than the software you’d be tolerating for the next five years.',
+    tier: 2,
+    name: 'Operations',
+    title: 'The slow parts, fixed.',
+    sub: 'For businesses with the foundation in place that are losing time to manual processes. Automation, internal tools, and the wiring that lets five tools see each other.',
+    tags: ['Automation', 'Tool-to-tool wiring', 'Internal tooling', 'Workflow improvements']
+  },
+  {
+    num: '01',
+    tier: 1,
+    name: 'Foundation',
+    title: 'The basics, working.',
+    sub: 'For businesses that still need the basics in place. A real website, software shaped to the operation, the digital basics that everything else has to sit on top of.',
+    tags: ['Website design and build', 'Custom apps', 'Digital presence']
+  }
+];
+
+// Detail blocks below the stack — same three layers, expanded.
+const layers = [
+  {
+    tier: 1,
+    num: '01',
+    name: 'Foundation',
+    title: 'Building the foundation.',
+    titleEm: '',
+    when: 'businesses still running on spreadsheets and a website nobody is proud of.',
+    body: [
+      'Before anything fancy, a small business needs the basic surfaces working. A website that loads fast, looks like yours, and staff can actually update without calling anyone. Software shaped to how the operation works, not the other way around.',
+      'This is the layer most small businesses are still missing. Get it right and everything above it is cheaper.'
+    ],
     symptoms: [
-      ['"Our website looks like every other shop on the block."', 'A site that’s actually yours, fast and built to last.'],
-      ['"We need a 3D preview before we build the real thing."', 'In-browser visualizer, no plugins, no exports.'],
-      ['"Customers keep emailing what should be a self-serve form."', 'Customer portal, scoped to what they actually need.']
+      ['"Our website looks like every other shop on the block."', "A site that\u2019s actually yours, fast and built to last."],
+      ['"The thing we need doesn\u2019t exist off the shelf."', 'Small custom app, scoped to how you actually work.'],
+      ['"Customers keep emailing what should be a self-serve form."', 'Customer portal scoped to the few things they actually need.'],
+      ['"We need a 3D preview before we build the real thing."', 'In-browser visualizer, no plugins, no exports.']
     ]
   },
   {
+    tier: 2,
+    num: '02',
+    name: 'Operations',
+    title: 'Streamlining business operations.',
+    titleEm: '',
+    when: 'businesses with the basics in place, losing hours every week to manual work and tools that don\u2019t talk.',
+    body: [
+      "Most businesses run on five or six tools that don\u2019t know the others exist. Data gets typed twice. Reports get assembled by hand. The same task happens at the same time every week and no one has time to fix it.",
+      'This is the highest-leverage layer in most engagements. Quiet wins, fast.'
+    ],
+    symptoms: [
+      ['"There\u2019s a spreadsheet four people maintain and nobody trusts."', 'Replaced with a small internal app. Single source of truth.'],
+      ['"It\u2019s an hour every Monday and the report is the same shape."', 'Scheduled job, emailed to whoever needs it.'],
+      ['"CRM doesn\u2019t talk to accounting."', 'Customer and invoice data, in sync without a person in the middle.'],
+      ['"Stuff falls through the cracks between tools."', 'Lightweight glue and alerts when something stalls.']
+    ]
+  },
+  {
+    tier: 3,
     num: '03',
-    title: 'When AI feels useful but you can’t tell where it fits.',
-    sub: 'AI integration',
-    blurb: 'When a process is clear enough to write down, AI can run it on a schedule — operating the same software your team uses, leaving an audit trail, and pausing for a human at the high-stakes steps. The work is picking the right shape for your operation, not bolting on a chatbot.',
+    name: 'Intelligence',
+    title: 'Putting AI to work.',
+    titleEm: '',
+    when: 'businesses with a solid foundation and tight operations, ready for AI to do real work.',
+    body: [
+      "AI works when the process underneath it is clear enough to write down. The model isn\u2019t the hard part. Picking the right shape for your operation is. So is leaving an audit trail and pausing for a human at the steps that matter.",
+      "This isn\u2019t a separate practice. It\u2019s the top of the same stack, run by the same person who built the layers below it."
+    ],
     symptoms: [
       ['"Half my week is running the same model with different inputs."', 'Scheduled runs with audit trails, not someone clicking through at 7am.'],
       ['"We prep CSVs for the model by hand and pray we got it right."', 'Validated data-prep pipeline, every row traceable to its source.'],
-      ['"We want AI to actually do the work, not just summarize it."', 'Agents that operate the tools your team already uses, with checkpoints where a human signs off.']
-    ]
-  },
-  {
-    num: '04',
-    title: 'When five tools can’t see each other.',
-    sub: 'Connecting your tools',
-    blurb: 'Most businesses run on five or six pieces of software that don’t know the others exist. Wiring them together so the same information doesn’t have to be entered twice is some of the highest-leverage work there is.',
-    symptoms: [
-      ['"CRM doesn’t talk to accounting."', 'Customer & invoice data, in sync without a person in the middle.'],
-      ['"Bookings live in one tool, the calendar in another."', 'Two-way sync, single source of truth.'],
-      ['"Stuff falls through the cracks between tools."', 'Lightweight glue + alerts when something stalls.']
+      ['"We want AI to actually do the work, not just summarize it."', 'Agents that operate the tools your team already uses, with checkpoints where a human signs off.'],
+      ['"We tried an AI tool last year and it didn\u2019t take."', 'Usually a foundation problem, not an AI problem. We start there.']
     ]
   }
 ];
 ---
 
 <BaseLayout
-  title="Services — Custom software, automation & AI integration | NSG Solutions"
-  description="Custom software, workflow automation, AI integration, and tool-to-tool connections for small businesses. Built end-to-end from Minneapolis, MN."
+  title="Services — Foundation, Operations, Intelligence | NSG Solutions"
+  description="NSG\u2019s work in three layers: foundation (websites, custom apps), operations (automation, internal tools, tool-to-tool wiring), and intelligence (AI integration). Engage at any layer."
 >
   <div class="page">
     <div class="container">
       <header class="page-head">
         <LabelRow num="SERVICES / 01" meta="What NSG does" />
-        <h1>Custom software, automation, and AI integration.</h1>
+        <h1 class="h1-oneline">The whole stack.</h1>
         <p class="lede">
-          Most projects start with a plain complaint: this report takes too long, this tool almost works,
-          this data keeps getting typed twice. The list below covers common patterns.
-          It’s a starting point, not a menu.
+          Small businesses often don&rsquo;t have time to catch up. The website is years old and nobody&rsquo;s
+          touched it. The operation runs on spreadsheets. AI is on the to-do list but the foundation
+          isn&rsquo;t there yet. NSG handles all three, starting wherever you are.
         </p>
       </header>
     </div>
 
     <div class="container">
-      {services.map((service) => (
-        <section class="svc-block">
-          <div class="left">
-            <div class="num">CATEGORY / {service.num}</div>
-            <h2>{service.title}</h2>
-            <p>{service.blurb}</p>
-            <div class="meta" style="margin-top: 1.5rem;">{service.sub}</div>
+      <div class="stack-frame" aria-label="Three layers of work">
+        <div class="stack-meta">
+          <span class="label">THE STACK</span>
+          <span>Engage at any layer · top to bottom</span>
+        </div>
+
+        {stack.map((row) => (
+          <div class:list={['stack-row', `row-tier-${row.tier}`]}>
+            <div class="row-num">{row.num}</div>
+            <div>
+              <span class="row-num-tag">LAYER {row.num} · {row.name.toUpperCase()}</span>
+              <div class="row-name">{row.title.replace(/\.$/, '')}<span class="accent-dot">.</span></div>
+              <div class="row-sub">{row.sub}</div>
+            </div>
+            <div class="row-tags">
+              {row.tags.map((t) => <span>{t}</span>)}
+            </div>
           </div>
-          <div class="svc-symptoms">
-            {service.symptoms.map(([quote, fix]) => (
-              <div class="svc-symptom">
-                <span class="check"></span>
-                <div>
-                  <span class="quote">{quote}</span>
-                  <span class="gloss">→ {fix}</span>
+        ))}
+      </div>
+
+      <div class="stack-where">
+        <span><strong>Engage at any layer.</strong></span>
+        <span class="rule" aria-hidden="true"></span>
+        <span>You don&rsquo;t need to come in at the top to talk to us.</span>
+      </div>
+    </div>
+
+    <div class="container">
+      {layers.map((layer) => (
+        <section class:list={['svc-layer', `layer-${layer.tier}`]}>
+          <div class="layer-head">
+            <div>
+              <div class="layer-tag">LAYER {layer.num} · {layer.name.toUpperCase()}</div>
+              <h2>{layer.title} <em>{layer.titleEm}</em></h2>
+            </div>
+            <div class="layer-when"><strong>For:</strong> {layer.when}</div>
+          </div>
+          <div class="layer-grid">
+            <div class="left">
+              {layer.body.map((p) => <p>{p}</p>)}
+              <div class="meta">{layer.name}</div>
+            </div>
+            <div class="symptoms">
+              {layer.symptoms.map(([quote, fix]) => (
+                <div class="symptom">
+                  <span class="check"></span>
+                  <div>
+                    <span class="quote">{quote}</span>
+                    <span class="gloss">→ {fix}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
       ))}
     </div>
 
     <CtaStrip
-      title="Not sure which of these is yours?"
-      continuation="Describe what’s bugging you."
-      note="A short note is plenty. We’ll sort it out from there."
+      title="Not sure which layer is yours?"
+      continuation="Describe what&rsquo;s bugging you."
+      note="A short note is plenty. We&rsquo;ll sort it out from there."
       primaryText="Send a note"
     />
   </div>

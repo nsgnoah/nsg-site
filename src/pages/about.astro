@@ -4,14 +4,12 @@ import LabelRow from '../components/LabelRow.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 
 const facts = [
-  ['Based', 'Minneapolis, <em>MN</em>'],
+  ['Based', 'Minneapolis, MN'],
   ['Available', 'Remote, US-wide'],
-  ['Capacity', '1–2 new this quarter'],
-  ['Reply time', '≤ 2 business days'],
-  ['Past clients', 'Small biz, <em>universities, brokers</em>'],
-  ['Stack', 'Whatever fits the job'],
-  ['Meeting style', 'In person where possible'],
-  ['Billing', 'Hourly, <em>or fixed scope</em>']
+  ['Reply time', '\u2264 2 business days'],
+  ['Past experience', 'Finance, academia, retail'],
+  ['Tech stack', 'Whatever fits the job'],
+  ['Meeting style', 'In person where possible']
 ];
 ---
 
@@ -24,11 +22,11 @@ const facts = [
       <section class="about-hero">
         <div>
           <LabelRow num="ABOUT / 01" meta="The person behind it" />
-          <h1>Hi — I'm Noah.<br /><em>I run a small software practice<br />out of Minneapolis.</em></h1>
+          <h1>I'm Noah.<br /><em>I run a small software practice<br />out of Minneapolis.</em></h1>
         </div>
         <div class="about-photo-frame">
           <img src="/assets/noah.jpg" alt="Noah Greensweig" />
-          <div class="about-photo-tag"><span class="dash"></span>Noah Greensweig · Minneapolis, MN</div>
+          <div class="about-photo-tag"><span class="dash"></span>Noah Greensweig &middot; Minneapolis, MN</div>
         </div>
       </section>
 
@@ -41,61 +39,83 @@ const facts = [
             person you talk to is the same person writing the code.
           </p>
           <p>
-            I've spent years writing software in full-time roles — most recently building an
-            automation layer over a reinsurance broker's catastrophe-modeling pipeline,
-            and leading AI adoption inside the same business. NSG is where I bring that
-            experience to small businesses that want a real tool, not a slide deck about one.
+            Most recently, I built automation systems and led AI adoption inside a reinsurance
+            brokerage. NSG is where I bring that to businesses that want a real tool, not a
+            slide deck about one.
           </p>
           <p>
-            The pitch is plain. <em>Do business with integrity. Stick with the work
-            until you look at it and feel: this is better than what we had in mind.</em>
-            That's it. There's no second pitch.
+            The pitch is plain. Most small businesses are still waiting on technology
+            they should have had years ago. NSG&rsquo;s job is closing that gap. The website,
+            the internal tools, the automations. And when those are solid, the AI that
+            quietly takes over the parts that used to take a person. One practice,
+            start to finish.
           </p>
         </div>
       </section>
 
       <section class="about-prose">
-        <div class="label-col">03 / HOW THIS WORKS</div>
+        <div class="label-col">03 / HOW IT WORKS</div>
         <div class="body-col">
           <p>
-            We meet — in person if you're in or near Minneapolis, video otherwise.
-            You walk me through what's getting in the way of the work. I ask a lot of
-            questions, take notes, and come back with a plain-language proposal:
-            what the fix looks like, what it costs (hourly rate, or a fixed bid for well-defined work),
-            and when you'll have it.
+            We meet, in person if you&rsquo;re in or near Minneapolis, video otherwise.
+            You walk me through what&rsquo;s getting in the way of the work. I ask a lot of
+            questions, take notes, and come back with a plain-language proposal. What
+            the fix looks like, what it costs (hourly rate, or a fixed bid for well-defined work),
+            and when you&rsquo;ll have it.
           </p>
           <p>
-            Then we build, together. You see the work as it goes — not in a reveal at the end.
-            Things change as we learn; that's fine. The point isn't to defend the original
-            plan, it's to land the right thing.
+            Then we build, together. You see the work as it goes, not in a reveal at the end.
+            Things change as we learn. That&rsquo;s fine. The point isn&rsquo;t to defend the original
+            plan, it&rsquo;s to land the right thing.
           </p>
           <p>
-            When it's done, it's yours. I write things so a person who isn't me can keep
+            When it&rsquo;s done, it&rsquo;s yours. I write things so a person who isn&rsquo;t me can keep
             them running. If something we previously agreed was finished later turns out to
             be broken, fixing it is free.
           </p>
         </div>
       </section>
 
+      <!-- 04 / ON AI — reframed around the progression story.
+           AI sits at the top of a stack; only works when the foundation is right;
+           NSG handles both. Said plainly. -->
       <section class="about-prose">
         <div class="label-col">04 / ON AI</div>
         <div class="body-col">
           <p>
-            There's no single right AI tool, and the landscape changes every few months.
-            Part of the job is keeping track of that so you don't have to, and picking
-            the thing that fits your situation — not the thing that's trending this week.
+            Most AI work doesn&rsquo;t fail because the AI is bad. It fails because it&rsquo;s
+            plugged into a process that was never solid to begin with. The spreadsheet is still the
+            source of truth. The website is half-broken. The data lives in three places.
+          </p>
+
+          <div class="about-stack-mini" aria-hidden="true">
+            <div class="row t3"><span class="num">03</span><span class="name">Intelligence</span><span class="bar"></span></div>
+            <div class="row t2"><span class="num">02</span><span class="name">Operations</span><span class="bar"></span></div>
+            <div class="row t1"><span class="num">01</span><span class="name">Foundation</span><span class="bar"></span></div>
+          </div>
+
+          <p>
+            AI sits at the top of a stack. Below it, a working website, software shaped
+            to the operation, tools that talk to each other. Skip those, and the AI
+            step is sitting on quicksand.
           </p>
           <p>
-            Used carefully, AI makes a lot of this work faster than it used to be, which
-            mostly means projects are cheaper and ship sooner. Quality doesn't suffer for
-            it. Used carelessly, it makes a confident mess. Most of the craft now is knowing
-            the difference.
+            NSG does the whole stack. The website, the internal tool, the wiring between
+            them, and then, when the foundation&rsquo;s right, the AI integration that
+            quietly takes over the parts a person used to do. <em>One person. No handoffs.</em>
+          </p>
+          <p>
+            The other honest thing about AI right now: the landscape moves every few months.
+            Part of my job is keeping track so you don&rsquo;t have to, and picking the tool
+            that fits your situation, not the thing that&rsquo;s trending this week. Used carefully,
+            it makes the work faster and cheaper without dropping the quality. Used carelessly,
+            it makes a confident mess. Most of the craft now is knowing the difference.
           </p>
         </div>
       </section>
 
       <section class="about-facts">
-        <LabelRow num="05 / FACTS" meta="The short version" />
+        <LabelRow num="05 / AT A GLANCE" meta="The short version" />
         <div class="facts-grid">
           {facts.map(([key, value]) => (
             <div class="fact">
@@ -110,7 +130,7 @@ const facts = [
     <CtaStrip
       title="Want to talk?"
       continuation="Tell me what's going on."
-      note="Two business-day reply · No commitment until you're ready"
+      note="Two business-day reply &middot; No commitment until you&rsquo;re ready"
       primaryText="Get in touch"
       ghostText="Email directly"
     />

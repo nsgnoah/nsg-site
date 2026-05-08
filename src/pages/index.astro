@@ -5,19 +5,45 @@ import LabelRow from '../components/LabelRow.astro';
 import WorkCard from '../components/WorkCard.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 
-const problems = [
-  ['01', '"There’s a spreadsheet four people maintain and nobody trusts."', 'Replaced with a small internal app. Single source of truth, no copy-paste.'],
-  ['02', '"Our website looks like every other shop on the block."', 'A site that’s actually yours — fast, tailored, and built to last.'],
-  ['03', '"Three tools don’t talk to each other; we re-enter everything."', 'Wired together so the same data only gets typed once.'],
-  ['04', '"We want to use AI but don’t know where it fits."', 'Pick the right tool(s) for your operation, then build it in.'],
-  ['05', '"The thing we need doesn’t exist off the shelf."', 'Built around how you actually work — no extra features in the way.'],
-  ['06', '"Every Monday morning is the same hour of busywork."', 'A script or scheduled job that does it before anyone clocks in.']
+// Problem cards grouped into the three tiers of the modernization stack.
+// Foundation (basics) → Operations (the slow parts) → Intelligence (AI fits).
+const tiers = [
+  {
+    key: 'foundation',
+    num: '01',
+    name: 'Foundation',
+    heading: 'The basics, working.',
+    items: [
+      ['01', '"Our website looks like every other shop on the block."', "A site that's actually yours. Fast, tailored, built to last."],
+      ['02', '"The thing we need doesn\u2019t exist off the shelf."', 'Built around how you actually work, no extra features in the way.']
+    ]
+  },
+  {
+    key: 'operations',
+    num: '02',
+    name: 'Operations',
+    heading: 'The slow parts, fixed.',
+    items: [
+      ['03', '"There\u2019s a spreadsheet four people maintain and nobody trusts."', 'Replaced with a small internal app. Single source of truth, no copy-paste.'],
+      ['04', '"Three tools don\u2019t talk to each other; we re-enter everything."', 'Wired together. The same data only gets typed once.']
+    ]
+  },
+  {
+    key: 'intelligence',
+    num: '03',
+    name: 'Intelligence',
+    heading: 'AI, where it actually fits.',
+    items: [
+      ['05', '"Every Monday morning is the same hour of busywork."', 'A scheduled job, with an AI step where judgment is needed. Done before anyone clocks in.'],
+      ['06', '"We want to use AI but don\u2019t know where it fits."', 'Pick the right shape for your operation. Build it in. Audit trail, human checkpoints where it matters.']
+    ]
+  }
 ];
 
 const principles = [
   ['01 / DIRECT', 'One person, start to finish.', 'You describe the problem to the same person who builds and ships the fix. Nothing translated, nothing lost on a handoff.'],
   ['02 / HONEST', 'Done means done.', 'Work continues until you look at it and say "this is better than what we had in mind." If something later breaks that we agreed was finished, fixing it is free.'],
-  ['03 / HANDS-ON', 'Visible while it’s built.', 'You see the work as it’s built, not in a reveal at the end. In person where possible, video the rest of the time.']
+  ['03 / HANDS-ON', 'Visible while it\u2019s built.', 'You see the work as it\u2019s built, not in a reveal at the end. In person where possible, video the rest of the time.']
 ];
 
 const work = [
@@ -25,7 +51,7 @@ const work = [
     kind: 'Web · Custom CMS',
     industry: 'Cannabis retail',
     year: '2026',
-    title: 'A storefront site that doesn’t look like a template.',
+    title: 'A storefront site that doesn\u2019t look like a template.',
     desc: 'New website and ordering flow for a dispensary opening in St. Paul. Fast, tailored, and easy for staff to update without calling anyone.',
     tag: 'STOREFRONT_001.JPG'
   },
@@ -50,16 +76,16 @@ const work = [
     industry: 'Reinsurance',
     year: 'Ongoing',
     title: 'Catastrophe-modeling, on a schedule.',
-    desc: 'Automation layer over a broker’s catastrophe-modeling pipeline. The same numbers, an order of magnitude faster, with eyes on every step that matters.',
+    desc: "Automation layer over a broker's catastrophe-modeling pipeline. The same numbers, an order of magnitude faster, with eyes on every step that matters.",
     tag: 'CAT_MODEL.RUN'
   }
 ];
 ---
 
 <BaseLayout
-  description="NSG Solutions is a one-person custom software practice in Minneapolis. Spreadsheet replacements, custom websites, AI integrations, and tools wired together — built end-to-end."
+  description="NSG Solutions is a one-person custom software practice in Minneapolis. Websites, custom apps, automation, and AI integration — meeting small businesses where they are and walking them forward."
 >
-  <div class="page">
+  <div class="page home-page">
     <section class="hero">
       <div class="container">
         <div class="hero-meta">
@@ -78,15 +104,17 @@ const work = [
         </div>
 
         <h1 class="hero-title">
-          Software that fits the way you<br />
-          <span class="already">already</span> work<span class="accent">.</span>
+          Software for where your<br />
+          business is, and where<br />
+          <span class="hero-final-line">it&rsquo;s <span class="already">headed next</span><span class="accent">.</span></span>
         </h1>
 
         <div class="hero-sub">
           <p>
-            NSG builds the small, sharp tools small businesses actually need —
-            the spreadsheet replacement, the website that isn’t a template, the
-            automation that quietly does what someone used to.
+            The website that loads fast and looks like it belongs to your business. The spreadsheet
+            replaced with something you can trust. The Monday morning task,
+            automated before anyone clocks in. And when the foundation&rsquo;s
+            solid, the AI layer that actually earns its place.
           </p>
           <div class="hero-actions">
             <a href="/contact" class="btn btn-primary">Start a conversation <span class="arr">→</span></a>
@@ -106,32 +134,34 @@ const work = [
       <div class="container">
         <SectionHead num="01 / WHY HIRE" meta="The work">
           <Fragment slot="title">Things that get in the way<br /><em>of getting work done.</em></Fragment>
-          <Fragment slot="lede">The list below is paraphrased from real first conversations. You probably recognize one of them.</Fragment>
         </SectionHead>
 
-        <div class="problems-list">
-          {problems.map(([num, quote, fix]) => (
-            <div class="problem">
-              <span class="num">PROBLEM / {num}</span>
-              <div class="problem-quote">{quote}</div>
-              <div class="problem-fix">
-                <span class="arrow">→</span>
-                <span>{fix}</span>
-              </div>
+        {tiers.map((tier) => (
+          <div class:list={['tier-group', `tier-${tier.num.replace(/^0/, '')}`]}>
+            <div class:list={['tier-intro', `tier-${tier.num.replace(/^0/, '')}`]}>
+              <div class="ti-num"><em>TIER {tier.num}</em> · {tier.name.toUpperCase()}</div>
+              <h3>{tier.heading}</h3>
             </div>
-          ))}
-        </div>
+            <div class="problems-list">
+              {tier.items.map(([num, quote, fix]) => (
+                <div class="problem">
+                  <span class="num">PROBLEM / {num}</span>
+                  <div class="problem-quote">{quote}</div>
+                  <div class="problem-fix">
+                    <span class="arrow">→</span>
+                    <span>{fix}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
 
     <section class="section approach">
       <div class="container">
-        <SectionHead num="02 / APPROACH" meta="How NSG works">
-          <Fragment slot="title">
-            Three things NSG <span class="approach-heading-keep">is built around.</span>
-          </Fragment>
-          <Fragment slot="lede">No account managers. The person you talk to is the person writing the code.</Fragment>
-        </SectionHead>
+        <LabelRow num="02 / APPROACH" meta="How NSG works" />
 
         <div class="principle-grid">
           {principles.map(([num, title, body]) => (
@@ -149,8 +179,7 @@ const work = [
     <section class="section work">
       <div class="container">
         <SectionHead num="03 / SELECTED WORK" meta="Recent engagements">
-          <Fragment slot="title">A few of the things<br /><em>currently in flight.</em></Fragment>
-          <Fragment slot="lede">Names withheld where clients prefer it. Happy to walk through any of these on a call.</Fragment>
+          <Fragment slot="title"><span class="work-title-oneline">A few things currently in flight.</span></Fragment>
         </SectionHead>
 
         <div class="work-list">
@@ -163,20 +192,16 @@ const work = [
       <div class="container">
         <LabelRow num="04 / NOTE" meta="From the workbench" dark />
         <h2>
-          <span class="manifesto-line">The aim isn’t to <em class="inline-em">impress</em> you with the work.</span>
-          <span class="manifesto-line manifesto-quote-line">
-            It’s to make you say
-            <em class="manifesto-tail">"this is better than what we had in mind."</em>
-          </span>
+          The work isn&rsquo;t done until you look at it and say:<br />
+          <em class="manifesto-tail">&ldquo;this is better than what we had in mind.&rdquo;</em>
         </h2>
-        <div class="manifesto-attr">Noah Greensweig, NSG</div>
       </div>
     </section>
 
     <CtaStrip
       title="Have a small thorn<br/>in your operation?"
       continuation="Send a note."
-      note="Replies within two business days · No commitment until you’re ready"
+      note="Replies within two business days · No commitment until you&rsquo;re ready"
       primaryText="Get in touch"
       ghostText="Email directly"
     />
