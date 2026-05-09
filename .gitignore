@@ -8,3 +8,5 @@ design_handoff_nsg_site/
 NSG Design System.zip
 .vercel
 .claude/
+.DS_Store
+**/.DS_Store

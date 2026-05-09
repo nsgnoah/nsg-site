@@ -16,6 +16,10 @@ const facts = [
 <BaseLayout
   title="About — NSG Solutions"
   description="Noah Greensweig runs NSG Solutions, a one-person custom software practice in Minneapolis. End-to-end engagements, no handoffs, no account managers."
+  breadcrumb={[
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' }
+  ]}
 >
   <div class="page">
     <div class="container">
@@ -25,7 +29,7 @@ const facts = [
           <h1>I'm Noah.<br /><em>I run a small software practice<br />out of Minneapolis.</em></h1>
         </div>
         <div class="about-photo-frame">
-          <img src="/assets/noah.jpg" alt="Noah Greensweig" />
+          <img src="/assets/noah.jpg" alt="Noah Greensweig, founder of NSG Solutions" width="800" height="800" loading="lazy" decoding="async" />
           <div class="about-photo-tag"><span class="dash"></span>Noah Greensweig &middot; Minneapolis, MN</div>
         </div>
       </section>

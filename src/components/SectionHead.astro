@@ -14,5 +14,5 @@ const { num, meta } = Astro.props;
     <LabelRow num={num} meta={meta} />
     <h2><slot name="title" /></h2>
   </div>
-  <p class="lede"><slot name="lede" /></p>
+  {Astro.slots.has('lede') && <p class="lede"><slot name="lede" /></p>}
 </div>

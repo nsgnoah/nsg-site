@@ -7,11 +7,15 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
+  breadcrumb?: { name: string; href: string }[];
 }
 
 const {
   title = 'NSG — Custom software for small businesses',
-  description = 'NSG Solutions builds custom software, automations, AI integrations, and connected tools for small businesses.'
+  description = 'NSG Solutions builds custom software, automations, AI integrations, and connected tools for small businesses.',
+  noindex = false,
+  breadcrumb
 } = Astro.props;
 
 const rawPath = Astro.url.pathname
@@ -21,12 +25,15 @@ const rawPath = Astro.url.pathname
 const path = rawPath === '' ? '/' : rawPath;
 const siteUrl = Astro.site ?? new URL('https://nsgsolutions.co');
 const canonical = new URL(path, siteUrl).toString();
-const ogImage = new URL('/assets/og-image.png?v=2', siteUrl).toString();
+const ogImage = new URL('/assets/og-image.png?v=3', siteUrl).toString();
+
+const orgId = new URL('/#organization', siteUrl).toString();
+const websiteId = new URL('/#website', siteUrl).toString();
+const webpageId = `${canonical}#webpage`;
 
 const orgSchema = {
-  '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  '@id': new URL('/#organization', siteUrl).toString(),
+  '@id': orgId,
   name: 'NSG Solutions',
   alternateName: 'NSG',
   url: siteUrl.toString(),
@@ -52,6 +59,43 @@ const orgSchema = {
   ],
   sameAs: ['https://www.linkedin.com/in/noah-greensweig']
 };
+
+const websiteSchema = {
+  '@type': 'WebSite',
+  '@id': websiteId,
+  url: siteUrl.toString(),
+  name: 'NSG Solutions',
+  publisher: { '@id': orgId },
+  inLanguage: 'en-US'
+};
+
+const webpageSchema = {
+  '@type': 'WebPage',
+  '@id': webpageId,
+  url: canonical,
+  name: title,
+  description,
+  isPartOf: { '@id': websiteId },
+  about: { '@id': orgId },
+  inLanguage: 'en-US',
+  primaryImageOfPage: { '@type': 'ImageObject', url: ogImage }
+};
+
+const breadcrumbSchema = breadcrumb && breadcrumb.length > 0
+  ? {
+      '@type': 'BreadcrumbList',
+      '@id': `${canonical}#breadcrumb`,
+      itemListElement: breadcrumb.map((crumb, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: crumb.name,
+        item: new URL(crumb.href, siteUrl).toString()
+      }))
+    }
+  : null;
+
+const graph = [orgSchema, websiteSchema, webpageSchema, breadcrumbSchema].filter(Boolean);
+const jsonLd = { '@context': 'https://schema.org', '@graph': graph };
 ---
 
 <!doctype html>
@@ -59,9 +103,12 @@ const orgSchema = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#D72638" />
+    <meta name="color-scheme" content="light" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    {!noindex && <link rel="canonical" href={canonical} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
@@ -80,8 +127,10 @@ const orgSchema = {
     <link rel="icon" href="/assets/favicon-red-dot.svg?v=small-preview" type="image/svg+xml" sizes="any" />
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" href="/fonts/BeVietnamPro-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/LibreBaskerville-Italic.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/JetBrainsMono-Latin.woff2" as="font" type="font/woff2" crossorigin />
-    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    {!noindex && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body>
     <Nav currentPath={path} />

@@ -12,9 +12,10 @@ interface Props {
 }
 
 const { index, kind, industry, year, title, desc, tag } = Astro.props;
+const ariaLabel = `${title} — ${industry}, ${year}. Get in touch to walk through this engagement.`;
 ---
 
-<a class="work-card" href="/contact">
+<a class="work-card" href="/contact" aria-label={ariaLabel}>
   <div class="work-thumb">
     <span class="work-thumb-label">{tag}</span>
     <Glyph index={index} />
