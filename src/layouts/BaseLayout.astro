@@ -89,5 +89,86 @@ const orgSchema = {
       <slot />
     </main>
     <Footer />
+    <script>
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Selectors that should fade-up into view as you scroll.
+      // Children of a group get a small stagger via --reveal-delay.
+      const groups: Array<{ selector: string; staggerMs?: number }> = [
+        { selector: '.problems .tier-group', staggerMs: 80 },
+        { selector: '.problems-list .problem', staggerMs: 60 },
+        { selector: '.principle-grid .principle', staggerMs: 80 },
+        { selector: '.work-list .work-card', staggerMs: 90 },
+        { selector: '.stack-frame .stack-row', staggerMs: 90 },
+        { selector: '.svc-layer' },
+        { selector: '.svc-layer .symptom', staggerMs: 60 },
+        { selector: '.about-stack-mini .row', staggerMs: 50 }
+      ];
+
+      const singletons = [
+        '.section-head',
+        '.label-row',
+        '.page-head',
+        '.manifesto h2',
+        '.cta-inner',
+        '.stack-where',
+        '.tier-intro'
+      ];
+
+      function tag(el: Element, delayMs = 0) {
+        el.classList.add('reveal');
+        if (delayMs > 0) {
+          (el as HTMLElement).style.setProperty('--reveal-delay', `${delayMs}ms`);
+        }
+      }
+
+      // Tag elements
+      for (const { selector, staggerMs } of groups) {
+        const nodes = document.querySelectorAll(selector);
+        nodes.forEach((node, i) => {
+          // For grouped items inside the same parent, stagger relative
+          // to position among siblings matching the same selector.
+          tag(node, staggerMs ? Math.min(i, 6) * staggerMs : 0);
+        });
+      }
+
+      for (const selector of singletons) {
+        document.querySelectorAll(selector).forEach((node) => tag(node));
+      }
+
+      // Hero one-shot: fire after first paint
+      requestAnimationFrame(() => {
+        document.body.classList.add('hero-loaded');
+      });
+
+      if (prefersReduced) {
+        // Reveal everything immediately; CSS already neutralizes transitions.
+        document.querySelectorAll('.reveal').forEach((n) => n.classList.add('is-in'));
+      } else if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
+        );
+
+        document.querySelectorAll('.reveal').forEach((n) => {
+          // If already on screen at load (above-the-fold), reveal without delay-in.
+          const rect = n.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.92) {
+            n.classList.add('is-in');
+          } else {
+            io.observe(n);
+          }
+        });
+      } else {
+        document.querySelectorAll('.reveal').forEach((n) => n.classList.add('is-in'));
+      }
+    </script>
   </body>
 </html>
