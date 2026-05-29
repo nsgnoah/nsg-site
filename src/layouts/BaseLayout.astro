@@ -12,8 +12,8 @@ interface Props {
 }
 
 const {
-  title = 'NSG — Modern software for small businesses',
-  description = 'NSG Solutions builds modern software, automations, AI integrations, and connected tools for small businesses.',
+  title = 'NSG — Software & AI for small businesses',
+  description = 'NSG Solutions builds custom sites, internal tools, automations, and AI integrations for small businesses. Custom agents and workflows. One person, end to end.',
   noindex = false,
   breadcrumb
 } = Astro.props;
@@ -42,7 +42,7 @@ const orgSchema = {
   image: ogImage,
   email: 'noah@nsgsolutions.co',
   priceRange: '$$-$$$',
-  description: 'NSG Solutions builds custom software, automations, AI integrations, and connected tools for small businesses.',
+  description: 'NSG Solutions builds custom sites, internal tools, automations, and AI integrations for small businesses. Custom agents and workflows. One person, end to end.',
   founder: {
     '@type': 'Person',
     name: 'Noah Greensweig',
@@ -126,10 +126,11 @@ const jsonLd = { '@context': 'https://schema.org', '@graph': graph };
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content="NSG Solutions — modern software for small businesses" />
-    <link rel="icon" href="/assets/favicon-red-dot.svg?v=small-preview" type="image/svg+xml" sizes="any" />
+    <link rel="icon" href="/assets/favicon.svg?v=wordmark" type="image/svg+xml" sizes="any" />
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" href="/fonts/BeVietnamPro-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/BeVietnamPro-Medium.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/LibreBaskerville-Italic.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/JetBrainsMono-Latin.woff2" as="font" type="font/woff2" crossorigin />
     {!noindex && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
@@ -150,9 +151,14 @@ const jsonLd = { '@context': 'https://schema.org', '@graph': graph };
         { selector: '.problems-list .problem', staggerMs: 60 },
         { selector: '.principle-grid .principle', staggerMs: 80 },
         { selector: '.work-list .work-card', staggerMs: 90 },
-        { selector: '.stack-frame .stack-row', staggerMs: 90 },
-        { selector: '.svc-layer' },
-        { selector: '.svc-layer .symptom', staggerMs: 60 },
+        { selector: '.svc-tier' },
+        { selector: '.svc-overview .svc-overview-card', staggerMs: 70 },
+        { selector: '.svc-picker .svc-picker-row', staggerMs: 50 },
+        { selector: '.svc-stack-viz > *', staggerMs: 50 },
+        { selector: '.svc-steps .svc-step', staggerMs: 60 },
+        { selector: '.about-overview .svc-overview-card', staggerMs: 70 },
+        { selector: '.about-commitment-tier', staggerMs: 80 },
+        { selector: '.about-fit-list li', staggerMs: 40 },
         { selector: '.about-stack-mini .row', staggerMs: 50 }
       ];
 
@@ -162,7 +168,6 @@ const jsonLd = { '@context': 'https://schema.org', '@graph': graph };
         '.page-head',
         '.manifesto h2',
         '.cta-inner',
-        '.stack-where',
         '.tier-intro'
       ];
 

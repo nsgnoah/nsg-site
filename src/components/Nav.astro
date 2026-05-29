@@ -32,16 +32,41 @@ const isActive = (path: string) => currentPath === path;
 </nav>
 
 <script>
-  const mobileNav = document.querySelector('[data-mobile-nav]');
-  const navToggle = mobileNav?.querySelector('[data-nav-toggle]');
-  const navMenu = mobileNav?.querySelector('[data-nav-menu]');
+  const mobileNav = document.querySelector<HTMLElement>('[data-mobile-nav]');
+  const navToggle = mobileNav?.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const navMenu = mobileNav?.querySelector<HTMLElement>('[data-nav-menu]');
+  const mainEl = document.querySelector('main');
+  const footerEl = document.querySelector('footer');
 
   if (mobileNav && navToggle && navMenu) {
-    const setOpen = (open) => {
+    let lastFocusBeforeOpen: HTMLElement | null = null;
+
+    const getFocusables = (): HTMLElement[] =>
+      Array.from(mobileNav.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')).filter(
+        (el) => (typeof el.checkVisibility === 'function' ? el.checkVisibility() : el.offsetParent !== null)
+      );
+
+    const setOpen = (open: boolean) => {
+      const wasOpen = mobileNav.getAttribute('data-open') === 'true';
+      if (open === wasOpen) return;
+
       mobileNav.setAttribute('data-open', open ? 'true' : 'false');
       navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       document.body.classList.toggle('nav-open', open);
+      mainEl?.toggleAttribute('inert', open);
+      footerEl?.toggleAttribute('inert', open);
+
+      if (open) {
+        lastFocusBeforeOpen =
+          document.activeElement instanceof HTMLElement ? document.activeElement : null;
+        requestAnimationFrame(() => {
+          navMenu.querySelector('a')?.focus();
+        });
+      } else {
+        (lastFocusBeforeOpen ?? navToggle).focus();
+        lastFocusBeforeOpen = null;
+      }
     };
 
     navToggle.addEventListener('click', () => {
@@ -52,8 +77,33 @@ const isActive = (path: string) => currentPath === path;
       link.addEventListener('click', () => setOpen(false));
     });
 
-    window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') setOpen(false);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && mobileNav.getAttribute('data-open') === 'true') {
+        setOpen(false);
+        return;
+      }
+      if (
+        event.key !== 'Tab' ||
+        mobileNav.getAttribute('data-open') !== 'true' ||
+        !window.matchMedia('(max-width: 720px)').matches
+      ) {
+        return;
+      }
+
+      const focusables = getFocusables();
+      if (focusables.length === 0) return;
+
+      const active = document.activeElement;
+      const i = active instanceof HTMLElement ? focusables.indexOf(active) : -1;
+      if (i === -1) return;
+
+      if (!event.shiftKey && i === focusables.length - 1) {
+        event.preventDefault();
+        focusables[0].focus();
+      } else if (event.shiftKey && i === 0) {
+        event.preventDefault();
+        focusables[focusables.length - 1].focus();
+      }
     });
 
     window.addEventListener('resize', () => {

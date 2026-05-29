@@ -1,118 +1,242 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LabelRow from '../components/LabelRow.astro';
+import ServiceGlyph from '../components/ServiceGlyph.astro';
 
-const types = ['Website or app', 'Automation', 'AI integration', 'Not sure yet'];
+const types = [
+  'Foundation (site or app)',
+  'Operations (automation)',
+  'Intelligence (AI)',
+  'Not sure yet'
+];
+
+const nextSteps = [
+  {
+    num: '01',
+    title: 'Send the note',
+    body: 'A few sentences is enough. What you need, and what \u201cdone\u201d looks like.'
+  },
+  {
+    num: '02',
+    title: 'Hear back within two business days',
+    body: 'By email or phone, whichever you pick on the form.'
+  },
+  {
+    num: '03',
+    title: 'Quick call if it\u2019s a fit',
+    body: 'I say yes, no, or not yet before money. Plain quote once we know the shape.'
+  }
+];
+
+const defaultFormEndpoint = 'https://formspree.io/f/xlgwzyop';
+const contactFormEndpoint =
+  import.meta.env.PUBLIC_CONTACT_FORM_ENDPOINT?.trim() || defaultFormEndpoint;
 ---
 
 <BaseLayout
-  title="Contact — NSG Solutions"
-  description="Start a conversation with NSG Solutions. A few sentences about what's in the way is plenty — replies within two business days, from Noah."
+  title="Contact — Start a conversation | NSG Solutions"
+  description="Contact NSG Solutions in Minneapolis. Describe what you need. Reply within two business days from Noah."
   breadcrumb={[
     { name: 'Home', href: '/' },
     { name: 'Contact', href: '/contact' }
   ]}
 >
-  <div class="page">
+  <div class="page contact-page">
     <div class="container">
-      <header class="page-head">
+      <header class="page-head contact-page-head">
         <LabelRow num="CONTACT / 01" meta="Start a conversation" />
-        <h1>Say hi.<br /><em>Describe what's in the way.</em></h1>
+        <h1>
+          Describe what you need<span class="accent">.</span>
+        </h1>
         <p class="lede">
-          A few sentences is plenty. You'll hear back from me within two business days.
+          You talk to Noah directly. A short note on the form is enough to get started, or we can set
+          up a call.
         </p>
-      </header>
-
-      <section class="contact-layout">
-        <div id="contact-success" class="contact-success" hidden>
-          <LabelRow num="SENT" />
-          <h2>Got it. <em>Talk soon.</em></h2>
-          <p>
-            You'll hear back from me within two business days. If something's urgent, email
-            <a href="mailto:noah@nsgsolutions.co">noah@nsgsolutions.co</a> directly.
-          </p>
-        </div>
-
-        <noscript>
-          <p style="padding: 1rem; border: 1px solid var(--gray-200); margin-bottom: 1rem;">
-            This form needs JavaScript to send. If you have it disabled, email
-            <a href="mailto:noah@nsgsolutions.co">noah@nsgsolutions.co</a> directly.
-          </p>
-        </noscript>
-
-        <form id="contact-form" class="contact-form">
-          <div class="field">
-            <label for="name">Your name</label>
-            <input id="name" name="name" type="text" required placeholder="Jane Smith" autocomplete="name" />
-            <p id="error-name" style="display: none; color: var(--red); font-size: 0.8rem; margin-top: 0.25rem;"></p>
+        <div class="hero-meta contact-hero-meta">
+          <div class="hero-meta-cell">
+            <div class="key">Reply</div>
+            <div class="val">&le; 2 business days</div>
           </div>
-
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required placeholder="jane@yourbusiness.com" autocomplete="email" />
-            <p id="error-email" style="display: none; color: var(--red); font-size: 0.8rem; margin-top: 0.25rem;"></p>
+          <div class="hero-meta-cell">
+            <div class="key">Based in</div>
+            <div class="val">Minneapolis, MN</div>
           </div>
-
-          <div class="field">
-            <label>What kind of work? <span style="font-weight: 400; color: var(--gray-300);">(optional)</span></label>
-            <div class="chips" role="listbox" aria-label="What kind of work?">
-              {types.map((type) => (
-                <button class="chip" type="button" data-value={type} role="option" aria-selected="false">{type}</button>
-              ))}
+          <div class="hero-meta-cell">
+            <div class="key">Also</div>
+            <div class="val">
+              <a href="mailto:noah@nsgsolutions.co">noah@nsgsolutions.co</a>
             </div>
-            <input id="type-input" name="type" type="hidden" />
           </div>
-
-          <div class="field">
-            <label for="message">What's going on?</label>
-            <textarea id="message" name="message" required rows="6" placeholder="A few sentences is plenty. What's in the way? What does &quot;done&quot; look like?"></textarea>
-            <p id="error-message" style="display: none; color: var(--red); font-size: 0.8rem; margin-top: 0.25rem;"></p>
-          </div>
-
-          <p id="submit-error" style="display: none; color: var(--red); font-size: 0.9rem;"></p>
-
-          <button type="submit" class="btn btn-primary" style="align-self: flex-start;">
-            Send the note <span class="arr">→</span>
-          </button>
-        </form>
-
-        <aside class="contact-aside">
-          <div class="block">
-            <h3>Direct line</h3>
-            <p><a href="mailto:noah@nsgsolutions.co">noah@nsgsolutions.co</a></p>
-          </div>
-          <div class="block">
-            <h3>Reply time</h3>
-            <p>Within two business days. If timing is tight, say so in the note.</p>
-          </div>
-          <div class="block">
-            <h3>What happens next</h3>
-            <p>We'll set up a call and talk through what you're dealing with. Then, you get a plain-language proposal: scope, timeline, price. No commitment until you're ready.</p>
-          </div>
-          <div class="block">
-            <h3>Where</h3>
-            <p>Minneapolis, MN. Available to meet in person or remote.</p>
-          </div>
-        </aside>
-      </section>
+        </div>
+      </header>
     </div>
+
+    <section class="section contact-main-section">
+      <div class="container">
+        <div class="contact-frame">
+          <div class="contact-form-col">
+            <LabelRow num="FORM / 02" meta="Send a note" />
+
+            <div id="contact-success" class="contact-success" hidden>
+              <LabelRow num="SENT" meta="On its way" />
+              <h2>Got it. <em>Talk soon.</em></h2>
+              <p>
+                You&rsquo;ll hear back within two business days. If something&rsquo;s urgent, email
+                <a href="mailto:noah@nsgsolutions.co">noah@nsgsolutions.co</a> directly.
+              </p>
+            </div>
+
+            <noscript>
+              <p class="contact-noscript">
+                This form needs JavaScript to send. If you have it disabled, email
+                <a href="mailto:noah@nsgsolutions.co">noah@nsgsolutions.co</a> directly.
+              </p>
+            </noscript>
+
+            <form id="contact-form" class="contact-form">
+              <div class="field">
+                <label for="name">Your name</label>
+                <input id="name" name="name" type="text" required placeholder="Jane Smith" autocomplete="name" />
+                <p id="error-name" class="field-error" hidden></p>
+              </div>
+
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required placeholder="jane@yourbusiness.com" autocomplete="email" />
+                <p id="error-email" class="field-error" hidden></p>
+              </div>
+
+              <div class="field">
+                <label for="phone">Phone <span class="chips-optional">(optional)</span></label>
+                <input id="phone" name="phone" type="tel" placeholder="(612) 555-0123" autocomplete="tel" />
+              </div>
+
+              <div class="field">
+                <fieldset class="chips-fieldset">
+                  <legend class="chips-legend">Preferred contact</legend>
+                  <div class="chips">
+                    <label class="chip-label">
+                      <input class="chip-input chip-contact" type="radio" name="contact-method" value="Email" required />
+                      <span class="chip">Email</span>
+                    </label>
+                    <label class="chip-label">
+                      <input class="chip-input chip-contact" type="radio" name="contact-method" value="Phone call" required />
+                      <span class="chip">Phone call</span>
+                    </label>
+                  </div>
+                </fieldset>
+                <input id="contact-method-input" name="contact_method" type="hidden" />
+                <p id="error-contact-method" class="field-error" hidden></p>
+              </div>
+
+              <div class="field">
+                <fieldset class="chips-fieldset">
+                  <legend class="chips-legend">
+                    Starting point <span class="chips-optional">(optional)</span>
+                  </legend>
+                  <div class="chips">
+                    {types.map((type) => (
+                      <label class="chip-label">
+                        <input class="chip-input" type="checkbox" value={type} />
+                        <span class="chip">{type}</span>
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+                <input id="type-input" name="type" type="hidden" />
+              </div>
+
+              <div class="field">
+                <label for="message">What&rsquo;s going on?</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows="6"
+                  placeholder="What do you need built? What would done look like? A few sentences is plenty."
+                ></textarea>
+                <p id="error-message" class="field-error" hidden></p>
+              </div>
+
+              <p id="submit-error" class="field-error field-error--submit" hidden></p>
+
+              <button type="submit" class="btn btn-primary contact-submit">
+                Send the note <span class="arr">→</span>
+              </button>
+            </form>
+          </div>
+
+          <aside class="contact-aside contact-aside-panel" aria-label="What happens after you send">
+            <div class="contact-aside-block contact-aside-direct">
+              <span class="contact-aside-label">Direct line</span>
+              <p>
+                <a href="mailto:noah@nsgsolutions.co">noah@nsgsolutions.co</a>
+              </p>
+            </div>
+
+            <div class="contact-aside-block">
+              <span class="contact-aside-label">What happens next</span>
+              <ol class="contact-steps">
+                {nextSteps.map((step, i) => (
+                  <li class="contact-step">
+                    <div class="contact-step-icon" aria-hidden="true">
+                      <ServiceGlyph tier="step" step={i + 1} />
+                    </div>
+                    <div class="contact-step-body">
+                      <span class="contact-step-num">{step.num}</span>
+                      <h3>{step.title}</h3>
+                      <p>{step.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <p class="contact-section-more">
+              Good-fit checklist on <a href="/about#good-fit">about</a>. Full build process on
+              <a href="/services">services</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <script>
-    const FORMSPREE_ID = 'xlgwzyop';
+  <script define:vars={{ contactFormEndpoint }}>
     const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const form = document.getElementById('contact-form');
     const successDiv = document.getElementById('contact-success');
     const typeInput = document.getElementById('type-input');
-    const chips = document.querySelectorAll('.chip');
-    const submitBtn = form.querySelector('button[type="submit"]');
+    const contactMethodInput = document.getElementById('contact-method-input');
+    const chipInputs = document.querySelectorAll('.chip-input:not(.chip-contact)');
+    const contactMethodRadios = document.querySelectorAll('.chip-contact');
+    const submitBtn = form?.querySelector('button[type="submit"]');
     const submitError = document.getElementById('submit-error');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const messageInput = document.getElementById('message');
+
+    if (!form || !typeInput || !contactMethodInput || !submitBtn || !submitError || !nameInput || !emailInput || !messageInput) {
+      // Form markup changed or script running on wrong page; skip setup.
+    } else {
+    function syncTypeFromChips() {
+      typeInput.value = [...chipInputs]
+        .filter((i) => i.checked)
+        .map((i) => i.value)
+        .join(', ');
+    }
+
+    function syncContactMethod() {
+      const selected = [...contactMethodRadios].find((i) => i.checked);
+      contactMethodInput.value = selected?.value ?? '';
+    }
 
     function clearError(fieldName) {
       const errorEl = document.getElementById(`error-${fieldName}`);
       if (errorEl) {
-        errorEl.style.display = 'none';
+        errorEl.hidden = true;
         errorEl.textContent = '';
       }
     }
@@ -121,15 +245,16 @@ const types = ['Website or app', 'Automation', 'AI integration', 'Not sure yet']
       const errorEl = document.getElementById(`error-${fieldName}`);
       if (errorEl) {
         errorEl.textContent = message;
-        errorEl.style.display = 'block';
+        errorEl.hidden = false;
       }
     }
 
     function validate() {
       const errors = {};
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      const message = messageInput.value.trim();
+      const contactMethod = [...contactMethodRadios].find((i) => i.checked);
 
       if (!name) {
         errors.name = "Add your name so I know who I'm talking to.";
@@ -139,27 +264,23 @@ const types = ['Website or app', 'Automation', 'AI integration', 'Not sure yet']
       } else if (!EMAIL_REGEX.test(email)) {
         errors.email = "That email doesn't look right.";
       }
+      if (!contactMethod) {
+        errors['contact-method'] = 'Please select a preferred contact method.';
+      }
       if (!message) {
-        errors.message = "Add a short note so I know what this is about.";
+        errors.message = 'Add a short note so I know what this is about.';
       }
 
       return errors;
     }
 
-    chips.forEach((chip) => {
-      chip.addEventListener('click', () => {
-        const isActive = chip.classList.contains('active');
-        chip.classList.toggle('active', !isActive);
-        chip.setAttribute('aria-selected', String(!isActive));
+    chipInputs.forEach((input) => input.addEventListener('change', syncTypeFromChips));
+    contactMethodRadios.forEach((input) => input.addEventListener('change', () => {
+      syncContactMethod();
+      clearError('contact-method');
+    }));
 
-        const selected = [...chips]
-          .filter((c) => c.classList.contains('active'))
-          .map((c) => c.getAttribute('data-value') || '');
-        typeInput.value = selected.join(', ');
-      });
-    });
-
-    document.getElementById('name').addEventListener('blur', () => {
+    nameInput.addEventListener('blur', () => {
       const errors = validate();
       if (errors.name) {
         showError('name', errors.name);
@@ -168,11 +289,11 @@ const types = ['Website or app', 'Automation', 'AI integration', 'Not sure yet']
       }
     });
 
-    document.getElementById('name').addEventListener('input', () => {
+    nameInput.addEventListener('input', () => {
       clearError('name');
     });
 
-    document.getElementById('email').addEventListener('blur', () => {
+    emailInput.addEventListener('blur', () => {
       const errors = validate();
       if (errors.email) {
         showError('email', errors.email);
@@ -181,11 +302,11 @@ const types = ['Website or app', 'Automation', 'AI integration', 'Not sure yet']
       }
     });
 
-    document.getElementById('email').addEventListener('input', () => {
+    emailInput.addEventListener('input', () => {
       clearError('email');
     });
 
-    document.getElementById('message').addEventListener('blur', () => {
+    messageInput.addEventListener('blur', () => {
       const errors = validate();
       if (errors.message) {
         showError('message', errors.message);
@@ -194,7 +315,7 @@ const types = ['Website or app', 'Automation', 'AI integration', 'Not sure yet']
       }
     });
 
-    document.getElementById('message').addEventListener('input', () => {
+    messageInput.addEventListener('input', () => {
       clearError('message');
     });
 
@@ -210,17 +331,19 @@ const types = ['Website or app', 'Automation', 'AI integration', 'Not sure yet']
       }
 
       submitBtn.setAttribute('disabled', '');
-      submitError.style.display = 'none';
+      submitError.hidden = true;
 
       try {
-        const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        const response = await fetch(contactFormEndpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
+            name: nameInput.value,
+            email: emailInput.value,
+            phone: phoneInput?.value || '',
+            contact_method: contactMethodInput.value,
             type: typeInput.value,
-            message: document.getElementById('message').value,
+            message: messageInput.value,
           }),
         });
 
@@ -234,8 +357,9 @@ const types = ['Website or app', 'Automation', 'AI integration', 'Not sure yet']
       } catch {
         submitBtn.removeAttribute('disabled');
         submitError.textContent = 'Something broke. Try again, or email noah@nsgsolutions.co directly.';
-        submitError.style.display = 'block';
+        submitError.hidden = false;
       }
     });
+    }
   </script>
 </BaseLayout>

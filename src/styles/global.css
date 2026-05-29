@@ -322,6 +322,19 @@ main {
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 
+.section-head:has(.lede) {
+  align-items: start;
+}
+
+.section-head > .label-row {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+.section-head:not(:has(.lede)) > div {
+  grid-column: 1 / -1;
+}
+
 .section-head h2 {
   font-size: 2.6rem;
   letter-spacing: 0;
@@ -529,6 +542,8 @@ main {
   background: var(--paper);
   border-bottom: 1px solid var(--gray-200);
   border-right: 1px solid var(--gray-200);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
   padding: clamp(1.5rem, 3vw, 2.5rem);
   position: relative;
   transition: background 0.3s var(--ease);
@@ -633,6 +648,72 @@ main {
   display: grid;
   gap: clamp(1.25rem, 2.5vw, 2rem);
   grid-template-columns: repeat(2, 1fr);
+}
+
+.org-track {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 0;
+  border: 1px solid var(--gray-200);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.org-cell {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.org-divider {
+  width: 1px;
+  background: var(--gray-200);
+}
+
+.org-type {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.org-scale {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.org-cell p {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--gray-700);
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+.work-belief {
+  border-left: 2px solid var(--black);
+  margin: 0;
+  padding: clamp(1rem, 2vw, 1.5rem) clamp(1.25rem, 3vw, 2rem);
+  background: var(--gray-100);
+}
+
+.work-belief p {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--gray-700);
+  max-width: 70ch;
+}
+
+.belief-em {
+  color: var(--black);
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-color: var(--red);
+  text-underline-offset: 3px;
 }
 
 .work-card {
@@ -812,6 +893,15 @@ main {
   font-size: 0.5em;
 }
 
+.cta-inner h2 .cta-answer {
+  color: var(--red);
+  display: block;
+  font-size: 0.6em;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  margin-top: 0.15em;
+}
+
 .cta-actions {
   align-items: center;
   display: flex;
@@ -831,7 +921,7 @@ main {
 
 .page-head {
   border-bottom: 1px solid var(--gray-200);
-  padding: clamp(5rem, 9vw, 8rem) 0 clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(5rem, 9vw, 8rem) 0 clamp(1.25rem, 2.5vw, 2rem);
 }
 
 .page-head .label-row {
@@ -851,6 +941,24 @@ main {
   font-size: 4.5rem;
   margin-bottom: 0;
   max-width: 16ch;
+}
+
+.about-hero .lede {
+  color: var(--gray-700);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-top: 1.5rem;
+  max-width: 56ch;
+}
+
+.about-prose .body-col a {
+  color: var(--red);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.about-prose .body-col a:hover {
+  color: var(--black);
 }
 
 .page-head h1 em,
@@ -1146,6 +1254,59 @@ main {
   text-transform: none;
 }
 
+.chips-fieldset {
+  border: 0;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+}
+
+.chips-legend {
+  color: var(--gray-500);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.65rem;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.chips-optional {
+  color: var(--gray-300);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.chip-label {
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  margin: 0;
+  position: relative;
+}
+
+.chip-input {
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.chip-input:focus-visible + .chip {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
+.chip-label:has(.chip-input:checked) .chip {
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--white);
+}
+
 .field input,
 .field textarea {
   background: transparent;
@@ -1176,9 +1337,10 @@ main {
 }
 
 .chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 11.5rem), auto));
+  justify-content: start;
 }
 
 .chip {
@@ -1187,23 +1349,20 @@ main {
   border-radius: 1px;
   color: var(--gray-700);
   cursor: pointer;
+  display: inline-block;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.06em;
+  line-height: 1.35;
   padding: 0.5rem 0.85rem;
   text-transform: uppercase;
   transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
+  white-space: nowrap;
 }
 
 .chip:hover {
   border-color: var(--black);
   color: var(--black);
-}
-
-.chip.active {
-  background: var(--black);
-  border-color: var(--black);
-  color: var(--white);
 }
 
 .contact-aside {
@@ -1333,6 +1492,10 @@ main {
 
   .cta-inner h2 {
     font-size: 2.6rem;
+  }
+
+  .contact-layout {
+    grid-template-columns: 1fr;
   }
 }
 

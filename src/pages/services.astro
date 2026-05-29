@@ -1,181 +1,312 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LabelRow from '../components/LabelRow.astro';
+import SectionHead from '../components/SectionHead.astro';
 import CtaStrip from '../components/CtaStrip.astro';
+import ServiceGlyph from '../components/ServiceGlyph.astro';
 
-// The stack — three layers, top to bottom. Engage at any one.
-// Layer 03 (Intelligence) gets the teal accent (--nsg-teal: #0D9488).
-const stack = [
+const overview = [
+  { num: '01', name: 'Foundation', blurb: 'Custom sites & apps', href: '#foundation', tier: 1 },
+  { num: '02', name: 'Operations', blurb: 'Automation & tools', href: '#operations', tier: 2 },
+  { num: '03', name: 'Intelligence', blurb: 'AI & agents', href: '#intelligence', tier: 3 }
+];
+
+const picker = [
+  { quote: 'Our website is embarrassing.', tier: 'Foundation', tierKey: 1, href: '#foundation' },
+  { quote: 'We need software that fits how we work.', tier: 'Foundation', tierKey: 1, href: '#foundation' },
+  { quote: 'The same data gets entered everywhere.', tier: 'Operations', tierKey: 2, href: '#operations' },
+  { quote: 'Monthly reports take forever.', tier: 'Operations', tierKey: 2, href: '#operations' },
+  { quote: 'Our tools don\u2019t connect.', tier: 'Operations', tierKey: 2, href: '#operations' },
+  { quote: 'We want to integrate AI but don\u2019t know where to start.', tier: 'Intelligence', tierKey: 3, href: '#intelligence' },
+  { quote: 'We have AI subscriptions nobody uses.', tier: 'Intelligence', tierKey: 3, href: '#intelligence' },
+  { quote: 'We ran an AI pilot and it faded.', tier: 'Intelligence', tierKey: 3, href: '#intelligence' }
+];
+
+const services = [
   {
-    num: '03',
-    tier: 3,
-    name: 'Intelligence',
-    title: 'AI that does the work.',
-    sub: "For businesses whose foundation is solid and whose operations are wired together. The point isn\u2019t bolting on a chatbot. It\u2019s letting AI run the parts a person used to.",
-    tags: ['AI integration', 'AI agents', 'Intelligent pipelines', 'AI-enhanced workflows']
-  },
-  {
-    num: '02',
-    tier: 2,
-    name: 'Operations',
-    title: 'The slow parts, fixed.',
-    sub: 'For businesses with the foundation in place that are losing time to manual processes. Automation, internal tools, and the wiring that lets five tools see each other.',
-    tags: ['Automation', 'Tool-to-tool wiring', 'Internal tooling', 'Workflow improvements']
-  },
-  {
+    id: 'foundation',
     num: '01',
     tier: 1,
     name: 'Foundation',
-    title: 'The basics, working.',
-    sub: 'For businesses that still need the basics in place. A real website, software shaped to the operation, the digital basics that everything else has to sit on top of.',
-    tags: ['Website design and build', 'Custom apps', 'Digital presence']
+    title: 'Custom sites & software',
+    plain: 'The basics: a site you\u2019re proud to send people to, and software that matches how your team actually works.',
+    builds: [
+      'Custom sites you\u2019re proud to send people to',
+      'Custom software when off-the-shelf doesn\u2019t fit',
+      'Client portals and online forms',
+      'Interactive previews and 3D viewers'
+    ],
+    symptoms: [
+      ['Our site looks like 2006 and we\u2019re embarrassed to share it.', 'Something current you\u2019re proud to send people to.'],
+      ['Nothing off the shelf fits how we actually operate.', 'Software built for your process from scratch.']
+    ],
+    outcome: 'A site worth showing and software built around you \u2014 live, owned, and made for your business.'
+  },
+  {
+    id: 'operations',
+    num: '02',
+    tier: 2,
+    name: 'Operations',
+    title: 'Automation & internal tools',
+    plain: 'The work that eats your week: moving data between systems, rebuilding the same report, keeping five spreadsheets in sync.',
+    builds: [
+      'Automatic sync between the tools you already use',
+      'Internal dashboards and small apps',
+      'Scheduled reports and recurring jobs',
+      'Replacing shared spreadsheets with one source of truth'
+    ],
+    symptoms: [
+      ['We have eight different versions of the same spreadsheet.', 'One app serves as a single source of truth.'],
+      ['Scheduling and reports eat our week.', 'Automations that run on a schedule and email the results.']
+    ],
+    outcome: 'Hours back every week, fewer mistakes, and data your team can trust.'
+  },
+  {
+    id: 'intelligence',
+    num: '03',
+    tier: 3,
+    name: 'Intelligence',
+    title: 'AI integration & custom agents',
+    plain: 'Pick the right AI tool for the job, connect it to your software, and build agents that handle repetitive work — and surface insights and ideas you’d otherwise miss.',
+    builds: [
+      'Choosing and setting up AI tools for your team',
+      'Custom AI agents inside your existing software',
+      'AI that surfaces insights and suggests improvements',
+      'MCP connections that wire AI to the tools you already use',
+      'Custom agent skills built for your workflows'
+    ],
+    symptoms: [
+      ['We want to integrate AI but don\u2019t know where to start.', 'Walk through your workflows, pick what fits, and wire it in.'],
+      ['We ran an AI pilot and it provided little value.', 'Go beyond chatbots with agentic skills and connectors wired into your real work.']
+    ],
+    outcome: 'AI that saves time on real tasks, with a person still in the loop where it matters.',
+    credibility: 'I work daily with Claude, Codex, MCP servers, and agent skills. You don\u2019t need the jargon; you get someone current who helps you pick what fits.',
+    caveat: 'AI works best when your data and tools are in order. I build the whole stack so nothing\u2019s missing.'
   }
 ];
 
-// Detail blocks below the stack — same three layers, expanded.
-const layers = [
-  {
-    tier: 1,
-    num: '01',
-    name: 'Foundation',
-    title: 'Building the foundation.',
-    titleEm: '',
-    when: 'businesses still running on spreadsheets and a website nobody is proud of.',
-    body: [
-      'Before anything fancy, a small business needs the basic surfaces working. A website that loads fast, looks like yours, and staff can actually update without calling anyone. Software shaped to how the operation works, not the other way around.',
-      'This is the layer most small businesses are still missing. Get it right and everything above it is cheaper.'
-    ],
-    symptoms: [
-      ['"Our website looks like every other shop on the block."', "A site that\u2019s actually yours, fast and built to last."],
-      ['"The thing we need doesn\u2019t exist off the shelf."', 'Small custom app, scoped to how you actually work.'],
-      ['"Customers keep emailing what should be a self-serve form."', 'Customer portal scoped to the few things they actually need.'],
-      ['"We need a 3D preview before we build the real thing."', 'In-browser visualizer, no plugins, no exports.']
-    ]
-  },
-  {
-    tier: 2,
-    num: '02',
-    name: 'Operations',
-    title: 'Streamlining business operations.',
-    titleEm: '',
-    when: 'businesses with the basics in place, losing hours every week to manual work and tools that don\u2019t talk.',
-    body: [
-      "Most businesses run on five or six tools that don\u2019t know the others exist. Data gets typed twice. Reports get assembled by hand. The same task happens at the same time every week and no one has time to fix it.",
-      'This is the highest-leverage layer in most engagements. Quiet wins, fast.'
-    ],
-    symptoms: [
-      ['"There\u2019s a spreadsheet four people maintain and nobody trusts."', 'Replaced with a small internal app. Single source of truth.'],
-      ['"It\u2019s an hour every Monday and the report is the same shape."', 'Scheduled job, emailed to whoever needs it.'],
-      ['"CRM doesn\u2019t talk to accounting."', 'Customer and invoice data, in sync without a person in the middle.'],
-      ['"Stuff falls through the cracks between tools."', 'Lightweight glue and alerts when something stalls.']
-    ]
-  },
-  {
-    tier: 3,
-    num: '03',
-    name: 'Intelligence',
-    title: 'Putting AI to work.',
-    titleEm: '',
-    when: 'businesses with a solid foundation and tight operations, ready for AI to do real work.',
-    body: [
-      "AI works when the process underneath it is clear enough to write down. The model isn\u2019t the hard part. Picking the right shape for your operation is. So is leaving an audit trail and pausing for a human at the steps that matter.",
-      "This isn\u2019t a separate practice. It\u2019s the top of the same stack, run by the same person who built the layers below it."
-    ],
-    symptoms: [
-      ['"Half my week is running the same model with different inputs."', 'Scheduled runs with audit trails, not someone clicking through at 7am.'],
-      ['"We prep CSVs for the model by hand and pray we got it right."', 'Validated data-prep pipeline, every row traceable to its source.'],
-      ['"We want AI to actually do the work, not just summarize it."', 'Agents that operate the tools your team already uses, with checkpoints where a human signs off.'],
-      ['"We tried an AI tool last year and it didn\u2019t take."', 'Usually a foundation problem, not an AI problem. We start there.']
-    ]
-  }
-];
 ---
 
 <BaseLayout
-  title="Services — Foundation, Operations, Intelligence | NSG Solutions"
-  description="Three layers of work: websites and custom apps, automation and internal tools, and AI integration. Engage at any layer."
+  title="Services — Custom Sites, Automation & AI | NSG Solutions"
+  description="Custom sites, custom apps, automation, and AI integration for small businesses. Custom agents, tool setup, and workflows. One person, end to end. Minneapolis."
   breadcrumb={[
     { name: 'Home', href: '/' },
     { name: 'Services', href: '/services' }
   ]}
 >
-  <div class="page">
+  <div class="page services-page">
     <div class="container">
       <header class="page-head">
         <LabelRow num="SERVICES / 01" meta="What NSG does" />
-        <h1 class="h1-oneline">The whole stack.</h1>
+        <h1>
+          I build custom sites, automations, and AI that does real work<span class="accent">.</span>
+        </h1>
         <p class="lede">
-          Small businesses often don&rsquo;t have time to catch up. The website is years old and nobody&rsquo;s
-          touched it. The operation runs on spreadsheets. AI is on the to-do list but the foundation
-          isn&rsquo;t there yet. NSG is a Minneapolis software practice that handles all three, starting wherever you are.
+          NSG is a one-person software and AI practice in Minneapolis. You describe what you&rsquo;re
+          looking for. I design, build, and ship it: custom sites, apps, automations, and AI
+          wired into your workflows.
         </p>
+        <div class="hero-meta svc-hero-meta">
+          <div class="hero-meta-cell">
+            <div class="key">Practice</div>
+            <div class="val">Custom sites &middot; Tools &middot; Automation &middot; AI</div>
+          </div>
+          <div class="hero-meta-cell">
+            <div class="key">Based in</div>
+            <div class="val">Minneapolis, MN</div>
+          </div>
+          <div class="hero-meta-cell">
+            <div class="key">Working with</div>
+            <div class="val">Small businesses</div>
+          </div>
+        </div>
+
+        <div class="svc-overview" aria-label="Three service areas">
+          {overview.map((item) => (
+            <a class:list={['svc-overview-card', `svc-overview-${item.tier}`]} href={item.href}>
+              <div class="svc-overview-glyph">
+                <ServiceGlyph tier={item.tier as 1 | 2 | 3} />
+              </div>
+              <div class="svc-overview-text">
+                <span class="svc-overview-num">{item.num}</span>
+                <span class="svc-overview-name">{item.name}</span>
+                <span class="svc-overview-blurb">{item.blurb}</span>
+              </div>
+            </a>
+          ))}
+        </div>
       </header>
     </div>
 
-    <div class="container">
-      <div class="stack-frame" aria-label="Three layers of work">
-        <div class="stack-meta">
-          <span class="label">THE STACK</span>
-          <span>Engage at any layer · top to bottom</span>
+    <section class="section svc-picker-section">
+      <div class="container">
+        <SectionHead num="02 / START HERE" meta="Which sounds like you?">
+          <Fragment slot="title">Pick the sentence that matches.</Fragment>
+        </SectionHead>
+
+        <div class="svc-picker" role="list">
+          {picker.map((row) => (
+            <a class:list={['svc-picker-row', `picker-tier-${row.tierKey}`]} href={row.href} role="listitem">
+              <span class="svc-picker-dot" aria-hidden="true"></span>
+              <span class="svc-picker-quote">&ldquo;{row.quote}&rdquo;</span>
+              <span class="svc-picker-arrow" aria-hidden="true">&rarr;</span>
+              <span class="svc-picker-tier">{row.tier}</span>
+            </a>
+          ))}
         </div>
-
-        {stack.map((row) => (
-          <div class:list={['stack-row', `row-tier-${row.tier}`]}>
-            <div class="row-num">{row.num}</div>
-            <div>
-              <span class="row-num-tag">LAYER {row.num} · {row.name.toUpperCase()}</span>
-              <div class="row-name">{row.title.replace(/\.$/, '')}<span class="accent-dot">.</span></div>
-              <div class="row-sub">{row.sub}</div>
-            </div>
-            <div class="row-tags">
-              {row.tags.map((t) => <span>{t}</span>)}
-            </div>
-          </div>
-        ))}
       </div>
+    </section>
 
-      <div class="stack-where">
-        <span><strong>Engage at any layer.</strong></span>
-        <span class="rule" aria-hidden="true"></span>
-        <span>You don&rsquo;t need to come in at the top to talk to us.</span>
-      </div>
-    </div>
+    <section class="section svc-tiers-section">
+      <div class="container">
+        <SectionHead num="03 / WHAT I BUILD" meta="Three kinds of work">
+          <Fragment slot="title">Three ways I can help.</Fragment>
+        </SectionHead>
 
-    <div class="container">
-      {layers.map((layer) => (
-        <section class:list={['svc-layer', `layer-${layer.tier}`]}>
-          <div class="layer-head">
-            <div>
-              <div class="layer-tag">LAYER {layer.num} · {layer.name.toUpperCase()}</div>
-              <h2>{layer.title} <em>{layer.titleEm}</em></h2>
-            </div>
-            <div class="layer-when"><strong>For:</strong> {layer.when}</div>
-          </div>
-          <div class="layer-grid">
-            <div class="left">
-              {layer.body.map((p) => <p>{p}</p>)}
-              <div class="meta">{layer.name}</div>
-            </div>
-            <div class="symptoms">
-              {layer.symptoms.map(([quote, fix]) => (
-                <div class="symptom">
-                  <span class="check"></span>
-                  <div>
-                    <span class="quote">{quote}</span>
-                    <span class="gloss">→ {fix}</span>
+        {services.map((svc) => (
+          <article class:list={['svc-tier', `svc-tier-${svc.tier}`]} id={svc.id}>
+            <div class="svc-tier-frame">
+              <div class="svc-tier-body">
+                <header class="svc-tier-head">
+                  <div class="svc-tier-head-row">
+                    <div class="svc-tier-glyph">
+                      <ServiceGlyph tier={svc.tier as 1 | 2 | 3} />
+                    </div>
+                    <div class="svc-tier-head-text">
+                      <span class="svc-tier-tag">
+                        {svc.num} &middot; {svc.name.toUpperCase()}
+                      </span>
+                      <h2>{svc.title}</h2>
+                    </div>
+                  </div>
+                  <p class="svc-tier-plain">{svc.plain}</p>
+                </header>
+
+                <div class="svc-tier-grid">
+                  <div class="svc-tier-col">
+                    <h3 class="svc-tier-label">I build</h3>
+                    <ul class="svc-tier-builds">
+                      {svc.builds.map((item, i) => (
+                        <li>
+                          <span class="build-idx" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div class="svc-tier-col">
+                    <h3 class="svc-tier-label">Sounds like you?</h3>
+                    <ul class="svc-tier-symptoms">
+                      {svc.symptoms.map(([quote, fix]) => (
+                        <li>
+                          <span class="symptom-mark" aria-hidden="true">&ldquo;</span>
+                          <div>
+                            <span class="quote">{quote}</span>
+                            <span class="fix">&rarr; {fix}</span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-              ))}
+
+                <div class="svc-tier-outcome">
+                  <span class="outcome-mark" aria-hidden="true">✓</span>
+                  <p><strong>What you get:</strong> {svc.outcome}</p>
+                </div>
+
+                {svc.credibility && (
+                  <p class="svc-tier-cred">{svc.credibility}</p>
+                )}
+
+                {svc.caveat && (
+                  <p class="svc-tier-caveat">{svc.caveat}</p>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section svc-stack-section" id="the-stack">
+      <div class="container">
+        <SectionHead num="04 / THE STACK" meta="How it fits together">
+          <Fragment slot="title">AI works two ways.</Fragment>
+        </SectionHead>
+
+        <div class="svc-stack-wrap">
+          <div class="svc-stack-viz" aria-hidden="true">
+            <div class="stack-block stack-block-intel">
+              <span class="stack-block-num">03</span>
+              <span class="stack-block-name">Intelligence</span>
+              <span class="stack-block-note">Agents &middot; MCP &middot; skills</span>
+            </div>
+            <div class="svc-stack-base">
+              <div class="svc-stack-layers">
+                <div class="stack-block stack-block-2">
+                  <span class="stack-block-num">02</span>
+                  <span class="stack-block-name">Operations</span>
+                </div>
+                <div class="stack-block stack-block-1">
+                  <span class="stack-block-num">01</span>
+                  <span class="stack-block-name">Foundation</span>
+                </div>
+              </div>
+              <div class="svc-stack-spine">
+                <span class="svc-stack-spine-label">AI</span>
+              </div>
             </div>
           </div>
-        </section>
-      ))}
-    </div>
+
+          <div class="svc-stack-copy">
+            <p>
+              <strong>Through everything.</strong> AI helps build the site, runs inside the apps, and
+              augments how you operate day to day &mdash; not a separate project bolted on top.
+            </p>
+            <p>
+              <strong>And its own craft.</strong> Custom agents, MCP servers, and skills built for your
+              business. One person does all of it. Not ready for AI yet? Start with a site and add the
+              rest as you grow.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section svc-process-section">
+      <div class="container">
+        <SectionHead num="05 / HOW IT WORKS" meta="How it goes">
+          <Fragment slot="title">How this works.</Fragment>
+        </SectionHead>
+
+        <div class="svc-process-prose">
+          <p>
+            Most of my work comes from word of mouth &mdash; someone I&rsquo;ve met, or someone they
+            trust. So by the time we talk about a project, we already know each other a little. We
+            figure out the shape of it together: what&rsquo;s in the way, what &ldquo;done&rdquo; looks
+            like, whether it&rsquo;s even worth doing yet. No pressure, no quote handed down from on high.
+          </p>
+          <p>
+            When you&rsquo;re ready, we start &mdash; and we work closely. You see progress as it&rsquo;s
+            built, and we course-correct as we go, so nothing&rsquo;s a surprise at the end. When it&rsquo;s
+            good, everything transfers to you: the code, the access, all of it. And if there&rsquo;s
+            something more you want down the road, I&rsquo;m still here.
+          </p>
+        </div>
+
+        <p class="svc-process-more">
+          More on how NSG works on the <a href="/about">about page</a>.
+        </p>
+      </div>
+    </section>
 
     <CtaStrip
-      title="Not sure which layer is yours?"
-      continuation="Describe what&rsquo;s bugging you."
-      note="A short note is plenty. We&rsquo;ll sort it out from there."
+      title="Still figuring it out? <span class='cta-answer'>That&rsquo;s what I&rsquo;m here for.</span>"
+      continuation="Ask anything &mdash; no prep needed."
+      note="We can think it through together. Two business-day reply."
       primaryText="Send a note"
     />
   </div>

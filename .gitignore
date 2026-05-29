@@ -10,3 +10,6 @@ NSG Design System.zip
 .claude/
 .DS_Store
 **/.DS_Store
+
+# Internal design notes (local only)
+claude_design_prompt.md

@@ -1,216 +1,317 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHead from '../components/SectionHead.astro';
 import LabelRow from '../components/LabelRow.astro';
-import WorkCard from '../components/WorkCard.astro';
+import SectionHead from '../components/SectionHead.astro';
 import CtaStrip from '../components/CtaStrip.astro';
+import ServiceGlyph from '../components/ServiceGlyph.astro';
+import ProofGlyph from '../components/ProofGlyph.astro';
 
-// Problem cards grouped into the three tiers of the modernization stack.
-// Foundation (basics) → Operations (the slow parts) → Intelligence (AI fits).
-const tiers = [
+const overview = [
+  { num: '01', name: 'Foundation', blurb: 'Custom sites & apps', href: '/services#foundation', tier: 1 },
+  { num: '02', name: 'Operations', blurb: 'Automation & tools', href: '/services#operations', tier: 2 },
+  { num: '03', name: 'Intelligence', blurb: 'AI & agents', href: '/services#intelligence', tier: 3 }
+];
+
+const picker = [
+  { quote: 'Our website is embarrassing.', tier: 'Foundation', tierKey: 1, href: '/services#foundation' },
+  { quote: 'The same data gets entered everywhere.', tier: 'Operations', tierKey: 2, href: '/services#operations' },
+  { quote: 'Monthly reports take forever.', tier: 'Operations', tierKey: 2, href: '/services#operations' },
+  { quote: 'We want to integrate AI but don\u2019t know where to start.', tier: 'Intelligence', tierKey: 3, href: '/services#intelligence' },
+  { quote: 'We ran an AI pilot and it faded.', tier: 'Intelligence', tierKey: 3, href: '/services#intelligence' }
+];
+
+const proof = [
   {
-    key: 'foundation',
     num: '01',
-    name: 'Foundation',
-    heading: 'The basics, working.',
-    items: [
-      ['01', '"Our website looks like every other shop on the block."', "A site that's actually yours. Fast, tailored, built to last."],
-      ['02', '"The thing we need doesn\u2019t exist off the shelf."', 'Built around how you actually work, no extra features in the way.']
-    ]
+    tier: 1 as const,
+    glyph: 'consolidation' as const,
+    sector: 'Start-up reinsurance broker',
+    scale: '~10 people',
+    built: 'Custom internal web app to automate catastrophe modeling operations',
+    before: 'Every cat modeling run jumped across five tools. Same data re-entered, re-exported, re-checked at each step.',
+    after: 'One app for the full cat modeling workflow. Five tools became one system.'
   },
   {
-    key: 'operations',
     num: '02',
-    name: 'Operations',
-    heading: 'The slow parts, fixed.',
-    items: [
-      ['03', '"There\u2019s a spreadsheet four people maintain and nobody trusts."', 'Replaced with a small internal app. Single source of truth, no copy-paste.'],
-      ['04', '"Three tools don\u2019t talk to each other; we re-enter everything."', 'Wired together. The same data only gets typed once.']
-    ]
+    tier: 2 as const,
+    glyph: 'stage-builder' as const,
+    sector: 'Mid-size staging company',
+    scale: 'Stage rentals & events',
+    built: 'Custom 3D stage builder for quotes and layouts',
+    before: 'Every quote started with hand-drawn stage outlines. Redraw the same rig for each client.',
+    after: 'Drag-and-drop 3D layouts built for how they quote. Sketches became sendable designs the same day.'
   },
   {
-    key: 'intelligence',
     num: '03',
-    name: 'Intelligence',
-    heading: 'AI, where it actually fits.',
-    items: [
-      ['05', '"Every Monday morning is the same hour of busywork."', 'A scheduled job, with an AI step where judgment is needed. Done before anyone clocks in.'],
-      ['06', '"We want to use AI but don\u2019t know where it fits."', 'Pick the right shape for your operation. Build it in. Audit trail, human checkpoints where it matters.']
-    ]
+    tier: 3 as const,
+    glyph: 'ai-pipeline' as const,
+    sector: 'Start-up reinsurance broker',
+    scale: '~10 people',
+    built: 'AI workflow: raw data in, catastrophe models run, on-brand client reports out',
+    before: 'Cat modeling took a week per run. Manual SQL, then click-through after click-through to finish a model.',
+    after: 'Prep and modeling run automatically. A person still reviews before anything client-facing ships.'
   }
 ];
 
-const principles = [
-  ['01 / DIRECT', 'One person, start to finish.', 'You describe the problem to the same person who builds and ships the fix. Nothing translated, nothing lost on a handoff.'],
-  ['02 / HONEST', 'Done means done.', 'Work continues until you look at it and say "this is better than what we had in mind." If something later breaks that we agreed was finished, fixing it is free.'],
-  ['03 / HANDS-ON', 'Visible while it\u2019s built.', 'You see the work as it\u2019s built, not in a reveal at the end. In person where possible, video the rest of the time.']
+const goLinks = [
+  {
+    num: '01',
+    href: '/services',
+    title: 'What I build',
+    body: 'Three layers, symptom picker, and full detail on custom sites, automation, and AI.',
+    cta: 'Services'
+  },
+  {
+    num: '02',
+    href: '/about',
+    title: 'About me',
+    body: 'My background, a fit checklist, and how I work day to day.',
+    cta: 'About'
+  },
+  {
+    num: '03',
+    href: '/contact',
+    title: 'Start here',
+    body: 'A few sentences on the form is enough. I reply within two business days.',
+    cta: 'Contact'
+  }
 ];
 
-const work = [
+const faq = [
   {
-    kind: 'Web · Custom CMS',
-    industry: 'Specialty retail',
-    year: '2026',
-    title: 'A storefront site that doesn\u2019t look like a template.',
-    desc: 'New website and ordering flow for a dispensary opening in St. Paul. Fast, tailored, and easy for staff to update without calling anyone.',
-    tag: 'STOREFRONT_001.JPG'
+    q: 'What does NSG do?',
+    a: 'Custom sites, custom apps, automation between tools, and AI wired into real workflows. One person in Minneapolis, start to launch.'
   },
   {
-    kind: 'Custom tool · 3D',
-    industry: 'Event staging',
-    year: '2026',
-    title: 'Stage builder, in 3D, before anything is built.',
-    desc: 'Internal 3D visualizer that lets a staging company see a stage in a venue before the trucks roll out. Replacing a stack of PDFs and best-guesses.',
-    tag: 'STAGE_PREVIEW.GLB'
+    q: 'Do you only do AI?',
+    a: 'No. I build custom sites, internal tools, and automation too. AI is part of the work when it saves time on real tasks, not a separate upsell.'
   },
   {
-    kind: 'Web · Forms',
-    industry: 'University research',
-    year: '2024',
-    title: 'A grant-application tool that researchers will actually use.',
-    desc: 'Custom application portal for environmental grant submissions at the University of Minnesota. Replaced a tangle of forms and email threads.',
-    tag: 'GRANTS_PORTAL.PNG'
-  },
-  {
-    kind: 'Automation · AI',
-    industry: 'Reinsurance',
-    year: 'Ongoing',
-    title: 'Catastrophe-modeling, on a schedule.',
-    desc: "Automation layer over a broker's catastrophe-modeling pipeline. The same numbers, an order of magnitude faster, with eyes on every step that matters.",
-    tag: 'CAT_MODEL.RUN'
+    q: 'How much does it cost?',
+    a: 'It depends on the project. I\u2019m happy to grab coffee or hop on a call to hear what\u2019s going on. If we move forward, you\u2019ll get a quote before any build work starts.'
   }
 ];
 ---
 
 <BaseLayout
-  title="NSG Solutions — Modern software for small businesses in Minneapolis"
-  description="Modern websites, internal tools, automation, and AI integration for small businesses. One person, end-to-end. Based in Minneapolis, MN."
+  title="NSG Solutions — Sites, software, and AI for small businesses"
+  description="Custom sites, custom apps, automation, and AI integration for small businesses in Minneapolis. One person, end to end. Happy to talk for free."
 >
   <div class="page home-page">
-    <section class="hero">
-      <div class="container">
-        <div class="hero-meta">
+    <div class="container">
+      <header class="page-head home-page-head">
+        <LabelRow num="NSG / HOME" meta="Minneapolis &middot; Small business" />
+        <h1>
+          Sites, software, and AI for small businesses<span class="accent">.</span>
+        </h1>
+        <p class="lede">
+          One-person practice. You describe what you need. I design, build, and ship custom sites,
+          internal tools, automations, and AI that runs inside how you already work.
+        </p>
+        <div class="home-head-actions">
+          <a href="/contact" class="btn btn-primary">Start a conversation <span class="arr">→</span></a>
+          <a href="/services" class="btn btn-ghost">See what I build</a>
+        </div>
+        <div class="hero-meta svc-hero-meta">
           <div class="hero-meta-cell">
             <div class="key">Practice</div>
-            <div class="val">Custom software</div>
+            <div class="val">Sites &middot; Tools &middot; AI</div>
           </div>
           <div class="hero-meta-cell">
             <div class="key">Based in</div>
             <div class="val">Minneapolis, MN</div>
           </div>
           <div class="hero-meta-cell">
-            <div class="key">Working with</div>
-            <div class="val">Small businesses</div>
+            <div class="key">Talking</div>
+            <div class="val">Always free</div>
           </div>
         </div>
 
-        <h1 class="hero-title">
-          Software for where your<br />
-          business is, and where<br />
-          <span class="hero-final-line">it&rsquo;s <span class="already">headed next</span><span class="accent">.</span></span>
-        </h1>
+      </header>
+    </div>
 
-        <div class="hero-sub">
-          <p>
-            The website that loads fast and looks like it belongs to your business. The spreadsheet
-            replaced with something you can trust. The Monday morning task,
-            automated before anyone clocks in. And when the foundation&rsquo;s
-            solid, the AI layer that actually earns its place.
-          </p>
-          <div class="hero-actions">
-            <a href="/contact" class="btn btn-primary">Start a conversation <span class="arr">→</span></a>
-            <a href="/services" class="btn btn-ghost">What we do</a>
-          </div>
-        </div>
-
-        <div class="ticker">
-          <span><span class="dot"></span>Currently taking on 1–2 new engagements</span>
-          <span>· Replies within two business days</span>
-          <span>· In person when possible</span>
+    <div class="home-intro-band">
+      <div class="container">
+        <div class="svc-overview" aria-label="Three service areas">
+          {overview.map((item) => (
+            <a class:list={['svc-overview-card', `svc-overview-${item.tier}`]} href={item.href}>
+              <div class="svc-overview-glyph">
+                <ServiceGlyph tier={item.tier as 1 | 2 | 3} />
+              </div>
+              <div class="svc-overview-text">
+                <span class="svc-overview-num">{item.num}</span>
+                <span class="svc-overview-name">{item.name}</span>
+                <span class="svc-overview-blurb">{item.blurb}</span>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
-    </section>
+    </div>
 
-    <section class="section problems">
+    <section class="section svc-picker-section home-picker-section">
       <div class="container">
-        <SectionHead num="01 / WHY HIRE" meta="The work">
-          <Fragment slot="title">Things that get in the way<br /><em>of getting work done.</em></Fragment>
+        <SectionHead num="01 / START HERE" meta="Which sounds like you?">
+          <Fragment slot="title">Pick the line that matches.</Fragment>
+          <Fragment slot="lede">
+            If one sounds familiar, it takes you to that tier on services. More there if nothing here fits.
+          </Fragment>
         </SectionHead>
 
-        {tiers.map((tier) => (
-          <div class:list={['tier-group', `tier-${tier.num.replace(/^0/, '')}`]}>
-            <div class:list={['tier-intro', `tier-${tier.num.replace(/^0/, '')}`]}>
-              <div class="ti-num"><em>TIER {tier.num}</em> · {tier.name.toUpperCase()}</div>
-              <h3>{tier.heading}</h3>
-            </div>
-            <div class="problems-list">
-              {tier.items.map(([num, quote, fix]) => (
-                <div class="problem">
-                  <span class="num">PROBLEM / {num}</span>
-                  <div class="problem-quote">{quote}</div>
-                  <div class="problem-fix">
-                    <span class="arrow">→</span>
-                    <span>{fix}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+        <div class="svc-picker" role="list">
+          {picker.map((row) => (
+            <a class:list={['svc-picker-row', `picker-tier-${row.tierKey}`]} href={row.href} role="listitem">
+              <span class="svc-picker-dot" aria-hidden="true"></span>
+              <span class="svc-picker-quote">&ldquo;{row.quote}&rdquo;</span>
+              <span class="svc-picker-arrow" aria-hidden="true">&rarr;</span>
+              <span class="svc-picker-tier">{row.tier}</span>
+            </a>
+          ))}
+        </div>
+
+        <p class="home-section-more">
+          Full picker and tier detail on <a href="/services">services</a>.
+        </p>
       </div>
     </section>
 
-    <section class="section approach">
+    <section class="section home-proof-section">
       <div class="container">
-        <LabelRow num="02 / APPROACH" meta="How NSG works" />
+        <SectionHead num="02 / PROOF" meta="Previous work">
+          <Fragment slot="title">Work that shipped.</Fragment>
+        </SectionHead>
 
-        <div class="principle-grid">
-          {principles.map(([num, title, body]) => (
-            <div class="principle">
-              <span class="marker"></span>
-              <span class="num">{num}</span>
-              <h3>{title}</h3>
-              <p>{body}</p>
-            </div>
+        <div class="home-proof-list">
+          {proof.map((item) => (
+            <article class:list={['home-proof-item', `home-proof-tier-${item.tier}`]}>
+              <div class:list={['home-proof-frame', `svc-tier-${item.tier}`]}>
+                <div class="home-proof-visual">
+                  <span class="home-proof-num">{item.num}</span>
+                  <div class="home-proof-glyph">
+                    {item.glyph ? (
+                      <ProofGlyph variant={item.glyph} />
+                    ) : (
+                      <ServiceGlyph tier={item.tier} />
+                    )}
+                  </div>
+                  <p class="home-proof-visual-label">
+                    {item.sector}
+                    <span>{item.scale}</span>
+                  </p>
+                </div>
+                <div class="svc-tier-body home-proof-body">
+                  <dl class="home-proof-facts">
+                    <div class="home-proof-fact">
+                      <dt>Built</dt>
+                      <dd class="home-proof-built">{item.built}</dd>
+                    </div>
+                    <div class="home-proof-fact">
+                      <dt>Before</dt>
+                      <dd>{item.before}</dd>
+                    </div>
+                    <div class="home-proof-fact">
+                      <dt>After</dt>
+                      <dd>{item.after}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+            </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section class="section work">
+    <section class="section svc-stack-section">
       <div class="container">
-        <SectionHead num="03 / SELECTED WORK" meta="Recent engagements">
-          <Fragment slot="title"><span class="work-title-oneline">A few things currently in flight.</span></Fragment>
+        <SectionHead num="03 / THE STACK" meta="How it fits together">
+          <Fragment slot="title">AI works two ways.</Fragment>
         </SectionHead>
 
-        <div class="work-list">
-          {work.map((item, index) => <WorkCard index={index} {...item} />)}
+        <div class="svc-stack-wrap">
+          <div class="svc-stack-viz" aria-hidden="true">
+            <div class="stack-block stack-block-intel">
+              <span class="stack-block-num">03</span>
+              <span class="stack-block-name">Intelligence</span>
+              <span class="stack-block-note">Agents &middot; MCP &middot; skills</span>
+            </div>
+            <div class="svc-stack-base">
+              <div class="svc-stack-layers">
+                <div class="stack-block stack-block-2">
+                  <span class="stack-block-num">02</span>
+                  <span class="stack-block-name">Operations</span>
+                </div>
+                <div class="stack-block stack-block-1">
+                  <span class="stack-block-num">01</span>
+                  <span class="stack-block-name">Foundation</span>
+                </div>
+              </div>
+              <div class="svc-stack-spine">
+                <span class="svc-stack-spine-label">AI</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="svc-stack-copy">
+            <p>
+              AI runs through what you already do &mdash; building the site, inside the apps, augmenting
+              how you operate &mdash; and it&rsquo;s a craft of its own: custom agents, MCP servers, and
+              skills. I build the whole picture so the layers connect.
+            </p>
+            <p class="home-section-more home-section-more--inline">
+              <a href="/services#the-stack">Read more about the stack &rarr;</a>
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section manifesto">
+    <section class="section home-go-section">
       <div class="container">
-        <LabelRow num="04 / NOTE" meta="From the workbench" dark />
-        <h2>
-          The work isn&rsquo;t done until you look at it and say:<br />
-          <em class="manifesto-tail">&ldquo;this is better than what we had in mind.&rdquo;</em>
-        </h2>
+        <SectionHead num="04 / GO DEEPER" meta="The rest of the site">
+          <Fragment slot="title">Where to go next.</Fragment>
+        </SectionHead>
+
+        <div class="home-go-grid">
+          {goLinks.map((link, i) => (
+            <a href={link.href} class:list={['home-go-card', `home-go-card-${i + 1}`]}>
+              <span class="home-go-num">{link.num}</span>
+              <h3>{link.title}</h3>
+              <p>{link.body}</p>
+              <span class="home-go-cta">{link.cta} <span aria-hidden="true">&rarr;</span></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section home-faq-section">
+      <div class="container">
+        <SectionHead num="05 / FAQ" meta="Quick answers">
+          <Fragment slot="title">Before you write.</Fragment>
+        </SectionHead>
+
+        <dl class="about-faq">
+          {faq.map((item) => (
+            <div class="about-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <p class="home-section-more">
+          Fit checklist, process, and more Q&amp;A on <a href="/about">about</a>.
+        </p>
       </div>
     </section>
 
     <CtaStrip
-      title="Have a small thorn<br/>in your operation?"
-      continuation="Send a note."
-      note="Replies within two business days · No commitment until you&rsquo;re ready"
-      primaryText="Get in touch"
+      title="Have any questions?"
+      continuation="Not sure where to start? That&rsquo;s fine."
+      note="Reply within two business days &middot; I&rsquo;ll tell you if it&rsquo;s not"
+      primaryText="Start a conversation"
       ghostText="Email directly"
     />
   </div>
 </BaseLayout>
-
-<style is:global>
-  .approach-heading-keep {
-    white-space: nowrap;
-  }
-</style>

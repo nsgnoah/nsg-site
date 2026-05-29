@@ -25,7 +25,7 @@ const {
     <div class="cta-inner">
       <div>
         <h2 set:html={`${title}<br/><em>${continuation}</em>`} />
-        <div class="cta-note">{note}</div>
+        {note && <div class="cta-note">{note}</div>}
       </div>
       <div class="cta-actions">
         <a href={primaryHref} class="btn btn-primary">{primaryText} <span class="arr">→</span></a>

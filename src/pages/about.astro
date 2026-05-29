@@ -1,139 +1,206 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LabelRow from '../components/LabelRow.astro';
+import SectionHead from '../components/SectionHead.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 
-const facts = [
-  ['Based', 'Minneapolis, MN'],
-  ['Available', 'Remote, US-wide'],
-  ['Reply time', '\u2264 2 business days'],
-  ['Past experience', 'Finance, academia, retail'],
-  ['Tech stack', 'Whatever fits the job'],
-  ['Meeting style', 'In person where possible']
+const logistics = [
+  ['Based in', 'Minneapolis, MN'],
+  ['Practice', 'Custom sites \u00b7 Tools \u00b7 AI'],
+  ['Reply time', '\u2264 2 business days']
+];
+
+const plainEnglish = [
+  {
+    num: '01 / WHAT I BUILD',
+    title: 'Custom sites, internal tools, automations, and AI that does real work.',
+    body: 'Custom sites, spreadsheet replacements, and AI wired into the workflows you already run.',
+    detail: 'Agents, tool integrations, and custom AI workflows. Not slide decks about AI.'
+  },
+  {
+    num: '02 / HOW IT WORKS',
+    title: 'You talk to me. I build it. You see it before it\u2019s done.',
+    body: 'Staging links and short check-ins, not a big reveal at the end.',
+    detail: 'In person in the Twin Cities when it helps.'
+  },
+  {
+    num: '03 / WHAT YOU GET',
+    title: 'Software in production, not a slide deck.',
+    body: 'Work continues until you say it\u2019s better than what you had in mind. If agreed finished work breaks later, fixing it is free.',
+    detail: 'You own it. Another developer can pick it up later.'
+  }
+];
+
+const goodFit = [
+  'We want AI integrated into how we actually work, not another subscription nobody uses.',
+  'Our website is embarrassing and we\u2019re a real business.',
+  'We\u2019re running the company on shared spreadsheets.',
+  'We want software live, not a strategy meeting.',
+  'One person can make decisions without a committee.'
+];
+
+const notFit = [
+  'Staff augmentation ("we need a dev for 3 months").',
+  'Slide-only AI strategy with nobody to build it.',
+  '\u201cAI everywhere\u201d with no one owning the process.',
+  'Engagements where the buyer never uses the tool.'
+];
+
+const faq = [
+  {
+    q: 'Do you do AI work?',
+    a: 'Yes. Picking the right tools, wiring them into your software, and building custom agents and workflows. I spent years leading AI adoption inside a large company before starting NSG.'
+  },
+  {
+    q: 'Do you work with teams or just solo?',
+    a: 'One person on your side. I may bring in a specialist for something narrow, but you always deal with me.'
+  },
+  {
+    q: 'How much does it cost?',
+    a: 'Depends on the problem. Talking is always free. I\u2019ll tell you if it\u2019s not a fit before I talk money.'
+  },
+  {
+    q: 'Are you local?',
+    a: 'Based in Minneapolis. Remote across the US. In person when it helps.'
+  }
 ];
 ---
 
 <BaseLayout
   title="About — NSG Solutions"
-  description="Noah Greensweig runs NSG Solutions, a one-person custom software practice in Minneapolis. End-to-end engagements, no handoffs, no account managers."
+  description="Noah Greensweig runs NSG Solutions, a one-person software and AI practice in Minneapolis. Custom sites, tools, automations, and AI integration. End to end, no handoffs."
   breadcrumb={[
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' }
   ]}
 >
-  <div class="page">
+  <div class="page about-page">
     <div class="container">
       <section class="about-hero">
-        <div>
-          <LabelRow num="ABOUT / 01" meta="The person behind it" />
-          <h1>I'm Noah.<br /><em>I run a small software practice<br />out of Minneapolis.</em></h1>
+        <div class="about-hero-copy">
+          <LabelRow num="ABOUT / 01" meta="Who runs NSG" />
+          <h1>I'm Noah.<br /><em>I build software and AI for small businesses.</em></h1>
+          <p class="lede">
+            NSG is a one-person practice in Minneapolis. Custom sites, internal tools, automations, and
+            AI wired into how you work. You talk to me. I build it. No account managers, no handoffs.
+          </p>
+          <div class="hero-meta about-logistics">
+            {logistics.map(([key, val]) => (
+              <div class="hero-meta-cell">
+                <div class="key">{key}</div>
+                <div class="val">{val}</div>
+              </div>
+            ))}
+          </div>
         </div>
         <div class="about-photo-frame">
           <img src="/assets/noah.jpg" alt="Noah Greensweig, founder of NSG Solutions" width="800" height="800" loading="lazy" decoding="async" />
           <div class="about-photo-tag"><span class="dash"></span>Noah Greensweig &middot; Minneapolis, MN</div>
         </div>
       </section>
+    </div>
 
-      <section class="about-prose">
-        <div class="label-col">02 / WHAT THIS IS</div>
-        <div class="body-col">
-          <p>
-            NSG is a small software practice. The whole thing is one person: I take on
-            a handful of client engagements at a time, I do the work end-to-end, and the
-            person you talk to is the same person writing the code.
-          </p>
-          <p>
-            Most recently, I built automation systems and led AI adoption inside a reinsurance
-            brokerage. NSG is where I bring that to businesses that want a real tool, not a
-            slide deck about one.
-          </p>
-          <p>
-            The pitch is plain. Most small businesses are still waiting on technology
-            they should have had years ago. NSG&rsquo;s job is closing that gap. The website,
-            the internal tools, the automations. And when those are solid, the AI that
-            quietly takes over the parts that used to take a person. One practice,
-            start to finish.
-          </p>
-        </div>
-      </section>
+    <section class="section about-plain-section">
+      <div class="container">
+        <SectionHead num="02 / IN PLAIN ENGLISH" meta="One minute read">
+          <Fragment slot="title">What this is, in one minute.</Fragment>
+        </SectionHead>
 
-      <section class="about-prose">
-        <div class="label-col">03 / HOW IT WORKS</div>
-        <div class="body-col">
-          <p>
-            We meet, in person if you&rsquo;re in or near Minneapolis, video otherwise.
-            You walk me through what&rsquo;s getting in the way of the work. I ask a lot of
-            questions, take notes, and come back with a plain-language proposal. What
-            the fix looks like, what it costs (hourly rate, or a fixed bid for well-defined work),
-            and when you&rsquo;ll have it.
-          </p>
-          <p>
-            Then we build, together. You see the work as it goes, not in a reveal at the end.
-            Things change as we learn. That&rsquo;s fine. The point isn&rsquo;t to defend the original
-            plan, it&rsquo;s to land the right thing.
-          </p>
-          <p>
-            When it&rsquo;s done, it&rsquo;s yours. I write things so a person who isn&rsquo;t me can keep
-            them running. If something we previously agreed was finished later turns out to
-            be broken, fixing it is free.
-          </p>
-        </div>
-      </section>
-
-      <!-- 04 / ON AI — reframed around the progression story.
-           AI sits at the top of a stack; only works when the foundation is right;
-           NSG handles both. Said plainly. -->
-      <section class="about-prose">
-        <div class="label-col">04 / ON AI</div>
-        <div class="body-col">
-          <p>
-            Most AI work doesn&rsquo;t fail because the AI is bad. It fails because it&rsquo;s
-            plugged into a process that was never solid to begin with. The spreadsheet is still the
-            source of truth. The website is half-broken. The data lives in three places.
-          </p>
-
-          <div class="about-stack-mini" aria-hidden="true">
-            <div class="row t3"><span class="num">03</span><span class="name">Intelligence</span><span class="bar"></span></div>
-            <div class="row t2"><span class="num">02</span><span class="name">Operations</span><span class="bar"></span></div>
-            <div class="row t1"><span class="num">01</span><span class="name">Foundation</span><span class="bar"></span></div>
-          </div>
-
-          <p>
-            AI sits at the top of a stack. Below it, a working website, software shaped
-            to the operation, tools that talk to each other. Skip those, and the AI
-            step is sitting on quicksand.
-          </p>
-          <p>
-            NSG does the whole stack. The website, the internal tool, the wiring between
-            them, and then, when the foundation&rsquo;s right, the AI integration that
-            quietly takes over the parts a person used to do. <em>One person. No handoffs.</em>
-          </p>
-          <p>
-            The other honest thing about AI right now: the landscape moves every few months.
-            Part of my job is keeping track so you don&rsquo;t have to, and picking the tool
-            that fits your situation, not the thing that&rsquo;s trending this week. Used carefully,
-            it makes the work faster and cheaper without dropping the quality. Used carelessly,
-            it makes a confident mess. Most of the craft now is knowing the difference.
-          </p>
-        </div>
-      </section>
-
-      <section class="about-facts">
-        <LabelRow num="05 / AT A GLANCE" meta="The short version" />
-        <div class="facts-grid">
-          {facts.map(([key, value]) => (
-            <div class="fact">
-              <div class="key">{key}</div>
-              <div class="val" set:html={value}></div>
+        <div class="principle-grid about-principle-grid">
+          {plainEnglish.map((item) => (
+            <div class="principle">
+              <span class="marker"></span>
+              <span class="num">{item.num}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+              <p class="principle-detail">{item.detail}</p>
             </div>
           ))}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+
+    <section class="section about-background-section">
+      <div class="container">
+        <SectionHead num="03 / BACKGROUND" meta="Where this comes from">
+          <Fragment slot="title">Where this comes from.</Fragment>
+        </SectionHead>
+
+        <div class="about-prose about-prose-solo">
+          <div class="body-col">
+            <p>
+              Before NSG, I spent years inside a large financial services company building automation
+              and leading AI adoption. Same numbers, much faster. Custom agents, tool integrations,
+              and workflows that cut hours off recurring work.
+            </p>
+            <p>
+              NSG is where I do that for smaller companies: pick the right AI tools, wire them in,
+              and build custom workflows that actually stick. Not pilots that fade after three months.
+            </p>
+            <p class="about-ai-note">
+              <strong>On AI:</strong> I build it. Tool selection, integration, custom agents, and
+              automations that use AI to do steps your team does today. I&apos;ll tell you straight if
+              something isn&apos;t ready yet, but AI is core to what I do.
+              <a href="/services#intelligence">See AI work in detail &rarr;</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-fit-section" id="good-fit">
+      <div class="container">
+        <SectionHead num="04 / GOOD FIT" meta="Before you reach out">
+          <Fragment slot="title">Should you reach out?</Fragment>
+        </SectionHead>
+
+        <div class="about-fit-grid">
+          <div class="about-fit-col about-fit-yes">
+            <h3 class="about-fit-heading">Good fit</h3>
+            <ul class="about-fit-list">
+              {goodFit.map((item) => (
+                <li>
+                  <span class="fit-mark fit-yes" aria-hidden="true"></span>
+                  <p>{item}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="about-fit-col about-fit-no">
+            <h3 class="about-fit-heading">Not for me</h3>
+            <ul class="about-fit-list">
+              {notFit.map((item) => (
+                <li>
+                  <span class="fit-mark fit-no" aria-hidden="true"></span>
+                  <p>{item}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-faq-section">
+      <div class="container">
+        <SectionHead num="05 / FAQ" meta="Common questions">
+          <Fragment slot="title">Questions people actually ask.</Fragment>
+        </SectionHead>
+
+        <dl class="about-faq">
+          {faq.map((item) => (
+            <div class="about-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
 
     <CtaStrip
-      title="Want to talk?"
-      continuation="Tell me what's going on."
+      title="Have any questions?"
+      continuation="Not sure where to start? That&rsquo;s fine."
       note="Two business-day reply &middot; No commitment until you&rsquo;re ready"
       primaryText="Get in touch"
       ghostText="Email directly"
