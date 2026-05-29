@@ -13,13 +13,38 @@ const overview = [
 
 const picker = [
   { quote: 'Our website is embarrassing.', tier: 'Foundation', tierKey: 1, href: '#foundation' },
-  { quote: 'We need software that fits how we work.', tier: 'Foundation', tierKey: 1, href: '#foundation' },
-  { quote: 'The same data gets entered everywhere.', tier: 'Operations', tierKey: 2, href: '#operations' },
+  {
+    quote: 'We need software that fits how we work.',
+    tier: 'Foundation',
+    tierKey: 1,
+    href: '#foundation'
+  },
+  {
+    quote: 'The same data gets entered everywhere.',
+    tier: 'Operations',
+    tierKey: 2,
+    href: '#operations'
+  },
   { quote: 'Monthly reports take forever.', tier: 'Operations', tierKey: 2, href: '#operations' },
   { quote: 'Our tools don\u2019t connect.', tier: 'Operations', tierKey: 2, href: '#operations' },
-  { quote: 'We want to integrate AI but don\u2019t know where to start.', tier: 'Intelligence', tierKey: 3, href: '#intelligence' },
-  { quote: 'We have AI subscriptions nobody uses.', tier: 'Intelligence', tierKey: 3, href: '#intelligence' },
-  { quote: 'We ran an AI pilot and it faded.', tier: 'Intelligence', tierKey: 3, href: '#intelligence' }
+  {
+    quote: 'We want to integrate AI but don\u2019t know where to start.',
+    tier: 'Intelligence',
+    tierKey: 3,
+    href: '#intelligence'
+  },
+  {
+    quote: 'We have AI subscriptions nobody uses.',
+    tier: 'Intelligence',
+    tierKey: 3,
+    href: '#intelligence'
+  },
+  {
+    quote: 'We ran an AI pilot and it faded.',
+    tier: 'Intelligence',
+    tierKey: 3,
+    href: '#intelligence'
+  }
 ];
 
 const services = [
@@ -29,7 +54,8 @@ const services = [
     tier: 1,
     name: 'Foundation',
     title: 'Custom sites & software',
-    plain: 'The basics: a site you\u2019re proud to send people to, and software that matches how your team actually works.',
+    plain:
+      'The basics: a site you\u2019re proud to send people to, and software that matches how your team actually works.',
     builds: [
       'Custom sites you\u2019re proud to send people to',
       'Custom software when off-the-shelf doesn\u2019t fit',
@@ -37,10 +63,17 @@ const services = [
       'Interactive previews and 3D viewers'
     ],
     symptoms: [
-      ['Our site looks like 2006 and we\u2019re embarrassed to share it.', 'Something current you\u2019re proud to send people to.'],
-      ['Nothing off the shelf fits how we actually operate.', 'Software built for your process from scratch.']
+      [
+        'Our site looks like 2006 and we\u2019re embarrassed to share it.',
+        'Something current you\u2019re proud to send people to.'
+      ],
+      [
+        'Nothing off the shelf fits how we actually operate.',
+        'Software built for your process from scratch.'
+      ]
     ],
-    outcome: 'A site worth showing and software built around you \u2014 live, owned, and made for your business.'
+    outcome:
+      'A site worth showing and software built around you \u2014 live, owned, and made for your business.'
   },
   {
     id: 'operations',
@@ -48,7 +81,8 @@ const services = [
     tier: 2,
     name: 'Operations',
     title: 'Automation & internal tools',
-    plain: 'The work that eats your week: moving data between systems, rebuilding the same report, keeping five spreadsheets in sync.',
+    plain:
+      'The work that eats your week: moving data between systems, rebuilding the same report, keeping five spreadsheets in sync.',
     builds: [
       'Automatic sync between the tools you already use',
       'Internal dashboards and small apps',
@@ -56,8 +90,14 @@ const services = [
       'Replacing shared spreadsheets with one source of truth'
     ],
     symptoms: [
-      ['We have eight different versions of the same spreadsheet.', 'One app serves as a single source of truth.'],
-      ['Scheduling and reports eat our week.', 'Automations that run on a schedule and email the results.']
+      [
+        'We have eight different versions of the same spreadsheet.',
+        'One app serves as a single source of truth.'
+      ],
+      [
+        'Scheduling and reports eat our week.',
+        'Automations that run on a schedule and email the results.'
+      ]
     ],
     outcome: 'Hours back every week, fewer mistakes, and data your team can trust.'
   },
@@ -67,7 +107,8 @@ const services = [
     tier: 3,
     name: 'Intelligence',
     title: 'AI integration & custom agents',
-    plain: 'Pick the right AI tool for the job, connect it to your software, and build agents that handle repetitive work — and surface insights and ideas you’d otherwise miss.',
+    plain:
+      'Pick the right AI tool for the job, connect it to your software, and build agents that handle repetitive work — and surface insights and ideas you’d otherwise miss.',
     builds: [
       'Choosing and setting up AI tools for your team',
       'Custom AI agents inside your existing software',
@@ -76,15 +117,22 @@ const services = [
       'Custom agent skills built for your workflows'
     ],
     symptoms: [
-      ['We want to integrate AI but don\u2019t know where to start.', 'Walk through your workflows, pick what fits, and wire it in.'],
-      ['We ran an AI pilot and it provided little value.', 'Go beyond chatbots with agentic skills and connectors wired into your real work.']
+      [
+        'We want to integrate AI but don\u2019t know where to start.',
+        'Walk through your workflows, pick what fits, and wire it in.'
+      ],
+      [
+        'We ran an AI pilot and it provided little value.',
+        'Go beyond chatbots with agentic skills and connectors wired into your real work.'
+      ]
     ],
     outcome: 'AI that saves time on real tasks, with a person still in the loop where it matters.',
-    credibility: 'I work daily with Claude, Codex, MCP servers, and agent skills. You don\u2019t need the jargon; you get someone current who helps you pick what fits.',
-    caveat: 'AI works best when your data and tools are in order. I build the whole stack so nothing\u2019s missing.'
+    credibility:
+      'I work daily with Claude, Codex, MCP servers, and agent skills. You don\u2019t need the jargon; you get someone current who helps you pick what fits.',
+    caveat:
+      'AI works best when your data and tools are in order. I build the whole stack so nothing\u2019s missing.'
   }
 ];
-
 ---
 
 <BaseLayout
@@ -103,9 +151,9 @@ const services = [
           I build custom sites, automations, and AI that does real work<span class="accent">.</span>
         </h1>
         <p class="lede">
-          NSG is a one-person software and AI practice in Minneapolis. You describe what you&rsquo;re
-          looking for. I design, build, and ship it: custom sites, apps, automations, and AI
-          wired into your workflows.
+          NSG is a one-person software and AI practice in Minneapolis. You describe what
+          you&rsquo;re looking for. I design, build, and ship it: custom sites, apps, automations,
+          and AI wired into your workflows.
         </p>
         <div class="hero-meta svc-hero-meta">
           <div class="hero-meta-cell">
@@ -123,18 +171,20 @@ const services = [
         </div>
 
         <div class="svc-overview" aria-label="Three service areas">
-          {overview.map((item) => (
-            <a class:list={['svc-overview-card', `svc-overview-${item.tier}`]} href={item.href}>
-              <div class="svc-overview-glyph">
-                <ServiceGlyph tier={item.tier as 1 | 2 | 3} />
-              </div>
-              <div class="svc-overview-text">
-                <span class="svc-overview-num">{item.num}</span>
-                <span class="svc-overview-name">{item.name}</span>
-                <span class="svc-overview-blurb">{item.blurb}</span>
-              </div>
-            </a>
-          ))}
+          {
+            overview.map((item) => (
+              <a class:list={['svc-overview-card', `svc-overview-${item.tier}`]} href={item.href}>
+                <div class="svc-overview-glyph">
+                  <ServiceGlyph tier={item.tier as 1 | 2 | 3} />
+                </div>
+                <div class="svc-overview-text">
+                  <span class="svc-overview-num">{item.num}</span>
+                  <span class="svc-overview-name">{item.name}</span>
+                  <span class="svc-overview-blurb">{item.blurb}</span>
+                </div>
+              </a>
+            ))
+          }
         </div>
       </header>
     </div>
@@ -146,14 +196,22 @@ const services = [
         </SectionHead>
 
         <div class="svc-picker" role="list">
-          {picker.map((row) => (
-            <a class:list={['svc-picker-row', `picker-tier-${row.tierKey}`]} href={row.href} role="listitem">
-              <span class="svc-picker-dot" aria-hidden="true"></span>
-              <span class="svc-picker-quote">&ldquo;{row.quote}&rdquo;</span>
-              <span class="svc-picker-arrow" aria-hidden="true">&rarr;</span>
-              <span class="svc-picker-tier">{row.tier}</span>
-            </a>
-          ))}
+          {
+            picker.map((row) => (
+              <a
+                class:list={['svc-picker-row', `picker-tier-${row.tierKey}`]}
+                href={row.href}
+                role="listitem"
+              >
+                <span class="svc-picker-dot" aria-hidden="true" />
+                <span class="svc-picker-quote">&ldquo;{row.quote}&rdquo;</span>
+                <span class="svc-picker-arrow" aria-hidden="true">
+                  &rarr;
+                </span>
+                <span class="svc-picker-tier">{row.tier}</span>
+              </a>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -164,70 +222,76 @@ const services = [
           <Fragment slot="title">Three ways I can help.</Fragment>
         </SectionHead>
 
-        {services.map((svc) => (
-          <article class:list={['svc-tier', `svc-tier-${svc.tier}`]} id={svc.id}>
-            <div class="svc-tier-frame">
-              <div class="svc-tier-body">
-                <header class="svc-tier-head">
-                  <div class="svc-tier-head-row">
-                    <div class="svc-tier-glyph">
-                      <ServiceGlyph tier={svc.tier as 1 | 2 | 3} />
+        {
+          services.map((svc) => (
+            <article class:list={['svc-tier', `svc-tier-${svc.tier}`]} id={svc.id}>
+              <div class="svc-tier-frame">
+                <div class="svc-tier-body">
+                  <header class="svc-tier-head">
+                    <div class="svc-tier-head-row">
+                      <div class="svc-tier-glyph">
+                        <ServiceGlyph tier={svc.tier as 1 | 2 | 3} />
+                      </div>
+                      <div class="svc-tier-head-text">
+                        <span class="svc-tier-tag">
+                          {svc.num} &middot; {svc.name.toUpperCase()}
+                        </span>
+                        <h2>{svc.title}</h2>
+                      </div>
                     </div>
-                    <div class="svc-tier-head-text">
-                      <span class="svc-tier-tag">
-                        {svc.num} &middot; {svc.name.toUpperCase()}
-                      </span>
-                      <h2>{svc.title}</h2>
+                    <p class="svc-tier-plain">{svc.plain}</p>
+                  </header>
+
+                  <div class="svc-tier-grid">
+                    <div class="svc-tier-col">
+                      <h3 class="svc-tier-label">I build</h3>
+                      <ul class="svc-tier-builds">
+                        {svc.builds.map((item, i) => (
+                          <li>
+                            <span class="build-idx" aria-hidden="true">
+                              {String(i + 1).padStart(2, '0')}
+                            </span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div class="svc-tier-col">
+                      <h3 class="svc-tier-label">Sounds like you?</h3>
+                      <ul class="svc-tier-symptoms">
+                        {svc.symptoms.map(([quote, fix]) => (
+                          <li>
+                            <span class="symptom-mark" aria-hidden="true">
+                              &ldquo;
+                            </span>
+                            <div>
+                              <span class="quote">{quote}</span>
+                              <span class="fix">&rarr; {fix}</span>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
-                  <p class="svc-tier-plain">{svc.plain}</p>
-                </header>
 
-                <div class="svc-tier-grid">
-                  <div class="svc-tier-col">
-                    <h3 class="svc-tier-label">I build</h3>
-                    <ul class="svc-tier-builds">
-                      {svc.builds.map((item, i) => (
-                        <li>
-                          <span class="build-idx" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div class="svc-tier-outcome">
+                    <span class="outcome-mark" aria-hidden="true">
+                      ✓
+                    </span>
+                    <p>
+                      <strong>What you get:</strong> {svc.outcome}
+                    </p>
                   </div>
 
-                  <div class="svc-tier-col">
-                    <h3 class="svc-tier-label">Sounds like you?</h3>
-                    <ul class="svc-tier-symptoms">
-                      {svc.symptoms.map(([quote, fix]) => (
-                        <li>
-                          <span class="symptom-mark" aria-hidden="true">&ldquo;</span>
-                          <div>
-                            <span class="quote">{quote}</span>
-                            <span class="fix">&rarr; {fix}</span>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {svc.credibility && <p class="svc-tier-cred">{svc.credibility}</p>}
+
+                  {svc.caveat && <p class="svc-tier-caveat">{svc.caveat}</p>}
                 </div>
-
-                <div class="svc-tier-outcome">
-                  <span class="outcome-mark" aria-hidden="true">✓</span>
-                  <p><strong>What you get:</strong> {svc.outcome}</p>
-                </div>
-
-                {svc.credibility && (
-                  <p class="svc-tier-cred">{svc.credibility}</p>
-                )}
-
-                {svc.caveat && (
-                  <p class="svc-tier-caveat">{svc.caveat}</p>
-                )}
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))
+        }
       </div>
     </section>
 
@@ -286,14 +350,15 @@ const services = [
           <p>
             Most of my work comes from word of mouth &mdash; someone I&rsquo;ve met, or someone they
             trust. So by the time we talk about a project, we already know each other a little. We
-            figure out the shape of it together: what&rsquo;s in the way, what &ldquo;done&rdquo; looks
-            like, whether it&rsquo;s even worth doing yet. No pressure, no quote handed down from on high.
+            figure out the shape of it together: what&rsquo;s in the way, what &ldquo;done&rdquo;
+            looks like, whether it&rsquo;s even worth doing yet. No pressure, no quote handed down
+            from on high.
           </p>
           <p>
-            When you&rsquo;re ready, we start &mdash; and we work closely. You see progress as it&rsquo;s
-            built, and we course-correct as we go, so nothing&rsquo;s a surprise at the end. When it&rsquo;s
-            good, everything transfers to you: the code, the access, all of it. And if there&rsquo;s
-            something more you want down the road, I&rsquo;m still here.
+            When you&rsquo;re ready, we start &mdash; and we work closely. You see progress as
+            it&rsquo;s built, and we course-correct as we go, so nothing&rsquo;s a surprise at the
+            end. When it&rsquo;s good, everything transfers to you: the code, the access, all of it.
+            And if there&rsquo;s something more you want down the road, I&rsquo;m still here.
           </p>
         </div>
 
@@ -304,8 +369,8 @@ const services = [
     </section>
 
     <CtaStrip
-      title="Still figuring it out? <span class='cta-answer'>That&rsquo;s what I&rsquo;m here for.</span>"
-      continuation="Ask anything &mdash; no prep needed."
+      title="Still figuring it out? <span class='cta-answer'>That’s what I’m here for.</span>"
+      continuation="Ask anything — no prep needed."
       note="We can think it through together. Two business-day reply."
       primaryText="Send a note"
     />

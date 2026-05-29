@@ -14,5 +14,11 @@ const { num, meta } = Astro.props;
   <div>
     <h2><slot name="title" /></h2>
   </div>
-  {Astro.slots.has('lede') && <p class="lede"><slot name="lede" /></p>}
+  {
+    Astro.slots.has('lede') && (
+      <p class="lede">
+        <slot name="lede" />
+      </p>
+    )
+  }
 </div>

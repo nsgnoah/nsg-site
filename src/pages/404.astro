@@ -16,7 +16,8 @@ import LabelRow from '../components/LabelRow.astro';
             <LabelRow num="ERR / 404" meta="Page not found" />
 
             <div class="nf-code" aria-hidden="true">
-              <span class="nf-code-digit">4</span><span class="nf-code-digit nf-code-zero">0</span><span class="nf-code-digit">4</span>
+              <span class="nf-code-digit">4</span><span class="nf-code-digit nf-code-zero">0</span
+              ><span class="nf-code-digit">4</span>
             </div>
 
             <h1 class="nf-title">
@@ -24,13 +25,14 @@ import LabelRow from '../components/LabelRow.astro';
             </h1>
 
             <p class="nf-lede">
-              Either the URL is off by a character, the link is older than the
-              site, or someone moved a thing without telling the redirects.
-              No big deal<span class="accent">.</span>
+              Either the URL is off by a character, the link is older than the site, or someone
+              moved a thing without telling the redirects. No big deal<span class="accent">.</span>
             </p>
 
             <div class="nf-actions">
-              <a href="/" class="btn btn-primary">Back to the home page <span class="arr">→</span></a>
+              <a href="/" class="btn btn-primary"
+                >Back to the home page <span class="arr">→</span></a
+              >
               <a href="/contact" class="btn btn-ghost">Email Noah</a>
             </div>
           </div>
@@ -252,7 +254,9 @@ import LabelRow from '../components/LabelRow.astro';
       gap: 1rem;
       justify-content: space-between;
       padding: 1rem 0.25rem;
-      transition: color 0.2s var(--ease), padding 0.2s var(--ease);
+      transition:
+        color 0.2s var(--ease),
+        padding 0.2s var(--ease);
     }
 
     .nf-suggest a:hover {

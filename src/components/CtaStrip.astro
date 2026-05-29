@@ -29,7 +29,13 @@ const {
       </div>
       <div class="cta-actions">
         <a href={primaryHref} class="btn btn-primary">{primaryText} <span class="arr">→</span></a>
-        {ghostText && <a href={ghostHref} class="btn btn-ghost">{ghostText}</a>}
+        {
+          ghostText && (
+            <a href={ghostHref} class="btn btn-ghost">
+              {ghostText}
+            </a>
+          )
+        }
       </div>
     </div>
   </div>

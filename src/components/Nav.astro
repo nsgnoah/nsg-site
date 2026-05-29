@@ -13,16 +13,29 @@ const isActive = (path: string) => currentPath === path;
     <a href="/" class="wordmark" aria-label="NSG home">
       NSG<span class="accent">.</span>
     </a>
-    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-menu" data-nav-toggle>
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="primary-menu"
+      data-nav-toggle
+    >
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </button>
     <ul class="nav-links" id="primary-menu" data-nav-menu>
       <li>
-        <a class="nav-link" href="/services" aria-current={isActive('/services') ? 'page' : undefined}>Services</a>
+        <a
+          class="nav-link"
+          href="/services"
+          aria-current={isActive('/services') ? 'page' : undefined}>Services</a
+        >
       </li>
       <li>
-        <a class="nav-link" href="/about" aria-current={isActive('/about') ? 'page' : undefined}>About</a>
+        <a class="nav-link" href="/about" aria-current={isActive('/about') ? 'page' : undefined}
+          >About</a
+        >
       </li>
       <li>
         <a class="nav-cta" href="/contact">Get in Touch →</a>
@@ -43,7 +56,8 @@ const isActive = (path: string) => currentPath === path;
 
     const getFocusables = (): HTMLElement[] =>
       Array.from(mobileNav.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')).filter(
-        (el) => (typeof el.checkVisibility === 'function' ? el.checkVisibility() : el.offsetParent !== null)
+        (el) =>
+          typeof el.checkVisibility === 'function' ? el.checkVisibility() : el.offsetParent !== null
       );
 
     const setOpen = (open: boolean) => {

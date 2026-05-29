@@ -49,8 +49,8 @@ const contactFormEndpoint =
           Describe what you need<span class="accent">.</span>
         </h1>
         <p class="lede">
-          You talk to Noah directly. A short note on the form is enough to get started, or we can set
-          up a call.
+          You talk to Noah directly. A short note on the form is enough to get started, or we can
+          set up a call.
         </p>
         <div class="hero-meta contact-hero-meta">
           <div class="hero-meta-cell">
@@ -96,19 +96,39 @@ const contactFormEndpoint =
             <form id="contact-form" class="contact-form">
               <div class="field">
                 <label for="name">Your name</label>
-                <input id="name" name="name" type="text" required placeholder="Jane Smith" autocomplete="name" />
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  placeholder="Jane Smith"
+                  autocomplete="name"
+                />
                 <p id="error-name" class="field-error" hidden></p>
               </div>
 
               <div class="field">
                 <label for="email">Email</label>
-                <input id="email" name="email" type="email" required placeholder="jane@yourbusiness.com" autocomplete="email" />
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="jane@yourbusiness.com"
+                  autocomplete="email"
+                />
                 <p id="error-email" class="field-error" hidden></p>
               </div>
 
               <div class="field">
                 <label for="phone">Phone <span class="chips-optional">(optional)</span></label>
-                <input id="phone" name="phone" type="tel" placeholder="(612) 555-0123" autocomplete="tel" />
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="(612) 555-0123"
+                  autocomplete="tel"
+                />
               </div>
 
               <div class="field">
@@ -116,11 +136,23 @@ const contactFormEndpoint =
                   <legend class="chips-legend">Preferred contact</legend>
                   <div class="chips">
                     <label class="chip-label">
-                      <input class="chip-input chip-contact" type="radio" name="contact-method" value="Email" required />
+                      <input
+                        class="chip-input chip-contact"
+                        type="radio"
+                        name="contact-method"
+                        value="Email"
+                        required
+                      />
                       <span class="chip">Email</span>
                     </label>
                     <label class="chip-label">
-                      <input class="chip-input chip-contact" type="radio" name="contact-method" value="Phone call" required />
+                      <input
+                        class="chip-input chip-contact"
+                        type="radio"
+                        name="contact-method"
+                        value="Phone call"
+                        required
+                      />
                       <span class="chip">Phone call</span>
                     </label>
                   </div>
@@ -135,12 +167,14 @@ const contactFormEndpoint =
                     Starting point <span class="chips-optional">(optional)</span>
                   </legend>
                   <div class="chips">
-                    {types.map((type) => (
-                      <label class="chip-label">
-                        <input class="chip-input" type="checkbox" value={type} />
-                        <span class="chip">{type}</span>
-                      </label>
-                    ))}
+                    {
+                      types.map((type) => (
+                        <label class="chip-label">
+                          <input class="chip-input" type="checkbox" value={type} />
+                          <span class="chip">{type}</span>
+                        </label>
+                      ))
+                    }
                   </div>
                 </fieldset>
                 <input id="type-input" name="type" type="hidden" />
@@ -177,18 +211,20 @@ const contactFormEndpoint =
             <div class="contact-aside-block">
               <span class="contact-aside-label">What happens next</span>
               <ol class="contact-steps">
-                {nextSteps.map((step, i) => (
-                  <li class="contact-step">
-                    <div class="contact-step-icon" aria-hidden="true">
-                      <ServiceGlyph tier="step" step={i + 1} />
-                    </div>
-                    <div class="contact-step-body">
-                      <span class="contact-step-num">{step.num}</span>
-                      <h3>{step.title}</h3>
-                      <p>{step.body}</p>
-                    </div>
-                  </li>
-                ))}
+                {
+                  nextSteps.map((step, i) => (
+                    <li class="contact-step">
+                      <div class="contact-step-icon" aria-hidden="true">
+                        <ServiceGlyph tier="step" step={i + 1} />
+                      </div>
+                      <div class="contact-step-body">
+                        <span class="contact-step-num">{step.num}</span>
+                        <h3>{step.title}</h3>
+                        <p>{step.body}</p>
+                      </div>
+                    </li>
+                  ))
+                }
               </ol>
             </div>
 
@@ -218,148 +254,160 @@ const contactFormEndpoint =
     const phoneInput = document.getElementById('phone');
     const messageInput = document.getElementById('message');
 
-    if (!form || !typeInput || !contactMethodInput || !submitBtn || !submitError || !nameInput || !emailInput || !messageInput) {
+    if (
+      !form ||
+      !typeInput ||
+      !contactMethodInput ||
+      !submitBtn ||
+      !submitError ||
+      !nameInput ||
+      !emailInput ||
+      !messageInput
+    ) {
       // Form markup changed or script running on wrong page; skip setup.
     } else {
-    function syncTypeFromChips() {
-      typeInput.value = [...chipInputs]
-        .filter((i) => i.checked)
-        .map((i) => i.value)
-        .join(', ');
-    }
-
-    function syncContactMethod() {
-      const selected = [...contactMethodRadios].find((i) => i.checked);
-      contactMethodInput.value = selected?.value ?? '';
-    }
-
-    function clearError(fieldName) {
-      const errorEl = document.getElementById(`error-${fieldName}`);
-      if (errorEl) {
-        errorEl.hidden = true;
-        errorEl.textContent = '';
-      }
-    }
-
-    function showError(fieldName, message) {
-      const errorEl = document.getElementById(`error-${fieldName}`);
-      if (errorEl) {
-        errorEl.textContent = message;
-        errorEl.hidden = false;
-      }
-    }
-
-    function validate() {
-      const errors = {};
-      const name = nameInput.value.trim();
-      const email = emailInput.value.trim();
-      const message = messageInput.value.trim();
-      const contactMethod = [...contactMethodRadios].find((i) => i.checked);
-
-      if (!name) {
-        errors.name = "Add your name so I know who I'm talking to.";
-      }
-      if (!email) {
-        errors.email = "That email doesn't look right.";
-      } else if (!EMAIL_REGEX.test(email)) {
-        errors.email = "That email doesn't look right.";
-      }
-      if (!contactMethod) {
-        errors['contact-method'] = 'Please select a preferred contact method.';
-      }
-      if (!message) {
-        errors.message = 'Add a short note so I know what this is about.';
+      function syncTypeFromChips() {
+        typeInput.value = [...chipInputs]
+          .filter((i) => i.checked)
+          .map((i) => i.value)
+          .join(', ');
       }
 
-      return errors;
-    }
-
-    chipInputs.forEach((input) => input.addEventListener('change', syncTypeFromChips));
-    contactMethodRadios.forEach((input) => input.addEventListener('change', () => {
-      syncContactMethod();
-      clearError('contact-method');
-    }));
-
-    nameInput.addEventListener('blur', () => {
-      const errors = validate();
-      if (errors.name) {
-        showError('name', errors.name);
-      } else {
-        clearError('name');
-      }
-    });
-
-    nameInput.addEventListener('input', () => {
-      clearError('name');
-    });
-
-    emailInput.addEventListener('blur', () => {
-      const errors = validate();
-      if (errors.email) {
-        showError('email', errors.email);
-      } else {
-        clearError('email');
-      }
-    });
-
-    emailInput.addEventListener('input', () => {
-      clearError('email');
-    });
-
-    messageInput.addEventListener('blur', () => {
-      const errors = validate();
-      if (errors.message) {
-        showError('message', errors.message);
-      } else {
-        clearError('message');
-      }
-    });
-
-    messageInput.addEventListener('input', () => {
-      clearError('message');
-    });
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-
-      const errors = validate();
-      if (Object.keys(errors).length > 0) {
-        Object.entries(errors).forEach(([field, message]) => {
-          showError(field, message);
-        });
-        return;
+      function syncContactMethod() {
+        const selected = [...contactMethodRadios].find((i) => i.checked);
+        contactMethodInput.value = selected?.value ?? '';
       }
 
-      submitBtn.setAttribute('disabled', '');
-      submitError.hidden = true;
+      function clearError(fieldName) {
+        const errorEl = document.getElementById(`error-${fieldName}`);
+        if (errorEl) {
+          errorEl.hidden = true;
+          errorEl.textContent = '';
+        }
+      }
 
-      try {
-        const response = await fetch(contactFormEndpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: nameInput.value,
-            email: emailInput.value,
-            phone: phoneInput?.value || '',
-            contact_method: contactMethodInput.value,
-            type: typeInput.value,
-            message: messageInput.value,
-          }),
-        });
+      function showError(fieldName, message) {
+        const errorEl = document.getElementById(`error-${fieldName}`);
+        if (errorEl) {
+          errorEl.textContent = message;
+          errorEl.hidden = false;
+        }
+      }
 
-        if (!response.ok) {
-          throw new Error('Submission failed');
+      function validate() {
+        const errors = {};
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const message = messageInput.value.trim();
+        const contactMethod = [...contactMethodRadios].find((i) => i.checked);
+
+        if (!name) {
+          errors.name = "Add your name so I know who I'm talking to.";
+        }
+        if (!email) {
+          errors.email = "That email doesn't look right.";
+        } else if (!EMAIL_REGEX.test(email)) {
+          errors.email = "That email doesn't look right.";
+        }
+        if (!contactMethod) {
+          errors['contact-method'] = 'Please select a preferred contact method.';
+        }
+        if (!message) {
+          errors.message = 'Add a short note so I know what this is about.';
         }
 
-        form.style.display = 'none';
-        successDiv?.removeAttribute('hidden');
-        successDiv?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-      } catch {
-        submitBtn.removeAttribute('disabled');
-        submitError.textContent = 'Something broke. Try again, or email noah@nsgsolutions.co directly.';
-        submitError.hidden = false;
+        return errors;
       }
-    });
+
+      chipInputs.forEach((input) => input.addEventListener('change', syncTypeFromChips));
+      contactMethodRadios.forEach((input) =>
+        input.addEventListener('change', () => {
+          syncContactMethod();
+          clearError('contact-method');
+        })
+      );
+
+      nameInput.addEventListener('blur', () => {
+        const errors = validate();
+        if (errors.name) {
+          showError('name', errors.name);
+        } else {
+          clearError('name');
+        }
+      });
+
+      nameInput.addEventListener('input', () => {
+        clearError('name');
+      });
+
+      emailInput.addEventListener('blur', () => {
+        const errors = validate();
+        if (errors.email) {
+          showError('email', errors.email);
+        } else {
+          clearError('email');
+        }
+      });
+
+      emailInput.addEventListener('input', () => {
+        clearError('email');
+      });
+
+      messageInput.addEventListener('blur', () => {
+        const errors = validate();
+        if (errors.message) {
+          showError('message', errors.message);
+        } else {
+          clearError('message');
+        }
+      });
+
+      messageInput.addEventListener('input', () => {
+        clearError('message');
+      });
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const errors = validate();
+        if (Object.keys(errors).length > 0) {
+          Object.entries(errors).forEach(([field, message]) => {
+            showError(field, message);
+          });
+          return;
+        }
+
+        submitBtn.setAttribute('disabled', '');
+        submitError.hidden = true;
+
+        try {
+          const response = await fetch(contactFormEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: nameInput.value,
+              email: emailInput.value,
+              phone: phoneInput?.value || '',
+              contact_method: contactMethodInput.value,
+              type: typeInput.value,
+              message: messageInput.value
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error('Submission failed');
+          }
+
+          form.style.display = 'none';
+          successDiv?.removeAttribute('hidden');
+          successDiv?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        } catch {
+          submitBtn.removeAttribute('disabled');
+          submitError.textContent =
+            'Something broke. Try again, or email noah@nsgsolutions.co directly.';
+          submitError.hidden = false;
+        }
+      });
     }
   </script>
 </BaseLayout>

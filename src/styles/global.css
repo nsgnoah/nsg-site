@@ -4,7 +4,9 @@
   font-weight: 400;
   font-display: swap;
   src: url('/fonts/JetBrainsMono-Latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
@@ -13,7 +15,9 @@
   font-weight: 500;
   font-display: swap;
   src: url('/fonts/JetBrainsMono-Latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
@@ -32,25 +36,55 @@
   src: url('/fonts/LibreBaskerville-Italic.woff2') format('woff2');
 }
 
-@font-face { font-family: 'Be Vietnam Pro'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/BeVietnamPro-Regular.woff2') format('woff2'); }
-@font-face { font-family: 'Be Vietnam Pro'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/BeVietnamPro-Medium.woff2') format('woff2'); }
-@font-face { font-family: 'Be Vietnam Pro'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/BeVietnamPro-SemiBold.woff2') format('woff2'); }
-@font-face { font-family: 'Be Vietnam Pro'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/BeVietnamPro-Bold.woff2') format('woff2'); }
-@font-face { font-family: 'Be Vietnam Pro'; font-style: normal; font-weight: 800; font-display: swap; src: url('/fonts/BeVietnamPro-ExtraBold.woff2') format('woff2'); }
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/BeVietnamPro-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/BeVietnamPro-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/BeVietnamPro-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/BeVietnamPro-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/BeVietnamPro-ExtraBold.woff2') format('woff2');
+}
 
 :root {
-  --nsg-black: #0A0A0A;
-  --nsg-white: #FAFAFA;
-  --nsg-red: #D72638;
-  --nsg-red-hover: #B81D2E;
-  --paper: #F4F2EE;
-  --ink: #1A1A1A;
-  --gray-100: #EFEDE8;
-  --gray-200: #E0DCD3;
-  --gray-300: #C8C3B8;
-  --gray-400: #9B9588;
-  --gray-500: #6B6B6B;
-  --gray-700: #3A3A3A;
+  --nsg-black: #0a0a0a;
+  --nsg-white: #fafafa;
+  --nsg-red: #d72638;
+  --nsg-red-hover: #b81d2e;
+  --paper: #f4f2ee;
+  --ink: #1a1a1a;
+  --gray-100: #efede8;
+  --gray-200: #e0dcd3;
+  --gray-300: #c8c3b8;
+  --gray-400: #9b9588;
+  --gray-500: #6b6b6b;
+  --gray-700: #3a3a3a;
   --white: var(--nsg-white);
   --black: var(--nsg-black);
   --red: var(--nsg-red);
@@ -244,7 +278,9 @@ main {
   height: 2.65rem;
   justify-content: center;
   padding: 0;
-  transition: background 0.2s var(--ease), border-color 0.2s var(--ease);
+  transition:
+    background 0.2s var(--ease),
+    border-color 0.2s var(--ease);
   width: 2.65rem;
 }
 
@@ -253,7 +289,9 @@ main {
   display: block;
   height: 1.5px;
   transform-origin: center;
-  transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+  transition:
+    background 0.2s var(--ease),
+    transform 0.2s var(--ease);
   width: 1.15rem;
 }
 
@@ -270,7 +308,11 @@ main {
   line-height: 1;
   padding: 0.85rem 1.4rem;
   text-transform: uppercase;
-  transition: background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
+  transition:
+    background 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    color 0.25s var(--ease),
+    transform 0.25s var(--ease);
 }
 
 .btn-primary {
@@ -723,7 +765,9 @@ main {
   display: block;
   padding: clamp(1.25rem, 2vw, 1.75rem);
   position: relative;
-  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+  transition:
+    border-color 0.3s var(--ease),
+    transform 0.3s var(--ease);
 }
 
 .work-card:hover {
@@ -734,7 +778,13 @@ main {
 .work-thumb {
   aspect-ratio: 16 / 10;
   background: var(--gray-100);
-  background-image: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(0, 0, 0, 0.03) 8px, rgba(0, 0, 0, 0.03) 9px);
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 8px,
+    rgba(0, 0, 0, 0.03) 8px,
+    rgba(0, 0, 0, 0.03) 9px
+  );
   border: 1px solid var(--gray-200);
   margin-bottom: 1.25rem;
   overflow: hidden;
@@ -1356,7 +1406,10 @@ main {
   line-height: 1.35;
   padding: 0.5rem 0.85rem;
   text-transform: uppercase;
-  transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
+  transition:
+    background 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    color 0.2s var(--ease);
   white-space: nowrap;
 }
 
@@ -1519,7 +1572,10 @@ main {
     right: 0;
     top: var(--nav-h);
     transform: translateY(-0.75rem);
-    transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0s linear 0.2s;
+    transition:
+      opacity 0.2s var(--ease),
+      transform 0.2s var(--ease),
+      visibility 0s linear 0.2s;
     visibility: hidden;
   }
 

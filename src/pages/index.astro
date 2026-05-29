@@ -7,17 +7,54 @@ import ServiceGlyph from '../components/ServiceGlyph.astro';
 import ProofGlyph from '../components/ProofGlyph.astro';
 
 const overview = [
-  { num: '01', name: 'Foundation', blurb: 'Custom sites & apps', href: '/services#foundation', tier: 1 },
-  { num: '02', name: 'Operations', blurb: 'Automation & tools', href: '/services#operations', tier: 2 },
+  {
+    num: '01',
+    name: 'Foundation',
+    blurb: 'Custom sites & apps',
+    href: '/services#foundation',
+    tier: 1
+  },
+  {
+    num: '02',
+    name: 'Operations',
+    blurb: 'Automation & tools',
+    href: '/services#operations',
+    tier: 2
+  },
   { num: '03', name: 'Intelligence', blurb: 'AI & agents', href: '/services#intelligence', tier: 3 }
 ];
 
 const picker = [
-  { quote: 'Our website is embarrassing.', tier: 'Foundation', tierKey: 1, href: '/services#foundation' },
-  { quote: 'The same data gets entered everywhere.', tier: 'Operations', tierKey: 2, href: '/services#operations' },
-  { quote: 'Monthly reports take forever.', tier: 'Operations', tierKey: 2, href: '/services#operations' },
-  { quote: 'We want to integrate AI but don\u2019t know where to start.', tier: 'Intelligence', tierKey: 3, href: '/services#intelligence' },
-  { quote: 'We ran an AI pilot and it faded.', tier: 'Intelligence', tierKey: 3, href: '/services#intelligence' }
+  {
+    quote: 'Our website is embarrassing.',
+    tier: 'Foundation',
+    tierKey: 1,
+    href: '/services#foundation'
+  },
+  {
+    quote: 'The same data gets entered everywhere.',
+    tier: 'Operations',
+    tierKey: 2,
+    href: '/services#operations'
+  },
+  {
+    quote: 'Monthly reports take forever.',
+    tier: 'Operations',
+    tierKey: 2,
+    href: '/services#operations'
+  },
+  {
+    quote: 'We want to integrate AI but don\u2019t know where to start.',
+    tier: 'Intelligence',
+    tierKey: 3,
+    href: '/services#intelligence'
+  },
+  {
+    quote: 'We ran an AI pilot and it faded.',
+    tier: 'Intelligence',
+    tierKey: 3,
+    href: '/services#intelligence'
+  }
 ];
 
 const proof = [
@@ -28,7 +65,8 @@ const proof = [
     sector: 'Start-up reinsurance broker',
     scale: '~10 people',
     built: 'Custom internal web app to automate catastrophe modeling operations',
-    before: 'Every cat modeling run jumped across five tools. Same data re-entered, re-exported, re-checked at each step.',
+    before:
+      'Every cat modeling run jumped across five tools. Same data re-entered, re-exported, re-checked at each step.',
     after: 'One app for the full cat modeling workflow. Five tools became one system.'
   },
   {
@@ -38,8 +76,10 @@ const proof = [
     sector: 'Mid-size staging company',
     scale: 'Stage rentals & events',
     built: 'Custom 3D stage builder for quotes and layouts',
-    before: 'Every quote started with hand-drawn stage outlines. Redraw the same rig for each client.',
-    after: 'Drag-and-drop 3D layouts built for how they quote. Sketches became sendable designs the same day.'
+    before:
+      'Every quote started with hand-drawn stage outlines. Redraw the same rig for each client.',
+    after:
+      'Drag-and-drop 3D layouts built for how they quote. Sketches became sendable designs the same day.'
   },
   {
     num: '03',
@@ -48,8 +88,10 @@ const proof = [
     sector: 'Start-up reinsurance broker',
     scale: '~10 people',
     built: 'AI workflow: raw data in, catastrophe models run, on-brand client reports out',
-    before: 'Cat modeling took a week per run. Manual SQL, then click-through after click-through to finish a model.',
-    after: 'Prep and modeling run automatically. A person still reviews before anything client-facing ships.'
+    before:
+      'Cat modeling took a week per run. Manual SQL, then click-through after click-through to finish a model.',
+    after:
+      'Prep and modeling run automatically. A person still reviews before anything client-facing ships.'
   }
 ];
 
@@ -100,7 +142,7 @@ const faq = [
   <div class="page home-page">
     <div class="container">
       <header class="page-head home-page-head">
-        <LabelRow num="NSG / HOME" meta="Minneapolis &middot; Small business" />
+        <LabelRow num="NSG / HOME" meta="Minneapolis · Small business" />
         <h1>
           Sites, software, and AI for small businesses<span class="accent">.</span>
         </h1>
@@ -109,7 +151,9 @@ const faq = [
           internal tools, automations, and AI that runs inside how you already work.
         </p>
         <div class="home-head-actions">
-          <a href="/contact" class="btn btn-primary">Start a conversation <span class="arr">→</span></a>
+          <a href="/contact" class="btn btn-primary"
+            >Start a conversation <span class="arr">→</span></a
+          >
           <a href="/services" class="btn btn-ghost">See what I build</a>
         </div>
         <div class="hero-meta svc-hero-meta">
@@ -126,25 +170,26 @@ const faq = [
             <div class="val">Always free</div>
           </div>
         </div>
-
       </header>
     </div>
 
     <div class="home-intro-band">
       <div class="container">
         <div class="svc-overview" aria-label="Three service areas">
-          {overview.map((item) => (
-            <a class:list={['svc-overview-card', `svc-overview-${item.tier}`]} href={item.href}>
-              <div class="svc-overview-glyph">
-                <ServiceGlyph tier={item.tier as 1 | 2 | 3} />
-              </div>
-              <div class="svc-overview-text">
-                <span class="svc-overview-num">{item.num}</span>
-                <span class="svc-overview-name">{item.name}</span>
-                <span class="svc-overview-blurb">{item.blurb}</span>
-              </div>
-            </a>
-          ))}
+          {
+            overview.map((item) => (
+              <a class:list={['svc-overview-card', `svc-overview-${item.tier}`]} href={item.href}>
+                <div class="svc-overview-glyph">
+                  <ServiceGlyph tier={item.tier as 1 | 2 | 3} />
+                </div>
+                <div class="svc-overview-text">
+                  <span class="svc-overview-num">{item.num}</span>
+                  <span class="svc-overview-name">{item.name}</span>
+                  <span class="svc-overview-blurb">{item.blurb}</span>
+                </div>
+              </a>
+            ))
+          }
         </div>
       </div>
     </div>
@@ -154,19 +199,28 @@ const faq = [
         <SectionHead num="01 / START HERE" meta="Which sounds like you?">
           <Fragment slot="title">Pick the line that matches.</Fragment>
           <Fragment slot="lede">
-            If one sounds familiar, it takes you to that tier on services. More there if nothing here fits.
+            If one sounds familiar, it takes you to that tier on services. More there if nothing
+            here fits.
           </Fragment>
         </SectionHead>
 
         <div class="svc-picker" role="list">
-          {picker.map((row) => (
-            <a class:list={['svc-picker-row', `picker-tier-${row.tierKey}`]} href={row.href} role="listitem">
-              <span class="svc-picker-dot" aria-hidden="true"></span>
-              <span class="svc-picker-quote">&ldquo;{row.quote}&rdquo;</span>
-              <span class="svc-picker-arrow" aria-hidden="true">&rarr;</span>
-              <span class="svc-picker-tier">{row.tier}</span>
-            </a>
-          ))}
+          {
+            picker.map((row) => (
+              <a
+                class:list={['svc-picker-row', `picker-tier-${row.tierKey}`]}
+                href={row.href}
+                role="listitem"
+              >
+                <span class="svc-picker-dot" aria-hidden="true" />
+                <span class="svc-picker-quote">&ldquo;{row.quote}&rdquo;</span>
+                <span class="svc-picker-arrow" aria-hidden="true">
+                  &rarr;
+                </span>
+                <span class="svc-picker-tier">{row.tier}</span>
+              </a>
+            ))
+          }
         </div>
 
         <p class="home-section-more">
@@ -182,42 +236,40 @@ const faq = [
         </SectionHead>
 
         <div class="home-proof-list">
-          {proof.map((item) => (
-            <article class:list={['home-proof-item', `home-proof-tier-${item.tier}`]}>
-              <div class:list={['home-proof-frame', `svc-tier-${item.tier}`]}>
-                <div class="home-proof-visual">
-                  <span class="home-proof-num">{item.num}</span>
-                  <div class="home-proof-glyph">
-                    {item.glyph ? (
+          {
+            proof.map((item) => (
+              <article class:list={['home-proof-item', `home-proof-tier-${item.tier}`]}>
+                <div class:list={['home-proof-frame', `svc-tier-${item.tier}`]}>
+                  <div class="home-proof-visual">
+                    <span class="home-proof-num">{item.num}</span>
+                    <div class="home-proof-glyph">
                       <ProofGlyph variant={item.glyph} />
-                    ) : (
-                      <ServiceGlyph tier={item.tier} />
-                    )}
+                    </div>
+                    <p class="home-proof-visual-label">
+                      {item.sector}
+                      <span>{item.scale}</span>
+                    </p>
                   </div>
-                  <p class="home-proof-visual-label">
-                    {item.sector}
-                    <span>{item.scale}</span>
-                  </p>
+                  <div class="svc-tier-body home-proof-body">
+                    <dl class="home-proof-facts">
+                      <div class="home-proof-fact">
+                        <dt>Built</dt>
+                        <dd class="home-proof-built">{item.built}</dd>
+                      </div>
+                      <div class="home-proof-fact">
+                        <dt>Before</dt>
+                        <dd>{item.before}</dd>
+                      </div>
+                      <div class="home-proof-fact">
+                        <dt>After</dt>
+                        <dd>{item.after}</dd>
+                      </div>
+                    </dl>
+                  </div>
                 </div>
-                <div class="svc-tier-body home-proof-body">
-                  <dl class="home-proof-facts">
-                    <div class="home-proof-fact">
-                      <dt>Built</dt>
-                      <dd class="home-proof-built">{item.built}</dd>
-                    </div>
-                    <div class="home-proof-fact">
-                      <dt>Before</dt>
-                      <dd>{item.before}</dd>
-                    </div>
-                    <div class="home-proof-fact">
-                      <dt>After</dt>
-                      <dd>{item.after}</dd>
-                    </div>
-                  </dl>
-                </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -254,9 +306,9 @@ const faq = [
 
           <div class="svc-stack-copy">
             <p>
-              AI runs through what you already do &mdash; building the site, inside the apps, augmenting
-              how you operate &mdash; and it&rsquo;s a craft of its own: custom agents, MCP servers, and
-              skills. I build the whole picture so the layers connect.
+              AI runs through what you already do &mdash; building the site, inside the apps,
+              augmenting how you operate &mdash; and it&rsquo;s a craft of its own: custom agents,
+              MCP servers, and skills. I build the whole picture so the layers connect.
             </p>
             <p class="home-section-more home-section-more--inline">
               <a href="/services#the-stack">Read more about the stack &rarr;</a>
@@ -273,14 +325,18 @@ const faq = [
         </SectionHead>
 
         <div class="home-go-grid">
-          {goLinks.map((link, i) => (
-            <a href={link.href} class:list={['home-go-card', `home-go-card-${i + 1}`]}>
-              <span class="home-go-num">{link.num}</span>
-              <h3>{link.title}</h3>
-              <p>{link.body}</p>
-              <span class="home-go-cta">{link.cta} <span aria-hidden="true">&rarr;</span></span>
-            </a>
-          ))}
+          {
+            goLinks.map((link, i) => (
+              <a href={link.href} class:list={['home-go-card', `home-go-card-${i + 1}`]}>
+                <span class="home-go-num">{link.num}</span>
+                <h3>{link.title}</h3>
+                <p>{link.body}</p>
+                <span class="home-go-cta">
+                  {link.cta} <span aria-hidden="true">&rarr;</span>
+                </span>
+              </a>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -292,12 +348,14 @@ const faq = [
         </SectionHead>
 
         <dl class="about-faq">
-          {faq.map((item) => (
-            <div class="about-faq-item">
-              <dt>{item.q}</dt>
-              <dd>{item.a}</dd>
-            </div>
-          ))}
+          {
+            faq.map((item) => (
+              <div class="about-faq-item">
+                <dt>{item.q}</dt>
+                <dd>{item.a}</dd>
+              </div>
+            ))
+          }
         </dl>
 
         <p class="home-section-more">
@@ -308,8 +366,8 @@ const faq = [
 
     <CtaStrip
       title="Have any questions?"
-      continuation="Not sure where to start? That&rsquo;s fine."
-      note="Reply within two business days &middot; I&rsquo;ll tell you if it&rsquo;s not"
+      continuation="Not sure where to start? That’s fine."
+      note="Reply within two business days · I’ll tell you if it’s not"
       primaryText="Start a conversation"
       ghostText="Email directly"
     />

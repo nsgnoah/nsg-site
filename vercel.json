@@ -23,9 +23,7 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "has": [
-        { "type": "host", "value": "www.nsgsolutions.co" }
-      ],
+      "has": [{ "type": "host", "value": "www.nsgsolutions.co" }],
       "destination": "https://nsgsolutions.co/$1",
       "permanent": true
     }

@@ -16,14 +16,14 @@ Copy `.env.example` to `.env` if you need to override defaults. The contact form
 
 ## Commands
 
-| Script            | Description                          |
-| ----------------- | ------------------------------------ |
-| `npm run dev`     | Local dev server                     |
-| `npm run build`   | Production build → `dist/`           |
-| `npm run preview` | Serve `dist/` locally                |
-| `npm run check`   | `astro check` (TypeScript / Astro)   |
-| `npm run format`  | Format with Prettier                 |
-| `npm run format:check` | Verify formatting (used in CI) |
+| Script                 | Description                        |
+| ---------------------- | ---------------------------------- |
+| `npm run dev`          | Local dev server                   |
+| `npm run build`        | Production build → `dist/`         |
+| `npm run preview`      | Serve `dist/` locally              |
+| `npm run check`        | `astro check` (TypeScript / Astro) |
+| `npm run format`       | Format with Prettier               |
+| `npm run format:check` | Verify formatting (used in CI)     |
 
 ## CI
 
