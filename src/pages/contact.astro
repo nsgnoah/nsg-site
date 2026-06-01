@@ -3,18 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import LabelRow from '../components/LabelRow.astro';
 import ServiceGlyph from '../components/ServiceGlyph.astro';
 
-const types = [
-  'Foundation (site or app)',
-  'Operations (automation)',
-  'Intelligence (AI)',
-  'Not sure yet'
-];
+const types = ['A site or app', 'Automation', 'AI', 'Not sure yet'];
 
 const nextSteps = [
   {
     num: '01',
     title: 'Send the note',
-    body: 'A few sentences is enough. What you need, and what \u201cdone\u201d looks like.'
+    body: 'A few sentences is enough. What you\u2019re looking for, and what \u201cdone\u201d looks like.'
   },
   {
     num: '02',
@@ -23,8 +18,8 @@ const nextSteps = [
   },
   {
     num: '03',
-    title: 'Quick call if it\u2019s a fit',
-    body: 'I say yes, no, or not yet before money. Plain quote once we know the shape.'
+    title: 'A call to talk it through',
+    body: 'Talking is always free. I\u2019ll be honest about whether it\u2019s a fit, and you\u2019ll get a plain quote once we know the shape.'
   }
 ];
 
@@ -46,11 +41,11 @@ const contactFormEndpoint =
       <header class="page-head contact-page-head">
         <LabelRow num="CONTACT / 01" meta="Start a conversation" />
         <h1>
-          Describe what you need<span class="accent">.</span>
+          Tell me what you&rsquo;re looking for<span class="accent">.</span>
         </h1>
         <p class="lede">
-          You talk to Noah directly. A short note on the form is enough to get started, or we can
-          set up a call.
+          You&rsquo;ll be talking with Noah directly. A short note on the form is enough to get
+          started, or we can set up a call &mdash; whatever&rsquo;s easier.
         </p>
         <div class="hero-meta contact-hero-meta">
           <div class="hero-meta-cell">
@@ -93,7 +88,7 @@ const contactFormEndpoint =
               </p>
             </noscript>
 
-            <form id="contact-form" class="contact-form">
+            <form id="contact-form" class="contact-form" novalidate>
               <div class="field">
                 <label for="name">Your name</label>
                 <input
@@ -383,7 +378,7 @@ const contactFormEndpoint =
         try {
           const response = await fetch(contactFormEndpoint, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({
               name: nameInput.value,
               email: emailInput.value,
