@@ -9,13 +9,15 @@ interface Props {
   description?: string;
   noindex?: boolean;
   breadcrumb?: { name: string; href: string }[];
+  faq?: { q: string; a: string }[];
 }
 
 const {
   title = 'NSG — Software & AI for small businesses',
   description = 'NSG Solutions builds custom sites, internal tools, automations, and AI integrations for small businesses. Custom agents and workflows. One person, end to end.',
   noindex = false,
-  breadcrumb
+  breadcrumb,
+  faq
 } = Astro.props;
 
 const rawPath = Astro.url.pathname
@@ -26,6 +28,7 @@ const path = rawPath === '' ? '/' : rawPath;
 const siteUrl = Astro.site ?? new URL('https://nsgsolutions.co');
 const canonical = new URL(path, siteUrl).toString().replace(/\/$/, '');
 const homeUrl = siteUrl.toString().replace(/\/$/, '');
+const siteUrlClean = homeUrl;
 const ogImage = new URL('/assets/og-image.png?v=3', siteUrl).toString();
 
 const orgId = new URL('/#organization', siteUrl).toString();
@@ -37,10 +40,11 @@ const orgSchema = {
   '@id': orgId,
   name: 'NSG Solutions',
   alternateName: 'NSG',
-  url: siteUrl.toString(),
+  url: siteUrlClean,
   logo: new URL('/assets/nsg-mark.svg', siteUrl).toString(),
   image: ogImage,
   email: 'noah@nsgsolutions.co',
+  telephone: '+1-612-839-8086',
   priceRange: '$$-$$$',
   description:
     'NSG Solutions builds custom sites, internal tools, automations, and AI integrations for small businesses. Custom agents and workflows. One person, end to end.',
@@ -48,6 +52,14 @@ const orgSchema = {
     '@type': 'Person',
     name: 'Noah Greensweig',
     url: 'https://www.linkedin.com/in/noah-greensweig'
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    telephone: '+1-612-839-8086',
+    email: 'noah@nsgsolutions.co',
+    areaServed: 'US',
+    availableLanguage: 'English'
   },
   address: {
     '@type': 'PostalAddress',
@@ -60,13 +72,46 @@ const orgSchema = {
     { '@type': 'AdministrativeArea', name: 'Minnesota' },
     { '@type': 'Country', name: 'United States' }
   ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Foundation — Custom sites & apps',
+          description:
+            'Custom websites, web apps, and client portals built end to end for small businesses.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Operations — Automation & internal tools',
+          description:
+            'Workflow automation, internal tools, dashboards, and reports that replace manual, repetitive work.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Intelligence — AI & agents',
+          description:
+            'AI integration, custom agents, MCP servers, and skills wired into the workflows you already run.'
+        }
+      }
+    ]
+  },
   sameAs: ['https://www.linkedin.com/in/noah-greensweig']
 };
 
 const websiteSchema = {
   '@type': 'WebSite',
   '@id': websiteId,
-  url: siteUrl.toString(),
+  url: siteUrlClean,
   name: 'NSG Solutions',
   publisher: { '@id': orgId },
   inLanguage: 'en-US'
@@ -98,7 +143,23 @@ const breadcrumbSchema =
       }
     : null;
 
-const graph = [orgSchema, websiteSchema, webpageSchema, breadcrumbSchema].filter(Boolean);
+const faqSchema =
+  faq && faq.length > 0
+    ? {
+        '@type': 'FAQPage',
+        '@id': `${canonical}#faq`,
+        isPartOf: { '@id': webpageId },
+        mainEntity: faq.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a }
+        }))
+      }
+    : null;
+
+const graph = [orgSchema, websiteSchema, webpageSchema, breadcrumbSchema, faqSchema].filter(
+  Boolean
+);
 const jsonLd = { '@context': 'https://schema.org', '@graph': graph };
 ---
 
@@ -141,6 +202,13 @@ const jsonLd = { '@context': 'https://schema.org', '@graph': graph };
     <link
       rel="preload"
       href="/fonts/BeVietnamPro-Medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/LibreBaskerville.woff2"
       as="font"
       type="font/woff2"
       crossorigin

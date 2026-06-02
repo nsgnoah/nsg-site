@@ -10,7 +10,12 @@ const isActive = (path: string) => currentPath === path;
 
 <nav class="nav" aria-label="Primary navigation" data-mobile-nav>
   <div class="container nav-inner">
-    <a href="/" class="wordmark" aria-label="NSG home">
+    <a
+      href="/"
+      class="wordmark"
+      aria-label="NSG home"
+      aria-current={isActive('/') ? 'page' : undefined}
+    >
       NSG<span class="accent">.</span>
     </a>
     <button
@@ -38,7 +43,9 @@ const isActive = (path: string) => currentPath === path;
         >
       </li>
       <li>
-        <a class="nav-cta" href="/contact">Get in Touch →</a>
+        <a class="nav-cta" href="/contact" aria-current={isActive('/contact') ? 'page' : undefined}
+          >Get in Touch →</a
+        >
       </li>
     </ul>
   </div>

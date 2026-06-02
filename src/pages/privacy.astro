@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LabelRow from '../components/LabelRow.astro';
+
+const lastUpdated = 'June 2, 2026';
+
+const collected = [
+  'Your name',
+  'Your email address',
+  'Your phone number (optional)',
+  'Your preferred way to be contacted, and an optional starting point',
+  'Whatever you write in the message'
+];
+---
+
+<BaseLayout
+  title="Privacy Policy | NSG Solutions"
+  description="How NSG Solutions handles the information you share through the contact form and email. No tracking, no ad networks, no selling your data."
+  breadcrumb={[
+    { name: 'Home', href: '/' },
+    { name: 'Privacy', href: '/privacy' }
+  ]}
+>
+  <div class="page privacy-page">
+    <div class="container">
+      <header class="page-head privacy-page-head">
+        <LabelRow num="PRIVACY / 01" meta="How your data is handled" />
+        <h1>
+          Privacy<span class="accent">.</span>
+        </h1>
+        <p class="lede">
+          NSG Solutions is a one-person practice run by Noah Greensweig in Minneapolis. This page
+          explains what information the site collects, why, and what happens to it. Plain language,
+          no surprises.
+        </p>
+      </header>
+    </div>
+
+    <section class="section privacy-section">
+      <div class="container">
+        <dl class="privacy-list">
+          <div class="privacy-item">
+            <dt>
+              <span class="privacy-num">01</span>
+              What this site collects
+            </dt>
+            <dd>
+              <p>
+                The only place this site collects personal information is the
+                <a href="/contact">contact form</a>. When you send a note, you choose what to share.
+                The form asks for:
+              </p>
+              <ul class="privacy-fields">
+                {collected.map((item) => <li>{item}</li>)}
+              </ul>
+              <p>
+                The site does not use analytics, advertising networks, or tracking cookies, and it
+                does not build a profile of you as you browse.
+              </p>
+            </dd>
+          </div>
+
+          <div class="privacy-item">
+            <dt>
+              <span class="privacy-num">02</span>
+              How that information is used
+            </dt>
+            <dd>
+              <p>
+                Your message is used for one thing: to read what you need and reply to you. If we
+                start working together, I may keep your contact details and notes so I can stay in
+                touch and do the work. I do not sell, rent, or trade your information, and I do not
+                share it for advertising.
+              </p>
+            </dd>
+          </div>
+
+          <div class="privacy-item">
+            <dt>
+              <span class="privacy-num">03</span>
+              Where it goes
+            </dt>
+            <dd>
+              <p>
+                The contact form is delivered by <a
+                  href="https://formspree.io/legal/privacy-policy"
+                  target="_blank"
+                  rel="noopener noreferrer">Formspree</a
+                >, a form-handling service that passes your submission along to my email. Your
+                message therefore passes through Formspree&rsquo;s systems and my email provider,
+                each of which handles the data under its own privacy terms. I keep these submissions
+                only as long as they&rsquo;re useful for our conversation or our work together.
+              </p>
+            </dd>
+          </div>
+
+          <div class="privacy-item">
+            <dt>
+              <span class="privacy-num">04</span>
+              Your choices
+            </dt>
+            <dd>
+              <p>
+                You decide what to send, and you can ask me to delete the information you&rsquo;ve
+                shared at any time. Email <a href="mailto:noah@nsgsolutions.co"
+                  >noah@nsgsolutions.co</a
+                > and I&rsquo;ll take care of it.
+              </p>
+            </dd>
+          </div>
+
+          <div class="privacy-item">
+            <dt>
+              <span class="privacy-num">05</span>
+              Changes to this policy
+            </dt>
+            <dd>
+              <p>
+                If the site starts collecting anything new &mdash; for example, if I add analytics
+                later &mdash; I&rsquo;ll update this page and the date below. This is a small
+                practice; if you have a question about any of this, just ask.
+              </p>
+            </dd>
+          </div>
+        </dl>
+
+        <p class="privacy-updated">Last updated: {lastUpdated}</p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .privacy-list {
+    border-top: 1px solid var(--gray-200);
+    margin: 0;
+  }
+
+  .privacy-item {
+    border-bottom: 1px solid var(--gray-200);
+    display: grid;
+    gap: clamp(1rem, 4vw, 4rem);
+    grid-template-columns: 1fr 2fr;
+    padding: clamp(2rem, 4vw, 3rem) 0;
+  }
+
+  .privacy-item dt {
+    align-items: baseline;
+    color: var(--black);
+    display: flex;
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
+    gap: 0.85rem;
+    line-height: 1.25;
+  }
+
+  .privacy-num {
+    color: var(--red);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    padding-top: 0.15rem;
+  }
+
+  .privacy-item dd {
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  .privacy-item dd p {
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin: 0 0 1.1rem;
+  }
+
+  .privacy-item dd p:last-child {
+    margin-bottom: 0;
+  }
+
+  .privacy-item dd a {
+    color: var(--red);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .privacy-item dd a:hover {
+    color: var(--black);
+  }
+
+  .privacy-fields {
+    list-style: none;
+    margin: 0 0 1.4rem;
+    padding: 0;
+  }
+
+  .privacy-fields li {
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    padding: 0.5rem 0 0.5rem 1.4rem;
+    position: relative;
+  }
+
+  .privacy-fields li + li {
+    border-top: 1px solid var(--gray-200);
+  }
+
+  .privacy-fields li::before {
+    background: var(--red);
+    content: '';
+    height: 6px;
+    left: 0;
+    position: absolute;
+    top: 0.95rem;
+    width: 6px;
+  }
+
+  .privacy-updated {
+    color: var(--gray-500);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 720px) {
+    .privacy-item {
+      gap: 0.85rem;
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
