@@ -1,7 +1,6 @@
 ---
 interface Props {
   title: string;
-  continuation: string;
   note: string;
   primaryText?: string;
   primaryHref?: string;
@@ -11,7 +10,6 @@ interface Props {
 
 const {
   title,
-  continuation,
   note,
   primaryText = 'Get in touch',
   primaryHref = '/contact',
@@ -24,7 +22,7 @@ const {
   <div class="container">
     <div class="cta-inner">
       <div>
-        <h2 set:html={`${title}<br/><em>${continuation}</em>`} />
+        <h2 set:html={title} />
         {note && <div class="cta-note">{note}</div>}
       </div>
       <div class="cta-actions">

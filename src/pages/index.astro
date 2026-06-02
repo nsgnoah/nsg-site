@@ -32,13 +32,13 @@ const picker = [
     href: '/services#foundation'
   },
   {
-    quote: 'The same data gets entered everywhere.',
+    quote: 'We have tons of data but don’t know how to put it to use.',
     tier: 'Operations',
     tierKey: 2,
     href: '/services#operations'
   },
   {
-    quote: 'Monthly reports take forever.',
+    quote: 'We sometimes spend hours at a time manually formatting Excel and Word documents.',
     tier: 'Operations',
     tierKey: 2,
     href: '/services#operations'
@@ -50,7 +50,7 @@ const picker = [
     href: '/services#intelligence'
   },
   {
-    quote: 'We ran an AI pilot and it faded.',
+    quote: 'Wake me up when AI can do something actually useful.',
     tier: 'Intelligence',
     tierKey: 3,
     href: '/services#intelligence'
@@ -100,7 +100,7 @@ const goLinks = [
     num: '01',
     href: '/services',
     title: 'What I build',
-    body: 'Three layers, symptom picker, and full detail on custom sites, automation, and AI.',
+    body: 'Three layers, common remarks, and full detail on custom sites, automation, and AI.',
     cta: 'Services'
   },
   {
@@ -130,7 +130,7 @@ const faq = [
   },
   {
     q: 'How much does it cost?',
-    a: 'It depends on the project. I\u2019m happy to grab coffee or hop on a call to hear what\u2019s going on. If we move forward, you\u2019ll get a quote before any build work starts.'
+    a: 'It depends on the project. I\u2019m happy to grab coffee or hop on a call to hear what\u2019s going on. If we move forward, you\u2019ll get a quote before any work starts.'
   }
 ];
 ---
@@ -198,10 +198,6 @@ const faq = [
       <div class="container">
         <SectionHead num="01 / START HERE" meta="Which sounds like you?">
           <Fragment slot="title">Pick the line that matches.</Fragment>
-          <Fragment slot="lede">
-            If one sounds familiar, it takes you to that tier on services. More there if nothing
-            here fits.
-          </Fragment>
         </SectionHead>
 
         <div class="svc-picker" role="list">
@@ -313,7 +309,7 @@ const faq = [
             <p>
               AI runs through what you already do &mdash; building the site, inside the apps,
               augmenting how you operate &mdash; and it&rsquo;s a craft of its own: custom agents,
-              MCP servers, and skills. I build the whole picture so the layers connect.
+              MCP servers, and skills. I manage all of it so the layers connect.
             </p>
             <p class="home-section-more home-section-more--inline">
               <a href="/services#the-stack">Read more about the stack &rarr;</a>
@@ -370,8 +366,7 @@ const faq = [
     </section>
 
     <CtaStrip
-      title="Have any questions?"
-      continuation="Not sure where to start? That’s fine."
+      title="Have any questions? <span class='cta-answer'>Not sure where to start? That’s fine.</span>"
       note="Reply within two business days · I’ll tell you if it’s not"
       primaryText="Start a conversation"
       ghostText="Email directly"

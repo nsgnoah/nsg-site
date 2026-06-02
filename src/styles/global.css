@@ -944,12 +944,14 @@ main {
 }
 
 .cta-inner h2 .cta-answer {
-  color: var(--red);
+  color: var(--gray-700);
   display: block;
-  font-size: 0.6em;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: 0.5em;
+  font-style: italic;
+  font-weight: 400;
   letter-spacing: 0.005em;
-  margin-top: 0.15em;
+  margin-top: 0.6em;
 }
 
 .cta-actions {
@@ -1387,10 +1389,9 @@ main {
 }
 
 .chips {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.65rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 11.5rem), auto));
-  justify-content: start;
 }
 
 .chip {

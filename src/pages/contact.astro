@@ -19,7 +19,7 @@ const nextSteps = [
   {
     num: '03',
     title: 'A call to talk it through',
-    body: 'Talking is always free. I\u2019ll be honest about whether it\u2019s a fit, and you\u2019ll get a plain quote once we know the shape.'
+    body: 'Talking is always free. I\u2019ll be honest about whether it\u2019s a fit, and I\u2019ll send over a plain quote once we know the shape.'
   }
 ];
 
@@ -41,11 +41,12 @@ const contactFormEndpoint =
       <header class="page-head contact-page-head">
         <LabelRow num="CONTACT / 01" meta="Start a conversation" />
         <h1>
-          Tell me what you&rsquo;re looking for<span class="accent">.</span>
+          Let&rsquo;s figure it out together<span class="accent">.</span>
         </h1>
         <p class="lede">
-          You&rsquo;ll be talking with Noah directly. A short note on the form is enough to get
-          started, or we can set up a call &mdash; whatever&rsquo;s easier.
+          Reach out and you get me, not a sales team. Whether you know exactly what you need or just
+          have a rough idea, a short note on the form is enough to get started. Or we can set up a
+          call, whatever&rsquo;s easier.
         </p>
         <div class="hero-meta contact-hero-meta">
           <div class="hero-meta-cell">
@@ -57,7 +58,7 @@ const contactFormEndpoint =
             <div class="val">Minneapolis, MN</div>
           </div>
           <div class="hero-meta-cell">
-            <div class="key">Also</div>
+            <div class="key">Email</div>
             <div class="val">
               <a href="mailto:noah@nsgsolutions.co">noah@nsgsolutions.co</a>
             </div>
@@ -182,7 +183,7 @@ const contactFormEndpoint =
                   name="message"
                   required
                   rows="6"
-                  placeholder="What do you need built? What would done look like? A few sentences is plenty."
+                  placeholder="What do you need built? What might done look like? A few sentences is plenty."
                 ></textarea>
                 <p id="error-message" class="field-error" hidden></p>
               </div>

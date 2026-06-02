@@ -14,19 +14,24 @@ const overview = [
 const picker = [
   { quote: 'Our website is embarrassing.', tier: 'Foundation', tierKey: 1, href: '#foundation' },
   {
-    quote: 'We need software that fits how we work.',
+    quote: 'We need an application that fits how we work.',
     tier: 'Foundation',
     tierKey: 1,
     href: '#foundation'
   },
   {
-    quote: 'The same data gets entered everywhere.',
+    quote: 'We have tons of data but don’t know how to put it to use.',
     tier: 'Operations',
     tierKey: 2,
     href: '#operations'
   },
-  { quote: 'Monthly reports take forever.', tier: 'Operations', tierKey: 2, href: '#operations' },
-  { quote: 'Our tools don\u2019t connect.', tier: 'Operations', tierKey: 2, href: '#operations' },
+  {
+    quote: 'We sometimes spend hours at a time manually formatting Excel and Word documents.',
+    tier: 'Operations',
+    tierKey: 2,
+    href: '#operations'
+  },
+  { quote: 'Our tools don\u2019t connect to each other.', tier: 'Operations', tierKey: 2, href: '#operations' },
   {
     quote: 'We want to integrate AI but don\u2019t know where to start.',
     tier: 'Intelligence',
@@ -40,7 +45,7 @@ const picker = [
     href: '#intelligence'
   },
   {
-    quote: 'We ran an AI pilot and it faded.',
+    quote: 'Wake me up when AI can do something actually useful.',
     tier: 'Intelligence',
     tierKey: 3,
     href: '#intelligence'
@@ -55,12 +60,12 @@ const services = [
     name: 'Foundation',
     title: 'Custom sites & software',
     plain:
-      'The basics: a site you\u2019re proud to send people to, and software that matches how your team actually works.',
+      'The basics: a well-designed site that ranks and converts, and software that matches how your team actually works.',
     builds: [
       'Custom sites you\u2019re proud to send people to',
-      'Custom software when off-the-shelf doesn\u2019t fit',
-      'Client portals and online forms',
-      'Interactive previews and 3D viewers'
+      'Sites designed to rank in search and turn visitors into customers',
+      'Custom applications when off-the-shelf doesn\u2019t fit',
+      'Client portals and online forms'
     ],
     symptoms: [
       [
@@ -73,7 +78,7 @@ const services = [
       ]
     ],
     outcome:
-      'A site worth showing and software built around you \u2014 live, owned, and made for your business.'
+      'A polished, search-optimized site that brings in business, and software built around you \u2014 live, owned, and made for your business.'
   },
   {
     id: 'operations',
@@ -87,7 +92,7 @@ const services = [
       'Automatic sync between the tools you already use',
       'Internal dashboards and small apps',
       'Scheduled reports and recurring jobs',
-      'Replacing shared spreadsheets with one source of truth'
+      'A single source of truth that replaces shared spreadsheets'
     ],
     symptoms: [
       [
@@ -99,7 +104,7 @@ const services = [
         'Automations that run on a schedule and email the results.'
       ]
     ],
-    outcome: 'Hours back every week, fewer mistakes, and data your team can trust.'
+    outcome: 'Time back to focus on the bigger picture and data your team can trust.'
   },
   {
     id: 'intelligence',
@@ -110,10 +115,9 @@ const services = [
     plain:
       'Pick the right AI tool for the job, connect it to your software, and build agents that handle repetitive work — and surface insights and ideas you’d otherwise miss.',
     builds: [
-      'Choosing and setting up AI tools for your team',
-      'Custom AI agents inside your existing software',
-      'AI that surfaces insights and suggests improvements',
-      'MCP connections that wire AI to the tools you already use',
+      'The right AI tools, chosen and set up for your team',
+      'Custom AI agents that do real work for you',
+      'MCP connections that bring AI into the tools you already use',
       'Custom agent skills built for your workflows'
     ],
     symptoms: [
@@ -258,7 +262,7 @@ const services = [
                     </div>
 
                     <div class="svc-tier-col">
-                      <h3 class="svc-tier-label">Sounds like you?</h3>
+                      <h3 class="svc-tier-label">Sound like you?</h3>
                       <ul class="svc-tier-symptoms">
                         {svc.symptoms.map(([quote, fix]) => (
                           <li>
@@ -313,14 +317,19 @@ const services = [
                 <div class="stack-block stack-block-2">
                   <span class="stack-block-num">02</span>
                   <span class="stack-block-name">Operations</span>
+                  <span class="stack-block-note">Marketing &middot; dashboards &middot; reports</span>
                 </div>
                 <div class="stack-block stack-block-1">
                   <span class="stack-block-num">01</span>
                   <span class="stack-block-name">Foundation</span>
+                  <span class="stack-block-note">Sites &middot; apps &middot; portals</span>
                 </div>
               </div>
               <div class="svc-stack-spine">
-                <span class="svc-stack-spine-label">AI</span>
+                <span class="svc-stack-spine-stack">
+                  <span class="svc-stack-spine-label">AI</span>
+                  <span class="svc-stack-spine-note">Fast &middot; cheap &middot; automation</span>
+                </span>
               </div>
             </div>
           </div>
@@ -369,8 +378,7 @@ const services = [
     </section>
 
     <CtaStrip
-      title="Still figuring it out? <span class='cta-answer'>That’s what I’m here for.</span>"
-      continuation="Ask anything — no prep needed."
+      title="Still figuring things out? <span class='cta-answer'>That’s what I’m here for.</span>"
       note="Let’s think through it together. Two business-day reply."
       primaryText="Send a note"
     />

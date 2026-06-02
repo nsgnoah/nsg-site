@@ -28,7 +28,8 @@
 }
 
 .home-page .section-head h2 em,
-.home-page .cta-inner h2 em {
+.home-page .cta-inner h2 em,
+.home-page .cta-inner h2 .cta-answer {
   font-family: var(--font-heading);
   font-style: normal;
   font-weight: 500;
@@ -941,6 +942,31 @@
   padding-top: clamp(3rem, 6vw, 5rem);
 }
 
+/* Align each row (num, heading, body, detail) across all three columns so
+   the paragraphs line up even when headings wrap to different line counts. */
+.about-principle-grid {
+  grid-template-rows: auto auto auto auto;
+}
+
+.about-principle-grid .principle {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+}
+
+/* The h3's own top/bottom margins would break subgrid row alignment; move that
+   spacing onto the grid gaps instead. */
+.about-principle-grid .principle h3 {
+  align-self: start;
+  margin: 1rem 0 0;
+}
+
+.about-principle-grid .principle p {
+  align-self: start;
+  margin: 0.75rem 0 0;
+}
+
 .about-principle-grid .principle p + p.principle-detail {
   color: var(--gray-500);
   font-size: 0.85rem;
@@ -1090,6 +1116,12 @@
 
 .fit-yes {
   background: var(--red);
+  border-radius: 0;
+  height: 14px;
+  margin-top: 0.35rem;
+  width: 14px;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round' d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round' d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 .fit-no {
@@ -1574,7 +1606,15 @@
 .contact-page .page-head h1 {
   font-size: clamp(2rem, 4.8vw, 3.75rem);
   line-height: 1.08;
-  max-width: 16ch;
+  max-width: none;
+}
+
+/* Keep the headline on one line on wider screens; let it wrap on mobile so it
+   never forces horizontal overflow. */
+@media (min-width: 600px) {
+  .contact-page .page-head h1 {
+    white-space: nowrap;
+  }
 }
 
 .contact-page .page-head h1 .accent {
@@ -1782,8 +1822,6 @@
 
 .contact-section-more a {
   color: var(--red);
-  text-decoration: underline;
-  text-underline-offset: 0.15em;
 }
 
 .contact-section-more a:hover {
