@@ -755,9 +755,6 @@
   width: 0.9rem;
 }
 
-/* (Removed: the border-spark + section-radiance "electrified" effect. The AI
-   rail keeps a subtle energy pulse — see .svc-stack-spine-charge below.) */
-
 .svc-stack-spine {
   align-items: center;
   background: linear-gradient(180deg, rgba(13, 148, 136, 0.16), rgba(13, 148, 136, 0.08));
@@ -787,7 +784,7 @@
   letter-spacing: 0.14em;
   position: absolute;
   right: 0;
-  top: 0.7rem;
+  top: calc(50% - 4.4rem);
   writing-mode: vertical-rl;
 }
 
@@ -806,41 +803,6 @@
   transform: translateY(-50%);
   white-space: nowrap;
   writing-mode: vertical-rl;
-}
-
-/* Energy pulse travelling down the rail — implies active force flowing in.
-   Soft and low-contrast so it reads as a gentle drift, not a strobe. */
-.svc-stack-spine-charge {
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(13, 148, 136, 0.26) 45%,
-    rgba(13, 148, 136, 0.32) 55%,
-    transparent
-  );
-  inset: 0 0 auto 0;
-  height: 38%;
-  pointer-events: none;
-  position: absolute;
-  z-index: 1;
-  animation: spine-charge 6s var(--ease) infinite;
-}
-
-@keyframes spine-charge {
-  0% {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-  18% {
-    opacity: 0.7;
-  }
-  82% {
-    opacity: 0.7;
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(280%);
-  }
 }
 
 .svc-stack-copy p {
@@ -1906,12 +1868,5 @@
   .hero-final-line .already::after {
     transform: scaleX(1);
     transition: none;
-  }
-
-  /* Freeze the AI rail pulse; show it parked mid-rail as a static glow. */
-  .svc-stack-spine-charge {
-    animation: none;
-    opacity: 0.5;
-    transform: translateY(85%);
   }
 }
