@@ -282,6 +282,7 @@ if (endpointHost !== ALLOWED_FORM_HOST && !endpointHost.endsWith(`.${ALLOWED_FOR
     const emailInput = document.getElementById('email');
     const phoneInput = document.getElementById('phone');
     const messageInput = document.getElementById('message');
+    const gotchaInput = document.getElementById('_gotcha');
 
     if (
       !form ||
@@ -406,6 +407,15 @@ if (endpointHost !== ALLOWED_FORM_HOST && !endpointHost.endsWith(`.${ALLOWED_FOR
           return;
         }
 
+        const gotcha = gotchaInput?.value.trim() ?? '';
+        if (gotcha) {
+          // Bot filled the honeypot: pretend success so they don't adapt; don't POST.
+          form.style.display = 'none';
+          successDiv?.removeAttribute('hidden');
+          successDiv?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          return;
+        }
+
         submitBtn.setAttribute('disabled', '');
         submitError.hidden = true;
 
@@ -414,6 +424,7 @@ if (endpointHost !== ALLOWED_FORM_HOST && !endpointHost.endsWith(`.${ALLOWED_FOR
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({
+              _gotcha: '',
               name: nameInput.value.trim(),
               email: emailInput.value.trim(),
               phone: phoneInput?.value.trim() || '',
