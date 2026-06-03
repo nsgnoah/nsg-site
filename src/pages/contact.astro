@@ -26,6 +26,25 @@ const nextSteps = [
 const defaultFormEndpoint = 'https://formspree.io/f/xlgwzyop';
 const contactFormEndpoint =
   import.meta.env.PUBLIC_CONTACT_FORM_ENDPOINT?.trim() || defaultFormEndpoint;
+
+// PUBLIC_* vars get inlined into client JS and become the fetch() target for
+// every submission (name, email, phone, message). Fail the build if a stray or
+// malicious env value points that anywhere other than Formspree, so PII can't be
+// silently redirected off-host.
+const ALLOWED_FORM_HOST = 'formspree.io';
+let endpointHost: string;
+try {
+  endpointHost = new URL(contactFormEndpoint).hostname;
+} catch {
+  throw new Error(
+    `PUBLIC_CONTACT_FORM_ENDPOINT is not a valid URL: ${JSON.stringify(contactFormEndpoint)}`
+  );
+}
+if (endpointHost !== ALLOWED_FORM_HOST && !endpointHost.endsWith(`.${ALLOWED_FORM_HOST}`)) {
+  throw new Error(
+    `PUBLIC_CONTACT_FORM_ENDPOINT must point to ${ALLOWED_FORM_HOST} (got ${endpointHost}).`
+  );
+}
 ---
 
 <BaseLayout
@@ -44,9 +63,9 @@ const contactFormEndpoint =
           Let&rsquo;s figure it out together<span class="accent">.</span>
         </h1>
         <p class="lede">
-          Reach out and you get me, not a sales team. Whether you know exactly what you need or just
-          have a rough idea, a short note on the form is enough to get started. Or we can set up a
-          call, whatever&rsquo;s easier.
+          Reach out and you get me, not a sales team. You don&rsquo;t need to know exactly what you
+          want built or speak any technical jargon &mdash; a short note on the form is enough to get
+          started. Or we can set up a call, whatever&rsquo;s easier.
         </p>
         <div class="hero-meta contact-hero-meta">
           <div class="hero-meta-cell">
@@ -90,6 +109,16 @@ const contactFormEndpoint =
             </noscript>
 
             <form id="contact-form" class="contact-form" novalidate>
+              {
+                /* Honeypot: hidden from humans, tempting to bots. Formspree drops
+                  any submission where _gotcha is filled. Kept out of the tab order
+                  and the accessibility tree so real users never reach it. */
+              }
+              <div class="contact-hp" aria-hidden="true">
+                <label for="_gotcha">Leave this field empty</label>
+                <input id="_gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+
               <div class="field">
                 <label for="name">Your name</label>
                 <input
@@ -97,6 +126,7 @@ const contactFormEndpoint =
                   name="name"
                   type="text"
                   required
+                  maxlength="100"
                   placeholder="Jane Smith"
                   autocomplete="name"
                 />
@@ -110,6 +140,7 @@ const contactFormEndpoint =
                   name="email"
                   type="email"
                   required
+                  maxlength="254"
                   placeholder="jane@yourbusiness.com"
                   autocomplete="email"
                 />
@@ -122,6 +153,7 @@ const contactFormEndpoint =
                   id="phone"
                   name="phone"
                   type="tel"
+                  maxlength="32"
                   placeholder="(612) 555-0123"
                   autocomplete="tel"
                 />
@@ -182,6 +214,7 @@ const contactFormEndpoint =
                   id="message"
                   name="message"
                   required
+                  maxlength="5000"
                   rows="6"
                   placeholder="What do you need built? What might done look like? A few sentences is plenty."
                 ></textarea>
@@ -381,12 +414,12 @@ const contactFormEndpoint =
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({
-              name: nameInput.value,
-              email: emailInput.value,
-              phone: phoneInput?.value || '',
+              name: nameInput.value.trim(),
+              email: emailInput.value.trim(),
+              phone: phoneInput?.value.trim() || '',
               contact_method: contactMethodInput.value,
               type: typeInput.value,
-              message: messageInput.value
+              message: messageInput.value.trim()
             })
           });
 

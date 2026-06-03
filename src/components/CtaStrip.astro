@@ -1,6 +1,10 @@
 ---
 interface Props {
   title: string;
+  // Optional styled follow-on phrase, rendered as <span class="cta-answer">.
+  // Kept as a separate text prop (not raw HTML in `title`) so this heading has
+  // no set:html sink — every value stays plain text and auto-escaped.
+  answer?: string;
   note: string;
   primaryText?: string;
   primaryHref?: string;
@@ -10,6 +14,7 @@ interface Props {
 
 const {
   title,
+  answer,
   note,
   primaryText = 'Get in touch',
   primaryHref = '/contact',
@@ -22,7 +27,16 @@ const {
   <div class="container">
     <div class="cta-inner">
       <div>
-        <h2 set:html={title} />
+        <h2>
+          {title}{
+            answer && (
+              <>
+                {' '}
+                <span class="cta-answer">{answer}</span>
+              </>
+            )
+          }
+        </h2>
         {note && <div class="cta-note">{note}</div>}
       </div>
       <div class="cta-actions">
