@@ -34,6 +34,7 @@ const plainEnglish = [
 ];
 
 const goodFit = [
+  '\u201cWe don\u2019t have an IT person or a developer, and we\u2019re not going to hire one.\u201d',
   '\u201cWe want AI integrated into how we actually work, not another subscription nobody uses.\u201d',
   '\u201cOur website is embarrassing and we\u2019re a real business.\u201d',
   '\u201cWe\u2019re running the company on shared spreadsheets.\u201d',
@@ -84,9 +85,10 @@ const faq = [
           <LabelRow num="ABOUT / 01" meta="Who runs NSG" />
           <h1>I'm Noah.<br /><em>I build software and AI for small businesses.</em></h1>
           <p class="lede">
-            NSG is a practice in Minneapolis building custom sites, internal tools, automations, and
-            AI wired into how you work. We figure out what you need together, and I build it. I work
-            directly alongside you as I carry out the work.
+            NSG is a Minneapolis practice for small businesses that don&rsquo;t have a full-time
+            developer or IT team on staff &mdash; and don&rsquo;t need one. We figure out what you
+            need together, and I build it: custom sites, internal tools, automations, and AI wired
+            into how you work.
           </p>
           <div class="hero-meta about-logistics">
             {
@@ -226,7 +228,8 @@ const faq = [
     </section>
 
     <CtaStrip
-      title="Have any questions? <span class='cta-answer'>Not sure where to start? That’s fine.</span>"
+      title="Have any questions?"
+      answer="Not sure where to start? That’s fine."
       note="Two business-day reply · No commitment until you’re ready"
       primaryText="Get in touch"
       ghostText="Email directly"
